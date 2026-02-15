@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODUS AXON | Brandbook Digital</title>
+    <style>
+        /* Variables de Marca */
+        :root {
+            --azul-profundo: #1A1A2E;
+            --violeta-electrico: #8A2BE2;
+            --cian-tecnologico: #00FFFF;
+            --gris-grafito: #333333;
+            --blanco-puro: #FFFFFF;
+            --gradiente-pule: linear-gradient(135deg, var(--violeta-electrico), var(--cian-tecnologico));
+            --fuente-sistema: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Reset y Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: var(--fuente-sistema); 
+            background-color: #f4f7f6; 
+            color: var(--gris-grafito); 
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--azul-profundo);
+            color: var(--blanco-puro);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--cian-tecnologico);
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        /* Tipografía */
+        h1 { font-size: 3rem; letter-spacing: -1px; margin-bottom: 10px; }
+        h2 { color: var(--azul-profundo); margin-bottom: 20px; border-left: 5px solid var(--violeta-electrico); padding-left: 15px; }
+        .tagline { font-weight: 300; font-size: 1.2rem; opacity: 0.9; }
+
+        /* Secciones */
+        section { 
+            background: var(--blanco-puro); 
+            margin-bottom: 40px; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Colores */
+        .color-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 20px; }
+        .color-card { padding: 20px; border-radius: 8px; text-align: center; color: white; font-weight: bold; }
+        .c1 { background-color: var(--violeta-electrico); }
+        .c2 { background-color: var(--cian-tecnologico); color: var(--azul-profundo); }
+        .c3 { background-color: var(--azul-profundo); }
+        .c4 { background: var(--gradiente-pule); }
+
+        /* Botones y UI */
+        .btn-pule {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradiente-pule);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn-pule:hover { transform: scale(1.05); }
+
+        .logo-placeholder {
+            background: var(--azul-profundo);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #888; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MODUS AXON</h1>
+        <p class="tagline">El método de la evolución digital</p>
+    </header>
+
+    <div class="container">
+        
+        <section id="filosofia">
+            <h2>Filosofía de Marca</h2>
+            <p><strong>MODUS AXON</strong> nace de la intersección entre la robustez de la ingeniería de software y la fluidez de la evolución orgánica. Nuestro propósito es conectar sistemas complejos con necesidades humanas mediante un método inteligente, elegante y altamente competitivo en el mercado global.</p>
+        </section>
+
+        <section id="logotipo">
+            <h2>Identidad Visual</h2>
+            <div class="logo-placeholder">
+                <span style="color: var(--blanco-puro)">MODUS</span><span style="color: var(--cian-tecnologico)">AXON</span>
+            </div>
+            <p><strong>Uso del Logo:</strong> El identificador debe mantener siempre su área de reserva. Se prefiere el uso sobre fondos oscuros (Azul Profundo) para resaltar los gradientes tecnológicos.</p>
+        </section>
+
+        <section id="colores">
+            <h2>Paleta Cromática</h2>
+            <div class="color-grid">
+                <div class="color-card c1">Violeta Eléctrico<br>#8A2BE2</div>
+                <div class="color-card c2">Cian Tech<br>#00FFFF</div>
+                <div class="color-card c3">Azul Profundo<br>#1A1A2E</div>
+                <div class="color-card c4">Gradiente PULE</div>
+            </div>
+        </section>
+
+        <section id="tipografia">
+            <h2>Tipografía de Sistema</h2>
+            <p style="margin-bottom: 10px;">Para garantizar <strong>rendimiento y compatibilidad total</strong> en móviles, tablets y PCs, utilizamos fuentes nativas del sistema.</p>
+            <div style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
+                <p style="font-size: 1.5rem; font-weight: bold;">H1: Títulos de Impacto</p>
+                <p style="font-size: 1.2rem; font-weight: 600;">H2: Subtítulos de Sección</p>
+                <p>Cuerpo de texto: Legibilidad óptima para documentación técnica y reportes estatales.</p>
+            </div>
+        </section>
+
+        <section id="ui">
+            <h2>Componentes de Interfaz (UI)</h2>
+            <p>La marca se expresa a través de elementos limpios con bordes redondeados que evocan esa evolución sinuosa.</p>
+            <br>
+            <a href="#" class="btn-pule">CONECTAR AHORA</a>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2026 MODUS AXON | Documentación de Identidad Reservada
+    </footer>
+
+</body>
+</html>
