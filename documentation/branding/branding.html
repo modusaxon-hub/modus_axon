@@ -1,147 +1,318 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MODUS AXON | Brandbook Digital</title>
+    <title>BRANDBOOK | MODUS AXON - Evolución Digital</title>
     <style>
-        /* Variables de Marca */
         :root {
-            --azul-profundo: #1A1A2E;
-            --violeta-electrico: #8A2BE2;
-            --cian-tecnologico: #00FFFF;
-            --gris-grafito: #333333;
-            --blanco-puro: #FFFFFF;
-            --gradiente-pule: linear-gradient(135deg, var(--violeta-electrico), var(--cian-tecnologico));
-            --fuente-sistema: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            /* MODUS AXON Power (Sci-Fi / AI Tech) */
+            --axon-dark: #05050A;
+            /* Obsidian Core */
+            --axon-primary: #00FFAA;
+            /* Cyber Matrix Green */
+            --axon-accent: #7B00FF;
+            /* Neural Quantum Purple */
+            --axon-text: #E0E5EC;
+            --axon-white: #F5F5F5;
+            --axon-gray: #1E1E2E;
+            --axon-gradient: linear-gradient(135deg, #7B00FF, #00FFAA);
+            --fuente-sistema: 'Inter', system-ui, -apple-system, sans-serif;
+            --glass: rgba(0, 255, 170, 0.03);
+            --glass-border: rgba(0, 255, 170, 0.1);
         }
 
-        /* Reset y Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: var(--fuente-sistema); 
-            background-color: #f4f7f6; 
-            color: var(--gris-grafito); 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fuente-sistema);
+            background: var(--axon-dark);
+            color: var(--axon-white);
+            overflow-x: hidden;
             line-height: 1.6;
         }
 
+        /* --- Background Animation --- */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(123, 0, 255, 0.1), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 170, 0.05), transparent 40%);
+            z-index: -1;
+        }
+
         header {
-            background-color: var(--azul-profundo);
-            color: var(--blanco-puro);
-            padding: 60px 20px;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            border-bottom: 4px solid var(--cian-tecnologico);
+            padding: 20px;
+            position: relative;
         }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-
-        /* Tipografía */
-        h1 { font-size: 3rem; letter-spacing: -1px; margin-bottom: 10px; }
-        h2 { color: var(--azul-profundo); margin-bottom: 20px; border-left: 5px solid var(--violeta-electrico); padding-left: 15px; }
-        .tagline { font-weight: 300; font-size: 1.2rem; opacity: 0.9; }
-
-        /* Secciones */
-        section { 
-            background: var(--blanco-puro); 
-            margin-bottom: 40px; 
-            padding: 40px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 950;
+            letter-spacing: -4px;
+            background: var(--axon-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            animation: titleReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Colores */
-        .color-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 20px; }
-        .color-card { padding: 20px; border-radius: 8px; text-align: center; color: white; font-weight: bold; }
-        .c1 { background-color: var(--violeta-electrico); }
-        .c2 { background-color: var(--cian-tecnologico); color: var(--azul-profundo); }
-        .c3 { background-color: var(--azul-profundo); }
-        .c4 { background: var(--gradiente-pule); }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
 
-        /* Botones y UI */
-        .btn-pule {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--gradiente-pule);
-            color: white;
-            text-decoration: none;
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+                letter-spacing: 10px;
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                letter-spacing: -4px;
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+        }
+
+        section {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 60px;
+            margin-bottom: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 span {
+            color: var(--axon-primary);
+            font-size: 1rem;
+            border: 1px solid var(--axon-primary);
+            padding: 4px 12px;
             border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .btn-pule:hover { transform: scale(1.05); }
 
-        .logo-placeholder {
-            background: var(--azul-profundo);
-            padding: 40px;
-            border-radius: 8px;
-            text-align: center;
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
+        p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 20px;
         }
 
-        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #888; }
+        /* --- Color Essence --- */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
+        .color-card {
+            padding: 30px;
+            border-radius: 16px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .color-card code {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-family: monospace;
+        }
+
+        .c1 {
+            background: var(--axon-accent);
+        }
+
+        .c2 {
+            background: var(--axon-primary);
+            color: var(--axon-dark);
+        }
+
+        .c3 {
+            background: var(--axon-dark);
+            border-color: var(--axon-primary);
+        }
+
+        .c4 {
+            background: var(--axon-gradient);
+        }
+
+        /* --- Typography --- */
+        .typo-sample {
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+        .typo-h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .typo-p {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 100px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .axon-seal {
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .axon-seal span {
+            background: var(--axon-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            section {
+                padding: 30px;
+            }
         }
     </style>
 </head>
+
 <body>
 
+    <div class="bg-glow"></div>
+
     <header>
-        <h1>MODUS AXON</h1>
-        <p class="tagline">El método de la evolución digital</p>
+        <h1 class="hero-title">BRANDBOOK</h1>
+        <p class="hero-subtitle">MODUS AXON Intelligence</p>
     </header>
 
     <div class="container">
-        
-        <section id="filosofia">
-            <h2>Filosofía de Marca</h2>
-            <p><strong>MODUS AXON</strong> nace de la intersección entre la robustez de la ingeniería de software y la fluidez de la evolución orgánica. Nuestro propósito es conectar sistemas complejos con necesidades humanas mediante un método inteligente, elegante y altamente competitivo en el mercado global.</p>
+
+        <section id="essence">
+            <h2><span>01</span> Esencia</h2>
+            <p>
+                <strong>MODUS AXON</strong> no es solo una marca; es un manifiesto de eficiencia tecnológica.
+                Nacemos de la necesidad de fusionar la <strong>lógica implacable</strong> del software con la
+                <strong>adaptabilidad orgánica</strong> de los sistemas vivos.
+            </p>
+            <p>
+                Nuestro método, la "Evolución Digital", busca que cada línea de código y cada pixel sume
+                hacia una transformación real, competitiva y estéticamente superior.
+            </p>
         </section>
 
-        <section id="logotipo">
-            <h2>Identidad Visual</h2>
-            <div class="logo-placeholder">
-                <span style="color: var(--blanco-puro)">MODUS</span><span style="color: var(--cian-tecnologico)">AXON</span>
+        <section id="visual">
+            <h2><span>02</span> Identidad Visual</h2>
+            <div
+                style="background: var(--axon-dark); padding: 80px; border-radius: 20px; text-align: center; border: 1px solid var(--axon-primary); margin-bottom: 30px;">
+                <h3 style="font-size: 4rem; font-weight: 950; letter-spacing: -3px;">
+                    MODUS <span
+                        style="background: var(--axon-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">AXON</span>
+                </h3>
             </div>
-            <p><strong>Uso del Logo:</strong> El identificador debe mantener siempre su área de reserva. Se prefiere el uso sobre fondos oscuros (Azul Profundo) para resaltar los gradientes tecnológicos.</p>
+            <p style="text-align: center; font-size: 0.9rem; opacity: 0.5;">
+                Configuración principal del logotipo: Tipografía geométrica sin remates con énfasis en gradiente
+                tecnológico AI (Neural Quantum Purple a Cyber Matrix Green).
+            </p>
         </section>
 
-        <section id="colores">
-            <h2>Paleta Cromática</h2>
+        <section id="colors">
+            <h2><span>03</span> ADN Cromático</h2>
             <div class="color-grid">
-                <div class="color-card c1">Violeta Eléctrico<br>#8A2BE2</div>
-                <div class="color-card c2">Cian Tech<br>#00FFFF</div>
-                <div class="color-card c3">Azul Profundo<br>#1A1A2E</div>
-                <div class="color-card c4">Gradiente PULE</div>
+                <div class="color-card c1">
+                    <strong>Neural Quantum Purple</strong>
+                    <code>#7B00FF</code>
+                </div>
+                <div class="color-card c2">
+                    <strong>Cyber Matrix Green</strong>
+                    <code>#00FFAA</code>
+                </div>
+                <div class="color-card c3">
+                    <strong>Obsidian Core</strong>
+                    <code>#05050A</code>
+                </div>
+                <div class="color-card c4">
+                    <strong>Axon Synergy Gradient</strong>
+                    <code>linear-gradient</code>
+                </div>
             </div>
         </section>
 
-        <section id="tipografia">
-            <h2>Tipografía de Sistema</h2>
-            <p style="margin-bottom: 10px;">Para garantizar <strong>rendimiento y compatibilidad total</strong> en móviles, tablets y PCs, utilizamos fuentes nativas del sistema.</p>
-            <div style="background: #f9f9f9; padding: 20px; border-radius: 8px;">
-                <p style="font-size: 1.5rem; font-weight: bold;">H1: Títulos de Impacto</p>
-                <p style="font-size: 1.2rem; font-weight: 600;">H2: Subtítulos de Sección</p>
-                <p>Cuerpo de texto: Legibilidad óptima para documentación técnica y reportes estatales.</p>
+        <section id="typography">
+            <h2><span>04</span> Voz Tipográfica</h2>
+            <p>Utilizamos tipografías de sistema para garantizar <strong>Zero Latency Design</strong>. El diseño debe
+                ser rápido, accesible y verse perfecto en cualquier dispositivo sin cargar recursos externos.</p>
+            <div class="typo-sample">
+                <div class="typo-h1">Headline Impact</div>
+                <div class="typo-p">
+                    Cuerpo de texto diseñado para la lectura técnica prolongada.
+                    Equilibrio perfecto entre densidad de información y aire visual.
+                </div>
             </div>
-        </section>
-
-        <section id="ui">
-            <h2>Componentes de Interfaz (UI)</h2>
-            <p>La marca se expresa a través de elementos limpios con bordes redondeados que evocan esa evolución sinuosa.</p>
-            <br>
-            <a href="#" class="btn-pule">CONECTAR AHORA</a>
         </section>
 
     </div>
 
     <footer>
-        &copy; 2026 MODUS AXON | Documentación de Identidad Reservada
+        <div class="axon-seal">MODUS <span>AXON</span></div>
+        <p style="opacity: 0.5; font-size: 0.8rem;">
+            &copy; 2026 MODUS AXON | El método de la evolución digital.<br>
+            Cualquier sistema, perfeccionado.
+        </p>
     </footer>
 
 </body>
+
 </html>
