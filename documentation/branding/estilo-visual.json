@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "brand": "MODUS AXON",
+    "version": "3.1.0",
+    "theme": "Bio-Digital Futurism",
+    "updated": "2026-03-06",
+    "author": "MODUS AXON Intelligence System"
+  },
+  "colores": {
+    "void": {
+      "hex": "#020608",
+      "nombre": "Void Black",
+      "uso": "Fondo principal del sistema — base absoluta"
+    },
+    "deep": {
+      "hex": "#0A0F14",
+      "nombre": "Deep Space",
+      "uso": "Fondos de sección y paneles secundarios"
+    },
+    "surface": {
+      "hex": "#0D1520",
+      "nombre": "Surface Dark",
+      "uso": "Cards, modales, contenedores elevados"
+    },
+    "bio": {
+      "hex": "#00FF9F",
+      "nombre": "Bio-Matrix Green",
+      "uso": "Único acento neon — énfasis, CTAs, indicadores activos, eco-digital"
+    },
+    "text": {
+      "hex": "#B0C8D8",
+      "nombre": "Ice Text",
+      "uso": "Texto de cuerpo principal — frío, técnico, legible (utilidad)"
+    },
+    "text_dim": {
+      "hex": "#5A7A90",
+      "nombre": "Dim Text",
+      "uso": "Texto secundario, labels, metadatos (utilidad)"
+    },
+    "white": {
+      "hex": "#E8F0F5",
+      "nombre": "Cryo White",
+      "uso": "Headlines principales, énfasis máximo (utilidad)"
+    }
+  },
+  "gradientes": {
+    "axon_bio": "linear-gradient(135deg, #00CC7A 0%, #00FF9F 100%)",
+    "axon_glow_bg": "radial-gradient(circle at 20% 30%, rgba(0, 255, 159, 0.08), transparent 45%), radial-gradient(circle at 80% 70%, rgba(0, 255, 159, 0.04), transparent 45%)",
+    "card_border": "rgba(0, 255, 159, 0.12)"
+  },
+  "glass": {
+    "bg": "rgba(13, 21, 32, 0.6)",
+    "border": "rgba(0, 255, 159, 0.12)",
+    "border_hover": "rgba(0, 255, 159, 0.4)",
+    "blur": "backdrop-filter: blur(20px)"
+  },
+  "tipografia": {
+    "logo": {
+      "familia": "Syncopate",
+      "fuente": "https://fonts.google.com/specimen/Syncopate",
+      "pesos": [400, 700],
+      "token": "--font-logo",
+      "uso": "EXCLUSIVO wordmark — solo en el componente .logo-horiz. Prohibido en body, headlines y cualquier otro contexto."
+    },
+    "titulo": {
+      "familia": "Inter",
+      "fuente": "https://fonts.google.com/specimen/Inter",
+      "pesos": [700, 600],
+      "token": "--font-display",
+      "uso": "Títulos H1–H3, section headers, UI components bold"
+    },
+    "cuerpo": {
+      "familia": "Inter",
+      "fuente": "https://fonts.google.com/specimen/Inter",
+      "pesos": [400, 500],
+      "token": "--font-body",
+      "uso": "Párrafos, descripciones, texto de cuerpo"
+    },
+    "cita": {
+      "familia": "Inter",
+      "fuente": "https://fonts.google.com/specimen/Inter",
+      "pesos": [300],
+      "estilo": "italic",
+      "token": "--font-quote",
+      "uso": "Citas editoriales, frases de énfasis, blockquotes — Inter 300 italic + border-left bio"
+    },
+    "code": {
+      "familia": "JetBrains Mono",
+      "fuente": "https://fonts.google.com/specimen/JetBrains+Mono",
+      "pesos": [400, 700],
+      "token": "--font-code",
+      "uso": "Código, valores hexadecimales, IDs técnicos, labels de sistema, monoespaciado"
+    },
+    "stack_total": "Syncopate (logo) + Inter (título/cuerpo/cita) + JetBrains Mono (code) — 3 fuentes, 5 roles"
+  },
+  "escala_tipografica": {
+    "hero": "clamp(3.5rem, 10vw, 7rem)",
+    "h1": "clamp(2.5rem, 6vw, 4.5rem)",
+    "h2": "clamp(1.8rem, 4vw, 3rem)",
+    "h3": "clamp(1.2rem, 2.5vw, 1.8rem)",
+    "body_lg": "1.125rem",
+    "body": "1rem",
+    "sm": "0.875rem",
+    "xs": "0.75rem",
+    "code": "0.9rem"
+  },
+  "espaciado": {
+    "radius_sm": "8px",
+    "radius_md": "16px",
+    "radius_lg": "24px",
+    "radius_xl": "32px",
+    "radius_pill": "50px"
+  },
+  "principios": {
+    "1": "Void First — El vacío oscuro es el lienzo. La información emerge como luz.",
+    "2": "Bio-Digital — Sistemas vivos que respiran. Tecnología con conciencia ecológica.",
+    "3": "Neon Precision — El único acento neon señala exactamente lo que importa.",
+    "4": "Zero Latency Design — Sin carga extra. Performance es estética.",
+    "5": "Futurismo Orgánico — Geometría de la era digital con raíces en lo natural."
+  },
+  "tono_de_voz": {
+    "palabras_clave": ["evolución", "precisión", "sistémico", "inteligente", "eficiente", "bio-digital"],
+    "palabras_prohibidas": ["simple", "fácil", "básico", "barato", "rápido (superficial)"],
+    "tono": "Técnico pero cercano. Futurista pero humano. Directo, sin adornos vacíos.",
+    "personalidad": "El arquitecto de sistemas vivos. Combina la lógica del código con la adaptabilidad de los sistemas orgánicos."
+  },
+  "logo": {
+    "isotipo_svg": "../logo/Oficial-logo-ModusAxon.svg",
+    "isotipo_png": "../logo/modus-axon-sinfondo-isotipo.png",
+    "isotipo_ai": "../logo/modus-axon-sinfondo-isotipo.ai",
+    "logo_horizontal": "../logo/modus-axon-sinfondo.svg",
+    "notas": [
+      "Oficial-logo-ModusAxon.svg es el ISOTIPO oficial (marca abstracta, portrait 63.6x102.13)",
+      "modus-axon-sinfondo.svg es el logo completo (isotipo + wordmark — USO PRINCIPAL)",
+      "NO modificar los colores internos del SVG del isotipo",
+      "Usar SVG en todos los contextos digitales. PNG solo como fallback.",
+      "Mantener isotipo intacto — solo cambia el entorno que lo rodea"
+    ]
+  }
+}
