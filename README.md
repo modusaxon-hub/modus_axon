@@ -35,12 +35,16 @@ Bienvenido al repositorio central de **MODUS AXON**, el ecosistema de desarrollo
 
 ---
 
-## Documentación
+## 📁 Documentación del Proyecto
 
-- [Brandbook Digital](documentation/branding/branding.html) — Sistema de identidad visual Bio-Digital Futurism
-- [estilo-visual.json](documentation/branding/estilo-visual.json) — Tokens de diseño (fuente de verdad)
-- [Portafolio](documentation/PORTFOLIO.html) — Casos de estudio y servicios
-- [Logo / Isotipo](documentation/logo/) — Archivos SVG oficiales
+### 🏢 Negocios y Marca (`/documentation/`)
+- [Portafolio Maestro](documentation/PORTFOLIO.html) — Casos de estudio y servicios.
+- [Brandbook Digital](documentation/branding/branding.html) — Identidad Visual Bio-Digital Futurism.
+- [Tokens JSON](documentation/branding/estilo-visual.json) — Fuente de verdad para diseño.
+
+### 🏗️ Arquitectura y Gestión (`/technical/`)
+- [Guía Maestra de Documentación](technical/GUIA_DOCUMENTACION.md) — Estándar OBLIGATORIO.
+- [Modelos Estándar (Templates)](technical/models/) — Gárgolas operativas para nuevos proyectos.
 
 ---
 
