@@ -10,9 +10,11 @@ Bienvenido al repositorio central de **MODUS AXON**, el ecosistema de desarrollo
 
 | Proyecto | Stack | Estado |
 |----------|-------|--------|
-| [Origen Sierra Nevada](../origen_sierranevada) — E-commerce Café Premium | React + Supabase + TypeScript | F3+ Activo |
+| **[Agent](../agent)** — El Cerebro AI Orchestrator | Python + Agentic Workflows | **CORE** |
+| [Origen Sierra Nevada](../origen_sierranevada) — E-commerce Café Premium | React + Supabase + TS | F3+ Activo |
 | [Project Jacquin](../project_jacquin) — Gestión Académica | PHP + MySQL + React | Mantenimiento |
 | [Despensa Inteligente](../despensa_inteligente) — Logística & Inventario | React + Supabase Realtime | Planificación |
+| [Portfolio Manuel Pertuz](../manuel_pertuz) — Identidad Personal | HTML + Vanilla CSS | Despliegue |
 
 **Ver:** [Portafolio Completo (HTML)](documentation/PORTFOLIO.html)
 
@@ -39,12 +41,12 @@ Bienvenido al repositorio central de **MODUS AXON**, el ecosistema de desarrollo
 
 ### 🏢 Negocios y Marca (`/documentation/`)
 - [Portafolio Maestro](documentation/PORTFOLIO.html) — Casos de estudio y servicios.
-- [Brandbook Digital](documentation/branding/branding.html) — Identidad Visual Bio-Digital Futurism.
-- [Tokens JSON](documentation/branding/estilo-visual.json) — Fuente de verdad para diseño.
+- [Brandbook Digital](documentation/branding/branding.html) — Identidad Visual **Bio-Digital Futurism**.
+- [Tokens JSON](documentation/branding/estilo-visual.json) — Fuente de verdad para diseño UI.
 
 ### 🏗️ Arquitectura y Gestión (`/technical/`)
-- [Guía Maestra de Documentación](technical/GUIA_DOCUMENTACION.md) — Estándar OBLIGATORIO.
-- [Modelos Estándar (Templates)](technical/models/) — Gárgolas operativas para nuevos proyectos.
+- [Guía Maestra de Documentación](technical/GUIA_DOCUMENTACION.md) — Protocolo OBLIGATORIO del Hub.
+- [Biblioteca de Gárgolas (Modelos)](technical/models/) — 00 a 07: Estructura técnica, legal y comercial.
 
 ---
 
