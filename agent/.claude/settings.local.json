@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"d:/Documentos/Proyectos ADSO/project_jacquin\" log --oneline -10 -- \"web_page/pages/src/**/*Header*\" \"web_page/pages/src/**/*Navbar*\" \"web_page/pages/src/**/*Nav*\")",
+      "Bash(git -C \"d:/Documentos/Proyectos ADSO/project_jacquin\" log --oneline -10)"
+    ]
+  }
+}

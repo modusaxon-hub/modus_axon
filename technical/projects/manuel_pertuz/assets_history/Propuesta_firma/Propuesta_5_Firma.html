@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Pertuz - Propuesta 5: El Acento Romántico</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Space+Grotesk:wght@300;400&family=Kumbh+Sans:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --neutral: #1a1a1a;
+            --white: #ffffff;
+            --accent: #5e5e5e;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: var(--neutral);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 60px;
+            font-family: sans-serif;
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            font-weight: 300;
+        }
+
+        .signature-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 70px;
+            margin-bottom: 70px;
+        }
+
+        .signature-item {
+            position: relative;
+            padding: 60px 40px;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .word {
+            display: inline-block;
+        }
+
+        /* 
+           Simulación de la caída "romántica" / vibrato / rasgueo.
+           Haremos que una letra caiga o cambie sutílmente.
+        */
+        .vibrato {
+            display: inline-block;
+            transform: translateY(8px) rotate(-3deg);
+            color: #d1b48b;
+            /* un acento de color oro apagado (nostalgia) */
+        }
+
+        .drop {
+            display: inline-block;
+            transform: translateY(12px);
+            font-style: italic;
+        }
+
+        .ital {
+            font-style: italic;
+            padding-right: 4px;
+        }
+
+        /* Opción 1: Outfit con "u" como vibrato */
+        .sig1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 400;
+            font-size: 4.5rem;
+            letter-spacing: 1px;
+            color: var(--neutral);
+        }
+
+        /* Opción 2: Space Grotesk con la P cayendo */
+        .sig2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 300;
+            font-size: 4rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--neutral);
+        }
+
+        /* Opción 3: Kumbh Sans jugando con la cursiva en una letra para el rasgueo */
+        .sig3 {
+            font-family: 'Kumbh Sans', sans-serif;
+            font-weight: 300;
+            font-size: 4rem;
+            letter-spacing: 2px;
+            color: var(--neutral);
+        }
+
+        .font-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #aaa;
+            letter-spacing: 2px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .concept-text {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            font-family: sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #555;
+            border-top: 1px solid #ddd;
+            padding-top: 30px;
+        }
+
+        .concept-text strong {
+            color: var(--neutral);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation-container">
+        <div class="header">
+            <h1>Propuesta 5: El Acento Romántico</h1>
+        </div>
+
+        <div class="signature-showcase">
+
+            <!-- Opción 1 -->
+            <div class="signature-item">
+                <div class="sig1">
+                    <span class="word">Man<span class="vibrato">u</span>el</span>
+                    <span class="word">Pertuz</span>
+                </div>
+                <div class="font-label">Fuente: Outfit (Descenso / Acorde Nostálgico)</div>
+            </div>
+
+            <!-- Opción 2 -->
+            <div class="signature-item">
+                <div class="sig2">
+                    <span class="word">MANUEL</span>
+                    <span class="word"><span class="drop">P</span>ERTUZ</span>
+                </div>
+                <div class="font-label">Fuente: Space Grotesk (Caída Instrumental)</div>
+            </div>
+
+            <!-- Opción 3 -->
+            <div class="signature-item">
+                <div class="sig3">
+                    <span class="word">Manuel</span>
+                    <span class="word">Per<span class="ital">t</span>uz</span>
+                </div>
+                <div class="font-label">Fuente: Kumbh Sans (Vibrato Sutil)</div>
+            </div>
+
+        </div>
+
+        <div class="concept-text">
+            <p><strong>Concepto Visual:</strong> Una base de tipografía Sans-Serif moderna (robusta pero refinada) en la
+                que solo un detalle rompe la estructura estricta: una letra con un rasgueo, caída, o sútil cursiva.</p>
+            <p><strong>Fundamento de Identidad:</strong> Captura lo "Sofisticado" en su estructura base rígida, pero la
+                imperfección calculada (la letra que cae o cambia, un "vibrato tipográfico") representa el romanticismo
+                de Jean Carlos Centeno y la pasión interpretativa de Marc Anthony.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen Estado Actual — Jacquin Academia Musical</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Dancing+Script:wght@700&display=swap');
+
+        :root {
+            --azul-principal: #223F61;
+            --azul-acento: #93B6EE;
+            --naranja-acento: #E78C3B;
+            --blanco-neutro: #dddddd;
+            --fondo-crema: #F3F2EE;
+            --humo-gris: #CDCDCD;
+            --font-principal: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+            --font-display: 'League Spartan', 'Spartan', 'Futura', 'Century Gothic', sans-serif;
+            --font-serif: 'Marion', Georgia, 'Times New Roman', serif;
+            --font-decorativa: 'Dancing Script', cursive;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-principal);
+            background: var(--fondo-crema);
+            color: var(--azul-principal);
+            line-height: 1.6;
+            padding: 3rem;
+        }
+
+        .page {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 4rem;
+            box-shadow: 0 0 50px rgba(0, 0, 0, .06);
+            border-radius: 8px;
+        }
+
+        /* ── Header ─────────────────────────────────────────── */
+        .report-header {
+            border-bottom: 5px solid var(--naranja-acento);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .report-header .brand {
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--naranja-acento);
+            margin-bottom: .4rem;
+            text-transform: uppercase;
+        }
+
+        .report-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            color: var(--azul-principal);
+            line-height: 1.2;
+        }
+
+        .report-header .meta {
+            text-align: right;
+            font-size: .85rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* ── Typography and Content ─────────────────────────── */
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--azul-principal);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--humo-gris);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--azul-principal);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 0.5rem;
+        }
+
+        strong {
+            color: var(--azul-principal);
+            font-weight: bold;
+            -webkit-text-stroke: 0px transparent;
+            font-family: inherit;
+        }
+
+        .highlight-card {
+            background: var(--fondo-crema);
+            border-left: 4px solid var(--naranja-acento);
+            padding: 1.5rem;
+            margin: 2.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ── Footer ─────────────────────────────────────────── */
+        footer {
+            margin-top: 4rem;
+            border-top: 1px solid var(--humo-gris);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: .8rem;
+            color: #666;
+            font-family: var(--font-principal);
+        }
+
+        /* ── Print ──────────────────────────────────────────── */
+        @media print {
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+
+            body {
+                padding: 0;
+                background: #fff;
+            }
+
+            .page {
+                box-shadow: none;
+                padding: 0;
+                border-radius: 0;
+            }
+
+            h2,
+            .highlight-card {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- PORTADA -->
+        <div class="report-header">
+            <div>
+                <div class="brand">JACQUIN Academia Musical</div>
+                <h1>Resumen de Estado y Arquitectura</h1>
+                <div
+                    style="margin-top:.5rem; font-size:1rem; color:var(--azul-principal); font-family:var(--font-serif); font-style:italic;">
+                    Una lectura profunda de la documentación y bitácoras de desarrollo.
+                </div>
+            </div>
+            <div class="meta">
+                Fecha: <strong>25 Feb 2026</strong><br>
+                Sistema: <strong>Reporte Ejecutivo</strong><br>
+                Estado: <strong style="color:var(--naranja-acento);">Actualizado</strong>
+            </div>
+        </div>
+
+        <!-- CONTENIDO -->
+        <p>El panorama detallado e integral del Proyecto <strong>"Jacquin Academia Musical"</strong> a nivel de
+            arquitectura, decisiones de ingeniería y estado actual se resume a continuación.</p>
+
+        <h2>🏛️ 1. Arquitectura General y Stack Tecnológico</h2>
+        <p>El proyecto se rige bajo una arquitectura <strong>Cliente-Servidor desacoplada híbrida</strong>, impulsando
+            rendimiento sin costos elevados de infraestructura (Host compartido en InfinityFree y desarrollo local
+            mediante XAMPP + Túneles Zrok).</p>
+        <ul>
+            <li><strong>Frontend Híbrido (Micro-Frontends):</strong> Se emplea una ingeniosa mezcla. La parte pública
+                consta de HTML5/CSS3 y Vanilla JS con Web Components, pero las piezas dinámicas clave (como el Footer,
+                Header y secciones como Eventos / Perfiles) se rigen por una Single Page Application (SPA) construida
+                con <strong>React.js (Vite)</strong> e inyectada mediante compilaciones independientes
+                (<code>esbuild</code>). Se comunican a través de un bus de <em>Custom Events</em>.</li>
+            <li><strong>Backend / API:</strong> Desarrollada puramente en <strong>PHP 8 nativo</strong>, prescindiendo
+                de frameworks pesados para garantizar tiempos de respuesta rápidos y compatibilidad del 100% en hostings
+                compartidos.</li>
+            <li><strong>Base de Datos:</strong> MySQL/MariaDB bajo el patrón relacional.</li>
+        </ul>
+
+        <h2>⚙️ 2. Decisiones Técnicas y Refactorizaciones Críticas</h2>
+        <p>A través de las iteraciones recientes (registradas durante febrero de 2026), se han tomado determinaciones
+            técnicas clave para escalar el proyecto:</p>
+        <ul>
+            <li><strong>Seguridad y PDO:</strong> Se migró toda la capa de acceso a datos de transacciones básicas a PDO
+                con declaraciones preparadas (Prepared Statements). Esto blindó la API contra inyecciones SQL. Además,
+                las contraseñas usan Bcrypt.</li>
+            <li><strong>Optimización de Cargas (Base64 a Físico):</strong> Se descubrió que la base de datos y JSON se
+                saturaban guardando imágenes en formato Base64. Se migró el algoritmo para que las imágenes se
+                decodifiquen y guarden físicamente en <code>public/uploads/programs/</code> como archivos
+                <code>.png</code>, reduciendo el peso de las transferencias de red hasta un <strong>-99.4%</strong> (de
+                858 KB a 5 KB en payloads de programas).
+            </li>
+            <li><strong>Gestión de Bugs e Interfaz (Mojibake):</strong> Se purgaron de manera profunda los errores de
+                codificación (UTF-8) y BOM en los headers de las peticiones vía PHP, asegurando que los caracteres en
+                reportes y modales se lean visualmente de forma limpia en todos los sistemas operativos.</li>
+            <li><strong>Túneles para pruebas:</strong> Implementación de un script transaccional en lote
+                (<code>iniciar_tunel.bat</code> junto con Zrok) para probar la API localmente mediante internet público
+                bajo demanda.</li>
+        </ul>
+
+        <h2>🎼 3. Modelado de Dominio y Módulos de Negocio (ERD)</h2>
+        <p>Las entidades del sistema están limpiamente separadas, resolviendo de manera eficiente las interacciones de
+            los distintos <em>Stakeholders</em>:</p>
+        <ul>
+            <li><strong>Usuarios / Roles:</strong> Un sistema de autorización estricto que diferencia entre
+                Administrador (Rol 1), Profesor y Estudiante.</li>
+            <li><strong>Módulo de Catálogo y Cursos ("Programas"):</strong> Entidades administrables que dictan los
+                currículos disponibles.</li>
+            <li><strong>Módulo de Inscripciones (Enrollments) y Horarios:</strong> Contiene flujos complejos. Un
+                estudiante solicita cupo, pero el estado inicia Pendiente, validando contra la cuota (quota/capacidad)
+                real en la base de datos hasta que un administrador da el aval (Activo), momento en el que el sistema
+                asocia o exige la designación de un profesor y un horario exacto. Se inyectaron recientemente
+                notificaciones al estilo "Horario pendiente de asignación" en el Dashboard.</li>
+        </ul>
+
+        <h2>🛡️ 4. Auditoría de Calidad Reciente (23-25 Feb)</h2>
+        <p>En las jornadas más recientes, documentadas en <code>TASK.md</code>, el sistema se sometió a una batería de
+            refinamientos rigurosos:</p>
+        <ul>
+            <li><strong>Auditoría de Seguridad API:</strong> Se superaron 37 de 37 Pruebas de Estrés. Se bloquearon
+                vulnerabilidades detectando endpoints sin validación de sesión real y aplicando configuraciones a nivel
+                de caché (Headers ETag/304).</li>
+            <li><strong>Sincronía de la Interfaz:</strong> Se resolvió un severo conflicto en el que el código heredado
+                de Vanilla JS "chocaba" con la SPA de React al abrir los modales de Inscripción. Ahora operan
+                simbióticamente mediante paso de estado (<code>location.state</code>).</li>
+            <li><strong>Brandbook y Assets:</strong> Se integró la paleta oficial e inyectaron fuentes estáticas
+                (HelveticaNeue y Marion Regular) desde el servidor sin depender de CDNs externos (para mayor control
+                frente a caídas), centralizando todas las imágenes dinámicas.</li>
+        </ul>
+
+        <div class="highlight-card">
+            <h3 style="margin-top:0;">💡 Resumen del Estado Actual</h3>
+            <p>El código se encuentra en una etapa madura que pasó de ser <em>"código artesanal a ingeniería
+                    estandarizada"</em>. Cuenta con scripts consolidados para el despliegue automático, reportes
+                sistemáticos inyectados, y un diseño modular y eminentemente seguro y enfocado en la usabilidad final.
+            </p>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <strong>JACQUIN Academia Musical</strong> · Informe Técnico Arquitectónico · Generado el 25/02/2026<br>
+            <em>Donde la pasión se convierte en arte</em>
+        </footer>
+
+    </div>
+</body>
+
+</html>

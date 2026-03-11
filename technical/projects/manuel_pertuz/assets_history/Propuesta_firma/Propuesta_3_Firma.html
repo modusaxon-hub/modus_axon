@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Pertuz - Propuesta 3: Geometría Acústica</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300&family=Inter:wght@200;300&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --dark-room: #0a0a0c;
+            /* "El cuarto oscuro" */
+            --silver: #e0e0e0;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-room);
+            color: var(--silver);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            font-weight: 300;
+        }
+
+        .signature-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .signature-item {
+            position: relative;
+            padding: 60px 40px;
+            background: #121215;
+            border: 1px solid #222;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* SVG Isologos */
+        .isologo-svg {
+            width: 120px;
+            height: 120px;
+            fill: none;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-bottom: 25px;
+        }
+
+        /* Nombre debajo del isotipo */
+        .brand-name {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 200;
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: var(--silver);
+            text-transform: uppercase;
+        }
+
+        .font-label {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            color: #555;
+            letter-spacing: 1px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .concept-text {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #bbb;
+            border-top: 1px solid #333;
+            padding-top: 30px;
+        }
+
+        .concept-text strong {
+            color: var(--white);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation-container">
+        <div class="header">
+            <h1>Propuesta 3: Geometría Acústica</h1>
+        </div>
+
+        <div class="signature-showcase">
+
+            <!-- Opción 1: M como onda acústica abstracta y P integrada -->
+            <div class="signature-item">
+                <svg viewBox="0 0 100 100" class="isologo-svg">
+                    <!-- M (Onda/Pulso) -->
+                    <polyline points="20,70 35,30 50,60 65,20 80,70" />
+                    <!-- P (Micrófono minimalista superpuesto/continuo imaginario) -->
+                    <circle cx="50" cy="35" r="10" />
+                    <line x1="50" y1="45" x2="50" y2="70" />
+                    <line x1="40" y1="70" x2="60" y2="70" />
+                </svg>
+                <div class="brand-name">Manuel Pertuz</div>
+                <div class="font-label">Concepto 1: Pulso Sonoro</div>
+            </div>
+
+            <!-- Opción 2: Monograma M+P Line-art continuo -->
+            <div class="signature-item">
+                <svg viewBox="0 0 100 100" class="isologo-svg">
+                    <!-- Trazo que forma M y P fluida -->
+                    <path d="M 25 80 L 25 30 L 40 55 L 55 30 L 55 80" />
+                    <path d="M 55 50 C 75 50 75 30 55 30" />
+                </svg>
+                <div class="brand-name">Manuel Pertuz</div>
+                <div class="font-label">Concepto 2: Monograma Continuo</div>
+            </div>
+
+            <!-- Opción 3: Isotipo Geométrico Puro -->
+            <div class="signature-item">
+                <svg viewBox="0 0 100 100" class="isologo-svg">
+                    <!-- Geometría abstracta M -->
+                    <polygon points="30,70 30,40 50,60 70,40 70,70" stroke-width="1.5" />
+                    <circle cx="70" cy="40" r="15" stroke-dasharray="20 10" />
+                </svg>
+                <div class="brand-name">Manuel Pertuz</div>
+                <div class="font-label">Concepto 3: M-P Espectral</div>
+            </div>
+
+        </div>
+
+        <div class="concept-text">
+            <p><strong>Concepto Visual:</strong> Transformación geométrica de las iniciales "M" y "P" usando un estilo
+                <em>line-art</em> continuo y vanguardista. Abstracciones visuales que combinan ondas acústicas, siluetas
+                de micrófonos clásicos y formas atemporales.</p>
+            <p><strong>Fundamento de Identidad:</strong> Apela estrictamente a la promesa del "Legado Musical" (Música
+                Evergreen). Estos símbolos están diseñados para resistir el paso del tiempo. Tienen una estética platina
+                sobre el "cuarto oscuro" (fondos negros), generando misterio y sobriedad.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

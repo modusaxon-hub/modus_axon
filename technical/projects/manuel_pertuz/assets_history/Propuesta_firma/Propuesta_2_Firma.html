@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Pertuz - Propuesta 2: Dualidad Elegante</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Serif Fonts (Clásicas, trazos finos, romance, elegancia) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,400;1,400&family=Cinzel:wght@400&display=swap"
+        rel="stylesheet">
+
+    <!-- Sans-Serif Fonts (Geométricas, minimalistas, siglo XXI) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&family=Outfit:wght@200;300&family=Inter:wght@200;300&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --black: #111111;
+            /* Tono acromático oscuro */
+            --white: #fafafa;
+            /* Fondo claro acromático */
+            --gray: #444444;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--white);
+            color: var(--black);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #777;
+            font-weight: 400;
+        }
+
+        .signature-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 90px;
+            margin-bottom: 60px;
+        }
+
+        .signature-item {
+            position: relative;
+            padding: 50px 20px;
+            background: #fff;
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .signature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilos base de la dualidad */
+        .dual-signature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            /* Separación entre el nombre y apellido */
+        }
+
+        .dual-signature-stacked {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        /* Opción 1: Cormorant Garamond (Italic) + Montserrat (Light) */
+        .sig1-manuel {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 5.5rem;
+            color: var(--black);
+        }
+
+        .sig1-pertuz {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            font-size: 3rem;
+            letter-spacing: 6px;
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        /* Opción 2: Playfair (Regular) + Outfit (Ligero) alineado a la misma altura */
+        .sig2-manuel {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 4rem;
+            color: var(--black);
+        }
+
+        .sig2-pertuz {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+            color: var(--black);
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* Opción 3: Cinzel (Clásico) + Inter (Ultramoderno, mucho tracking) */
+        .sig3-manuel {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            font-size: 4rem;
+            color: var(--black);
+            letter-spacing: 1px;
+        }
+
+        .sig3-pertuz {
+            font-family: 'Inter', sans-serif;
+            font-weight: 200;
+            font-size: 1.5rem;
+            letter-spacing: 15px;
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-top: -5px;
+            margin-left: 15px;
+            /* Compensa visualmente el tracking extra */
+        }
+
+        .font-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: #aaa;
+            letter-spacing: 2px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+        }
+
+        .concept-text {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+            border-top: 1px solid #ddd;
+            padding-top: 30px;
+        }
+
+        .concept-text strong {
+            color: var(--black);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation-container">
+        <div class="header">
+            <h1>Propuesta 2: Dualidad Elegante</h1>
+        </div>
+
+        <div class="signature-showcase">
+
+            <!-- Opción 1: Contraste Itálica / Geométrica (Apilado) -->
+            <div class="signature-item">
+                <div class="dual-signature-stacked">
+                    <span class="sig1-manuel">Manuel</span>
+                    <span class="sig1-pertuz">Pertuz</span>
+                </div>
+                <div class="font-label">Fuente: Cormorant Garamond / Montserrat</div>
+            </div>
+
+            <!-- Opción 2: Contraste Horizontal (Equilibrio de peso visual) -->
+            <div class="signature-item">
+                <div class="dual-signature">
+                    <span class="sig2-manuel">Manuel</span>
+                    <span class="sig2-pertuz">PERTUZ</span>
+                </div>
+                <div class="font-label">Fuente: Playfair Display / Outfit</div>
+            </div>
+
+            <!-- Opción 3: Clásico y Vanguardia Absoluta (Apilado moderno) -->
+            <div class="signature-item" style="padding-bottom: 70px;">
+                <div class="dual-signature-stacked">
+                    <span class="sig3-manuel">MANUEL</span>
+                    <span class="sig3-pertuz">PERTUZ</span>
+                </div>
+                <div class="font-label">Fuente: Cinzel / Inter</div>
+            </div>
+
+        </div>
+
+        <div class="concept-text">
+            <p><strong>Concepto Visual:</strong> Combinación (pairing) de tipografías contrastantes y sofisticadas.
+                "MANUEL" en una fuente Serif clásica de trazos finos (evocando romance y elegancia clásica), junto a
+                "PERTUZ" en una Sans-Serif geométrica ultra minimalista.</p>
+            <p><strong>Fundamento de Identidad:</strong> Visualiza "la utilidad técnica aplicada al sentimiento". Resume
+                al músico que respeta el legado musical, pero cuyo empaque acústico y visual aterriza al siglo XXI con
+                "los pies en la tierra" en tonos acromáticos (blanco, negro, gris).</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Pertuz - Propuesta 4: Respiración Visual</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fuentes Geométricas / Estilos Editoriales -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Jost:wght@200;300&family=Syne:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--white);
+            color: var(--black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .presentation-container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 80px;
+            font-family: sans-serif;
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            font-weight: 300;
+        }
+
+        .signature-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+            margin-bottom: 80px;
+        }
+
+        .signature-item {
+            position: relative;
+            padding: 20px;
+            /* Marco fotográfico crudo imaginario */
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 
+           Opción 1: Montserrat (Light) con Tracking Extremo (40px)
+        */
+        .sig1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            font-size: 2rem;
+            letter-spacing: 40px;
+            /* Respiración extrema */
+            text-transform: uppercase;
+            color: var(--black);
+            margin-right: -40px;
+            /* Compensa visualmente al centrar por el tracking */
+        }
+
+        /* 
+           Opción 2: Jost (Extra Light) Espaciado y Minimalista
+        */
+        .sig2 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 200;
+            font-size: 3.5rem;
+            letter-spacing: 25px;
+            text-transform: uppercase;
+            color: var(--black);
+            margin-right: -25px;
+        }
+
+        /* 
+           Opción 3: Syne (Regular) Vanguardia Moderna con tracking moderado pero imponente
+        */
+        .sig3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 400;
+            font-size: 2.5rem;
+            letter-spacing: 15px;
+            /* Menos tracking pero letras inherentemente anchas */
+            text-transform: lowercase;
+            /* Estilo urbano poético */
+            color: var(--black);
+            margin-right: -15px;
+            opacity: 0.9;
+        }
+
+        .font-label {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #aaa;
+            letter-spacing: 3px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+        }
+
+        .concept-text {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #444;
+            padding-top: 40px;
+        }
+
+        .concept-text strong {
+            font-weight: 500;
+            color: var(--black);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation-container">
+        <div class="header">
+            <h1>Propuesta 4: Respiración Visual</h1>
+        </div>
+
+        <div class="signature-showcase">
+
+            <div class="signature-item">
+                <div class="sig1">MANUEL PERTUZ</div>
+                <div class="font-label">Fuente: Montserrat / Tracking: 40px</div>
+            </div>
+
+            <div class="signature-item">
+                <div class="sig2">MANUEL PERTUZ</div>
+                <div class="font-label">Fuente: Jost / Tracking: 25px</div>
+            </div>
+
+            <div class="signature-item" style="border:none;">
+                <div class="sig3">manuel pertuz</div>
+                <div class="font-label">Fuente: Syne / Minúsculas / Tracking: 15px</div>
+            </div>
+
+        </div>
+
+        <div class="concept-text">
+            <p><strong>Concepto Visual:</strong> Diseño puramente tipográfico (Wordmark). La firma de proporciones
+                geométricas aplicando un <em>tracking</em> (espaciado entre letras) extremadamente amplio.</p>
+            <p><strong>Fundamento de Identidad:</strong> El gran espacio negativo (el blanco) representa literalmente el
+                "silencio antes que el ruido" musical. Las letras se leen de manera separada emulando "La anatomía de un
+                verso", el despiece clínico y romántico de una canción cantada a flor de piel.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

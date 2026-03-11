@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora de Errores — Project Jacquin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --brand-primary: #153e6b;
+            --brand-secondary: #081d33;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --accent-gold: #c5a065;
+            --bg-body: #f0f2f5;
+            --bg-card: #ffffff;
+            --bg-header: #081d33;
+            --border: #e2e8f0;
+            --text-main: #1a202c;
+            --text-muted: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* ── MASTER HEADER ─────────────────────────────────── */
+        .master-header {
+            background: var(--bg-header);
+            color: #e6edf3;
+            padding: 2.5rem 3rem;
+            border-bottom: 4px solid var(--danger);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .master-header-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--danger);
+            margin-bottom: 6px;
+        }
+
+        .master-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .master-header .meta {
+            text-align: right;
+            font-size: 0.82rem;
+            color: #8b949e;
+            line-height: 1.8;
+        }
+
+        .master-header .meta strong {
+            color: #e6edf3;
+        }
+
+        /* ── INDEX TABLE ───────────────────────────────────── */
+        .index-section {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .index-section h2 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .index-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+        }
+
+        .index-table thead th {
+            background: var(--bg-header);
+            color: #93b6ee;
+            font-weight: 600;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .index-table tbody tr { border-bottom: 1px solid var(--border); }
+        .index-table tbody tr:last-child { border-bottom: none; }
+        .index-table tbody tr:hover { background: #f8fafc; }
+
+        .index-table td { padding: 9px 14px; }
+        .index-table td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--danger);
+            font-weight: 600;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .idx-link {
+            color: var(--brand-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .idx-link:hover { text-decoration: underline; }
+
+        .idx-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .idx-badge.resolved { background: #d1fae5; color: #065f46; }
+        .idx-badge.err { background: #fee2e2; color: #991b1b; }
+        .idx-badge.sec { background: #fef3c7; color: #92400e; }
+        .idx-badge.vuln { background: #ede9fe; color: #4c1d95; }
+
+        .idx-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* ── ACCORDION SHELL ───────────────────────────────── */
+        .entries-section {
+            max-width: 960px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .entries-section h2 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        details.err-entry {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--danger);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            scroll-margin-top: 80px;
+        }
+
+        details.err-entry.resolved {
+            border-left-color: var(--success);
+        }
+
+        details.err-entry > summary {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            flex-wrap: wrap;
+        }
+
+        details.err-entry > summary::-webkit-details-marker { display: none; }
+
+        .entry-id-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            background: var(--bg-header);
+            color: var(--danger);
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        details.err-entry.resolved .entry-id-badge {
+            color: #10b981;
+        }
+
+        .entry-latest-tag {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: var(--danger);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .entry-type-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .entry-type-badge.err { background: #fee2e2; color: #991b1b; }
+        .entry-type-badge.sec { background: #fef3c7; color: #92400e; }
+        .entry-type-badge.vuln { background: #ede9fe; color: #4c1d95; }
+
+        .entry-status-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .entry-status-badge.resolved { background: #d1fae5; color: #065f46; }
+
+        .summary-title {
+            flex: 1;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .summary-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .summary-arrow {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        details[open] .summary-arrow { transform: rotate(90deg); }
+
+        /* ── ENTRY CONTENT ─────────────────────────────────── */
+        .entry-body {
+            padding: 0 20px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .entry-meta-row {
+            display: flex;
+            gap: 2rem;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 1rem;
+            font-size: 0.78rem;
+            flex-wrap: wrap;
+        }
+
+        .entry-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .entry-meta-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .entry-meta-value {
+            font-weight: 600;
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+        }
+
+        .entry-meta-value.danger { color: var(--danger); }
+        .entry-meta-value.success { color: var(--success); }
+        .entry-meta-value.warning { color: var(--warning); }
+
+        .entry-content {
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.75;
+        }
+
+        .entry-content strong { color: var(--text-main); }
+
+        .entry-content code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            background: #f1f5f9;
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: #1e40af;
+        }
+
+        .entry-content .solution-block {
+            margin-top: 1rem;
+            padding: 12px 16px;
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .entry-content .problem-block {
+            margin-top: 0.5rem;
+            padding: 12px 16px;
+            background: #fff1f2;
+            border-left: 3px solid var(--danger);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .entry-content .warning-block {
+            margin-top: 0.5rem;
+            padding: 12px 16px;
+            background: #fffbeb;
+            border-left: 3px solid var(--warning);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .cvss-chip {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #fca5a5;
+        }
+
+        /* ── FOOTER ────────────────────────────────────────── */
+        .master-footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MASTER HEADER -->
+    <div class="master-header">
+        <div>
+            <div class="master-header-label">System Diagnostics · Incident Log</div>
+            <h1>Bitácora de Errores</h1>
+        </div>
+        <div class="meta">
+            <strong>Project Jacquin</strong><br>
+            13 incidentes &nbsp;·&nbsp; E00001–E00013<br>
+            17 Feb – 24 Feb 2026 · Siguiente: <strong>E00014</strong>
+        </div>
+    </div>
+
+    <!-- INDEX -->
+    <div class="index-section">
+        <h2>Índice de Incidentes</h2>
+        <table class="index-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Código Original</th>
+                    <th>Descripción</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#E00013" class="idx-link">27/02/2026/E00013</a></td>
+                    <td>VULN-007</td>
+                    <td>Sin validación de payload en backend</td>
+                    <td><span class="idx-badge vuln">VULN</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">24 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00012" class="idx-link">27/02/2026/E00012</a></td>
+                    <td>VULN-006</td>
+                    <td>Dos copias independientes del endpoint de escritura</td>
+                    <td><span class="idx-badge vuln">VULN</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">24 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00011" class="idx-link">27/02/2026/E00011</a></td>
+                    <td>VULN-005</td>
+                    <td>Sin cache headers en get_programs_json.php</td>
+                    <td><span class="idx-badge vuln">VULN</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">24 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00010" class="idx-link">27/02/2026/E00010</a></td>
+                    <td>VULN-004</td>
+                    <td>Directorio data/ creado con permisos 0777</td>
+                    <td><span class="idx-badge vuln">VULN</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">24 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00009" class="idx-link">27/02/2026/E00009</a></td>
+                    <td>VULN-003</td>
+                    <td>Sin bloqueo de archivo en escrituras concurrentes</td>
+                    <td><span class="idx-badge vuln">VULN</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">24 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00008" class="idx-link">27/02/2026/E00008</a></td>
+                    <td>VULN-002</td>
+                    <td>Imágenes Base64 embebidas en programs.json (838 KB)</td>
+                    <td><span class="idx-badge vuln">VULN</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">24 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00007" class="idx-link">27/02/2026/E00007</a></td>
+                    <td>VULN-001</td>
+                    <td>Sin autenticación en endpoint de escritura de programas</td>
+                    <td><span class="idx-badge vuln">VULN</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">24 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00006" class="idx-link">27/02/2026/E00006</a></td>
+                    <td>ERR-004</td>
+                    <td>Avatar 404 en Header.js (ruta hardcodeada)</td>
+                    <td><span class="idx-badge err">ERR</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">18 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00005" class="idx-link">27/02/2026/E00005</a></td>
+                    <td>SEC-002</td>
+                    <td>Enumeración de usuarios en login.php</td>
+                    <td><span class="idx-badge sec">SEC</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">18 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00004" class="idx-link">27/02/2026/E00004</a></td>
+                    <td>SEC-001</td>
+                    <td>Archivos debug en producción sin autenticación</td>
+                    <td><span class="idx-badge sec">SEC</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">18 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00003" class="idx-link">27/02/2026/E00003</a></td>
+                    <td>ERR-003</td>
+                    <td>Assets 404 — Avatars & Events en ruta incorrecta</td>
+                    <td><span class="idx-badge err">ERR</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">18 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00002" class="idx-link">27/02/2026/E00002</a></td>
+                    <td>ERR-002</td>
+                    <td>Avatar paths — rutas relativas incorrectas en admin_users.js</td>
+                    <td><span class="idx-badge err">ERR</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">17 Feb 2026</td>
+                </tr>
+                <tr>
+                    <td><a href="#E00001" class="idx-link">27/02/2026/E00001</a></td>
+                    <td>ERR-001</td>
+                    <td>404 JS/Main — referencia a js/main.js inexistente</td>
+                    <td><span class="idx-badge err">ERR</span></td>
+                    <td><span class="idx-badge resolved">Resuelto</span></td>
+                    <td class="idx-date">17 Feb 2026</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ENTRIES -->
+    <div class="entries-section">
+        <h2>Entradas del Log &mdash; Más reciente primero</h2>
+
+        <!-- E00013 -->
+        <details class="err-entry resolved" id="E00013" open>
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00013</span>
+                <span class="entry-latest-tag">Último</span>
+                <span class="entry-type-badge vuln">VULN</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">VULN-007 — Sin Validación de Payload en Backend</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">VULN-007</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">24022026SECFIX</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Severidad</span>
+                        <span class="entry-meta-value danger">Media</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Fecha</span>
+                        <span class="entry-meta-value">24 Feb 2026</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <strong>Riesgos identificados:</strong><br>
+                        (a) Payload de decenas de MB podía enviarse libremente sin restricción de tamaño.<br>
+                        (b) Un array vacío <code>[]</code> pasaba la validación <code>is_array()</code> y borraba todos los programas.<br>
+                        (c) Arrays secuenciales como <code>[{"title":"x"}]</code> podían corromper la estructura del JSON.
+                    </div>
+                    <div class="warning-block" style="margin-top:0.75rem;">
+                        <strong>Bug técnico descubierto:</strong> La detección de <code>[]</code> vacío con
+                        <code>array_keys($data) === range(0, count($data)-1)</code> fallaba porque
+                        <code>range(0, -1)</code> devuelve <code>[0, -1]</code> en PHP (no un array vacío).
+                        Bug descubierto durante la suite de tests y corregido inmediatamente.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Límite de <strong>10 MB</strong> + rechazo de <code>[]</code> vacío
+                        usando <code>empty()</code> + rechazo de arrays secuenciales (estructura inválida).
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00012 -->
+        <details class="err-entry resolved" id="E00012">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00012</span>
+                <span class="entry-type-badge vuln">VULN</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">VULN-006 — Dos Copias Independientes del Endpoint de Escritura</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">VULN-006</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">24022026SECFIX</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Severidad</span>
+                        <span class="entry-meta-value warning">Arquitectura</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <strong>Archivos afectados:</strong><br>
+                        <code>jacquin_api/admin_save_programs_json.php</code> (raíz, activo) y
+                        <code>jacquin_api/public/admin_save_programs_json.php</code> (duplicado).<br>
+                        Ambas con lógica ligeramente diferente (0777 vs 0755, mensajes distintos) pero apuntando al mismo
+                        <code>programs.json</code>. Duplica la superficie de ataque y complica el mantenimiento.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> El endpoint canónico es el de la raíz (al que apunta <code>ApiService</code>).
+                        El duplicado en <code>public/</code> devuelve <strong>HTTP 410 Gone</strong> indicando su obsolescencia.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00011 -->
+        <details class="err-entry resolved" id="E00011">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00011</span>
+                <span class="entry-type-badge vuln">VULN</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">VULN-005 — Sin Cache Headers en get_programs_json.php</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">VULN-005</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">24022026SECFIX</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Severidad</span>
+                        <span class="entry-meta-value warning">Performance</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <strong>Archivo afectado:</strong> <code>jacquin_api/get_programs_json.php</code>.<br>
+                        Sin ningún header de caché, cada visita al home descargaba el JSON completo
+                        (838 KB al momento del hallazgo) desde InfinityFree sin posibilidad de caché del navegador.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Añadidos <code>Cache-Control: public, max-age=300</code>,
+                        <code>ETag</code> (MD5 del archivo) y <code>Last-Modified</code>.<br>
+                        Lógica de respuesta <strong>304 Not Modified</strong> cuando el cliente ya tiene la versión actual.
+                        En visitas repetidas, el JSON no se descarga (0 bytes de transferencia).
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00010 -->
+        <details class="err-entry resolved" id="E00010">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00010</span>
+                <span class="entry-type-badge vuln">VULN</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">VULN-004 — Directorio data/ Creado con Permisos 0777</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">VULN-004</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">24022026SECFIX</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Severidad</span>
+                        <span class="entry-meta-value warning">Baja-Media</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <strong>Archivo afectado:</strong> <code>admin_save_programs_json.php</code> (raíz), línea 26:
+                        <code>mkdir(dirname($file), 0777, true)</code>.<br>
+                        En hosting compartido (Linux), un directorio world-writable permite que cualquier proceso
+                        del servidor modifique <code>programs.json</code>.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> <code>0777</code> → <code>0755</code>.
+                        La copia en <code>public/</code> ya usaba 0755 correctamente.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00009 -->
+        <details class="err-entry resolved" id="E00009">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00009</span>
+                <span class="entry-type-badge vuln">VULN</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">VULN-003 — Sin Bloqueo de Archivo en Escrituras Concurrentes</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">VULN-003</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">24022026SECFIX + 24022026STRESS</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Severidad</span>
+                        <span class="entry-meta-value warning">Moderada</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <strong>Archivos afectados:</strong> Ambos endpoints de escritura usaban
+                        <code>file_put_contents()</code> sin flags.<br>
+                        En escritura simultánea de dos admins, los bytes podían intercalarse produciendo un JSON
+                        corrupto que dejaba <code>Programs.jsx</code> en blanco (el <code>JSON.parse</code>
+                        fallaría silenciosamente).
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Añadido flag <code>LOCK_EX</code> en todas las llamadas
+                        <code>file_put_contents()</code> de ambos archivos.<br>
+                        Verificado por test de <strong>5 procesos paralelos</strong> (Build: 24022026STRESS).
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00008 -->
+        <details class="err-entry resolved" id="E00008">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00008</span>
+                <span class="entry-type-badge vuln">VULN</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">VULN-002 — Imágenes Base64 Embebidas en programs.json (838 KB)</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">VULN-002</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">24022026SECFIX</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Severidad</span>
+                        <span class="entry-meta-value danger">Alta — Performance</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <strong>Evidencia real:</strong> <code>program_1768517168737</code> contenía una imagen Base64
+                        de <strong>844,922 caracteres</strong>. El JSON completo pesaba <strong>858,635 bytes (838 KB)</strong>.<br>
+                        Cada visita al home descargaba esos 838 KB antes de renderizar "Nuestros Programas".<br>
+                        Proyección máxima con 9 programas × 3 MB: JSON de <strong>~36 MB</strong>.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución backend:</strong> El endpoint detecta automáticamente cualquier campo
+                        <code>image</code> que empiece con <code>data:image/</code>, decodifica el Base64,
+                        valida tipo MIME (jpg/png/webp/gif), valida tamaño (máx 5 MB), guarda en
+                        <code>public/uploads/programs/</code> con <code>PathHelper</code>, y sustituye el campo por
+                        la ruta relativa (&lt;30 chars).<br><br>
+                        <strong>Migración ejecutada:</strong> <code>programs.json</code> pasó de
+                        <strong>858 KB → 5 KB (−99.4%)</strong>. Imagen guardada como archivo PNG físico (618 KB).<br>
+                        <strong>Frontend:</strong> <code>Programs.jsx</code> actualizado con <code>resolveImageUrl()</code>
+                        para manejar rutas <code>public/uploads/</code> vía <code>ApiService.BASE_URL</code>.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00007 -->
+        <details class="err-entry resolved" id="E00007">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00007</span>
+                <span class="entry-type-badge vuln">VULN</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">VULN-001 — Sin Autenticación en Endpoint de Escritura de Programas</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">VULN-001</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">24022026SECFIX</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Severidad</span>
+                        <span class="entry-meta-value danger">Crítica</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">CVSS Estimado</span>
+                        <span class="entry-meta-value"><span class="cvss-chip">9.1 Crítico</span></span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <strong>Archivos afectados:</strong>
+                        <code>jacquin_api/admin_save_programs_json.php</code> (raíz) y
+                        <code>jacquin_api/public/admin_save_programs_json.php</code> (copia).<br>
+                        Ambos carecían de <code>session_start()</code> y verificación de rol.
+                        Cualquier actor externo podía enviar un POST anónimo y sobrescribir o vaciar
+                        <code>programs.json</code>, borrando la sección pública instantáneamente.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Añadido <code>session_start()</code> + guard
+                        <code>$_SESSION['user']['id_rol'] != 1</code> → <strong>HTTP 403</strong> en ambos archivos.<br>
+                        El endpoint <code>public/</code> marcado además como deprecado (HTTP 410).<br>
+                        <code>ApiService.saveProgramsJson()</code> actualizado con <code>credentials: 'include'</code>
+                        (legacy + React) para transmitir la cookie de sesión PHP.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00006 -->
+        <details class="err-entry resolved" id="E00006">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00006</span>
+                <span class="entry-type-badge err">ERR</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">ERR-004 — Avatar 404 en Header.js (ruta hardcodeada)</span>
+                <span class="summary-date">18 Feb 2026 · Build: 180220261100HEADER</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">ERR-004</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">180220261100HEADER</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Fecha</span>
+                        <span class="entry-meta-value">18 Feb 2026</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <code>Header.js</code> mantenía referencia hardcodeada a la ruta
+                        <code>web_page/pages/uploads</code>, que generaba un 404 al ser servido desde contextos
+                        distintos al esperado durante el desarrollo.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Se parcheó el componente para usar
+                        <code>API_CONFIG.BASE_URL</code> dinámico en lugar de rutas absolutas hardcodeadas.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00005 -->
+        <details class="err-entry resolved" id="E00005">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00005</span>
+                <span class="entry-type-badge sec">SEC</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">SEC-002 — Enumeración de Usuarios en login.php</span>
+                <span class="summary-date">18 Feb 2026 · Build: 180220261050AUDIT</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">SEC-002</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">180220261050AUDIT</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Fecha</span>
+                        <span class="entry-meta-value">18 Feb 2026</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        <code>login.php</code> retornaba mensajes específicos como <em>"Correo no encontrado"</em>.
+                        Esto permitía a atacantes verificar qué correos están registrados en el sistema
+                        simplemente enviando solicitudes de login (user enumeration attack).
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Se unificaron todos los mensajes de error de login a un
+                        mensaje genérico: <em>"Credenciales inválidas"</em> o equivalente,
+                        sin revelar si el correo existe o no.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00004 -->
+        <details class="err-entry resolved" id="E00004">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00004</span>
+                <span class="entry-type-badge sec">SEC</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">SEC-001 — Archivos Debug en Producción sin Autenticación</span>
+                <span class="summary-date">18 Feb 2026 · Build: 180220261050AUDIT</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">SEC-001</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">180220261050AUDIT</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Fecha</span>
+                        <span class="entry-meta-value">18 Feb 2026</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        Se detectaron <code>debug_check.php</code> y <code>add_clarinete.php</code> en la raíz
+                        del proyecto. Estos scripts exponían rutas completas (<code>__DIR__</code>) y lógica de base
+                        de datos sin ningún tipo de autenticación, accesibles públicamente.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Acción:</strong> Ambos archivos fueron eliminados durante la auditoría de seguridad.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00003 -->
+        <details class="err-entry resolved" id="E00003">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00003</span>
+                <span class="entry-type-badge err">ERR</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">ERR-003 — Assets 404 (Avatars &amp; Events) en ruta incorrecta</span>
+                <span class="summary-date">18 Feb 2026 · Build: 180220261055FIX</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">ERR-003</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Build Asociado</span>
+                        <span class="entry-meta-value warning">180220261055FIX</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Fecha</span>
+                        <span class="entry-meta-value">18 Feb 2026</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        Se reportaron errores 404 en la carga de recursos (avatares y eventos).<br>
+                        <strong>Causa:</strong> Los archivos estaban en <code>web_page/pages/uploads</code>
+                        en lugar de <code>jacquin_api/public/uploads</code> (ruta correcta servida por la API).
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Se movieron los directorios <code>avatars</code> y
+                        <code>events</code> a la ruta correcta: <code>jacquin_api/public/uploads/</code>.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00002 -->
+        <details class="err-entry resolved" id="E00002">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00002</span>
+                <span class="entry-type-badge err">ERR</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">ERR-002 — Avatar Paths: Rutas Relativas Incorrectas</span>
+                <span class="summary-date">17 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">ERR-002</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Archivo Afectado</span>
+                        <span class="entry-meta-value">admin_users.js</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Fecha</span>
+                        <span class="entry-meta-value">17 Feb 2026</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        Los avatares se rompían al cargarse con rutas relativas incorrectas en
+                        <code>admin_users.js</code>. El comportamiento era dependiente del contexto de navegación
+                        y fallaba en rutas anidadas.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> Se implementó <code>ApiService.BASE_URL</code> en
+                        <code>admin_users.js</code> para forzar rutas absolutas en todos los recursos de avatar.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E00001 -->
+        <details class="err-entry resolved" id="E00001">
+            <summary>
+                <span class="entry-id-badge">27/02/2026/E00001</span>
+                <span class="entry-type-badge err">ERR</span>
+                <span class="entry-status-badge resolved"><i class="bi bi-check-circle-fill"></i> Resuelto</span>
+                <span class="summary-title">ERR-001 — 404 JS/Main en contactanos.html</span>
+                <span class="summary-date">17 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="entry-body">
+                <div class="entry-meta-row">
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Código Original</span>
+                        <span class="entry-meta-value">ERR-001</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Archivo Afectado</span>
+                        <span class="entry-meta-value">contactanos.html</span>
+                    </div>
+                    <div class="entry-meta-item">
+                        <span class="entry-meta-label">Fecha</span>
+                        <span class="entry-meta-value">17 Feb 2026</span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    <div class="problem-block">
+                        Se detectó una referencia a <code>js/main.js</code> en <code>contactanos.html</code>
+                        que generaba un error 404 en la consola del navegador. El archivo referenciado
+                        no existía en el proyecto.
+                    </div>
+                    <div class="solution-block">
+                        <strong>Solución:</strong> El archivo fue eliminado de la referencia en
+                        <code>contactanos.html</code> ya que no existía ni era necesario.
+                    </div>
+                </div>
+            </div>
+        </details>
+
+    </div>
+
+    <div class="master-footer">
+        Project Jacquin &nbsp;·&nbsp; Bitácora de Errores Unificada &nbsp;·&nbsp;
+        13 incidentes (E00001–E00013) &nbsp;·&nbsp; Siguiente: <strong>E00014</strong> &nbsp;·&nbsp;
+        Generado: 27 Feb 2026
+    </div>
+
+</body>
+</html>

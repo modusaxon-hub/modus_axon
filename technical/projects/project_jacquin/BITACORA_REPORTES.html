@@ -1,0 +1,3067 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora de Reportes de Desarrollo — Project Jacquin</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════
+           OUTER SHELL — Bitácora Unificada de Reportes
+           ID Format: DD/MM/AAAA/XXXXXX (secuencial sin importar la fecha)
+        ═══════════════════════════════════════════════════════════════════ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+            background: #F3F2EE;
+            color: #223F61;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .bitacora-wrap {
+            max-width: 240mm;
+            margin: 0 auto;
+        }
+
+        /* ── Master Header ─────────────────────────────────────────────── */
+        .blt-header {
+            background: #223F61;
+            color: #fff;
+            padding: 2.5rem 3rem;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .blt-brand {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #E78C3B;
+            margin-bottom: .4rem;
+            text-transform: uppercase;
+        }
+
+        .blt-header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: .3rem;
+        }
+
+        .blt-subtitle {
+            font-size: .88rem;
+            color: #93B6EE;
+        }
+
+        .blt-meta {
+            font-size: .82rem;
+            color: #93B6EE;
+            line-height: 2;
+            text-align: right;
+        }
+
+        .blt-meta strong {
+            color: #fff;
+        }
+
+        .blt-meta .accent {
+            color: #E78C3B;
+        }
+
+        /* ── Report Index ──────────────────────────────────────────────── */
+        .rpt-index-wrap {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .04);
+        }
+
+        .rpt-index-label {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #E78C3B;
+            margin-bottom: 1rem;
+        }
+
+        .rpt-index {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .85rem;
+        }
+
+        .rpt-index th {
+            background: #223F61;
+            color: #fff;
+            padding: .5rem 1rem;
+            text-align: left;
+            font-size: .75rem;
+            letter-spacing: .5px;
+        }
+
+        .rpt-index td {
+            padding: .5rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+
+        .rpt-index tr:last-child td {
+            border-bottom: none;
+        }
+
+        .rpt-index tr:hover td {
+            background: #f8fafc;
+        }
+
+        .rpt-index td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem;
+            font-weight: 700;
+            color: #223F61;
+        }
+
+        .rpt-index a {
+            color: #223F61;
+            text-decoration: none;
+        }
+
+        .rpt-index a:hover {
+            text-decoration: underline;
+            color: #E78C3B;
+        }
+
+        /* ── Accordion (details/summary) ──────────────────────────────── */
+        details.rpt {
+            background: #fff;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .04);
+            overflow: hidden;
+        }
+
+        details.rpt>summary {
+            display: flex;
+            align-items: center;
+            gap: .9rem;
+            padding: 1.1rem 1.6rem;
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            border-left: 5px solid #223F61;
+            transition: background .15s;
+        }
+
+        details.rpt>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.rpt[open]>summary {
+            border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        details.rpt>summary:hover {
+            background: #f8fafc;
+        }
+
+        .summary-arrow {
+            margin-left: auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            transition: transform .2s;
+            flex-shrink: 0;
+        }
+
+        details.rpt[open]>summary .summary-arrow {
+            transform: rotate(90deg);
+        }
+
+        .rpt-id-badge {
+            background: #223F61;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            padding: .22rem .6rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .rpt-latest {
+            background: #16a34a;
+            color: #fff;
+            font-size: .62rem;
+            font-weight: 700;
+            padding: .15rem .5rem;
+            border-radius: 20px;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .summary-title {
+            font-size: .9rem;
+            font-weight: 600;
+            color: #223F61;
+        }
+
+        .summary-date {
+            font-size: .78rem;
+            color: #94a3b8;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           LIGHT SCOPE (.ls) — Reports JQ0005, JQ0006, JQ0007 (24/25/26 Feb)
+        ═══════════════════════════════════════════════════════════════ */
+        .ls {
+            background: #F3F2EE;
+            padding: 2rem;
+        }
+
+        .ls .page {
+            background: #ffffff;
+            padding: 4rem;
+            box-shadow: 0 0 50px rgba(0, 0, 0, .06);
+        }
+
+        .ls .report-header {
+            border-bottom: 5px solid #223F61;
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .ls .report-header .brand {
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #223F61;
+            margin-bottom: .4rem;
+        }
+
+        .ls .report-header h1 {
+            font-family: 'Spartan', 'Futura', sans-serif;
+            font-size: 1.9rem;
+            color: #223F61;
+        }
+
+        .ls .report-header .meta {
+            text-align: right;
+            font-size: .82rem;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        .ls .section {
+            margin-bottom: 3.5rem;
+        }
+
+        .ls .section-title {
+            font-family: 'Spartan', 'Futura', sans-serif;
+            font-size: 1.35rem;
+            color: #223F61;
+            border-bottom: 2px solid #666666;
+            padding-bottom: .6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        /* Badges */
+        .ls .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            padding: .2rem .75rem;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .ls .badge-critical {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .ls .badge-high {
+            background: #fff7ed;
+            color: #E78C3B;
+            border: 1px solid #fed7aa;
+        }
+
+        .ls .badge-medium {
+            background: #fefce8;
+            color: #ca8a04;
+            border: 1px solid #fef08a;
+        }
+
+        .ls .badge-new {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+        }
+
+        .ls .badge-fixed {
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+        }
+
+        .ls .badge-low {
+            background: #eff6ff;
+            color: #93B6EE;
+            border: 1px solid #bfdbfe;
+        }
+
+        .ls .badge-perf {
+            background: #f8fafc;
+            color: #888;
+            border: 1px solid #666666;
+        }
+
+        .ls .badge-id {
+            background: #223F61;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            padding: .2rem .6rem;
+            border-radius: 4px;
+        }
+
+        /* Risk borders */
+        .ls .risk-critical {
+            border-left: 5px solid #dc2626;
+        }
+
+        .ls .risk-high {
+            border-left: 5px solid #E78C3B;
+        }
+
+        .ls .risk-medium {
+            border-left: 5px solid #ca8a04;
+        }
+
+        .ls .risk-feature {
+            border-left: 5px solid #93B6EE;
+        }
+
+        .ls .risk-bug {
+            border-left: 5px solid #E78C3B;
+        }
+
+        .ls .risk-low {
+            border-left: 5px solid #93B6EE;
+        }
+
+        .ls .risk-perf {
+            border-left: 5px solid #CDCDCD;
+        }
+
+        /* Work/Vuln cards */
+        .ls .work-card,
+        .ls .vuln-card {
+            border: 1px solid #666666;
+            border-radius: 10px;
+            padding: 1.6rem 1.8rem;
+            margin-bottom: 1.5rem;
+            page-break-inside: avoid;
+        }
+
+        .ls .work-card .wc-head,
+        .ls .vuln-card .vc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .ls .work-card h3,
+        .ls .vuln-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #223F61;
+        }
+
+        .ls .wc-meta,
+        .ls .vc-meta {
+            font-size: .82rem;
+            color: #666666;
+            margin-bottom: .8rem;
+        }
+
+        .ls .wc-meta code,
+        .ls .vc-meta code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #f1f5f9;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .8rem;
+            color: #223F61;
+        }
+
+        .ls .wc-row,
+        .ls .vc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: .8rem;
+        }
+
+        .ls .wc-block,
+        .ls .vc-block {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: .9rem 1rem;
+        }
+
+        .ls .wc-block-label,
+        .ls .vc-block-label {
+            font-size: .72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666666;
+            margin-bottom: .4rem;
+            font-weight: 600;
+        }
+
+        .ls .wc-block p,
+        .ls .vc-block p {
+            font-size: .88rem;
+        }
+
+        /* Tables */
+        .ls table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .88rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ls th {
+            background: #223F61;
+            color: #fff;
+            padding: .6rem 1rem;
+            text-align: left;
+            font-size: .78rem;
+            letter-spacing: .5px;
+        }
+
+        .ls td {
+            padding: .6rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .ls tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ls tr:hover td {
+            background: #f8fafc;
+        }
+
+        /* Code */
+        .ls pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .82rem;
+            padding: 1.2rem 1.4rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: .8rem 0;
+        }
+
+        .ls code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #f1f5f9;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .82rem;
+            color: #223F61;
+        }
+
+        .ls pre code {
+            background: transparent;
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        .ls .c-red {
+            color: #f87171;
+        }
+
+        .ls .c-green {
+            color: #86efac;
+        }
+
+        .ls .c-yellow {
+            color: #fde68a;
+        }
+
+        .ls .c-blue {
+            color: #93c5fd;
+        }
+
+        .ls .c-gray {
+            color: #94a3b8;
+        }
+
+        /* KPIs */
+        .ls .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .ls .kpi-card {
+            border: 1px solid #666666;
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .ls .kpi-card .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: .3rem;
+        }
+
+        .ls .kpi-card .kpi-label {
+            font-size: .78rem;
+            color: #666666;
+        }
+
+        /* Flow diagrams */
+        .ls .flow-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-size: .82rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .ls .flow-row {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            margin: .3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .ls .fn {
+            background: #223F61;
+            color: #fff;
+            padding: .2rem .6rem;
+            border-radius: 4px;
+            font-size: .78rem;
+        }
+
+        .ls .fn-red {
+            background: #dc2626;
+            color: #fff;
+            padding: .2rem .6rem;
+            border-radius: 4px;
+            font-size: .78rem;
+        }
+
+        .ls .fn-green {
+            background: #16a34a;
+            color: #fff;
+            padding: .2rem .6rem;
+            border-radius: 4px;
+            font-size: .78rem;
+        }
+
+        .ls .fn-orange {
+            background: #ea580c;
+            color: #fff;
+            padding: .2rem .6rem;
+            border-radius: 4px;
+            font-size: .78rem;
+        }
+
+        .ls .fn-cond {
+            background: #f1f5f9;
+            border: 1px solid #666666;
+            color: #223F61;
+            padding: .2rem .6rem;
+            border-radius: 4px;
+            font-size: .78rem;
+        }
+
+        .ls .arrow {
+            color: #666666;
+            font-size: .9rem;
+        }
+
+        /* Footer */
+        .ls footer {
+            margin-top: 5rem;
+            border-top: 1px solid #666666;
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: .78rem;
+            color: #666666;
+        }
+
+        /* Test grid (JQ0005) */
+        .ls .test-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .8rem;
+        }
+
+        .ls .test-block {
+            border: 1px solid #666666;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .ls .test-block .tb-title {
+            font-weight: 700;
+            font-size: .85rem;
+            color: #223F61;
+            margin-bottom: .5rem;
+        }
+
+        .ls .test-block .tb-result {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .ls .tb-pass {
+            color: #16a34a;
+        }
+
+        .ls .test-list {
+            list-style: none;
+            padding: 0;
+            margin-top: .5rem;
+        }
+
+        .ls .test-list li {
+            font-size: .78rem;
+            color: #666666;
+            display: flex;
+            gap: .3rem;
+            align-items: baseline;
+            padding: 0;
+            border: none;
+        }
+
+        .ls .test-list li::before {
+            content: "✓";
+            color: #16a34a;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Size bar (JQ0005) */
+        .ls .size-bar-wrap {
+            margin: .8rem 0 1.2rem;
+        }
+
+        .ls .size-label {
+            font-size: .82rem;
+            color: #666666;
+            margin-bottom: .3rem;
+        }
+
+        .ls .bar-track {
+            background: #f1f5f9;
+            border-radius: 20px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .ls .bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: .72rem;
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           DARK LEGACY SCOPE (.ds) — Reports JQ0001, JQ0002, JQ0003 (18/20/21 Feb)
+        ═══════════════════════════════════════════════════════════════ */
+        .ds {
+            font-family: 'Inter', sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            line-height: 1.7;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .ds .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .ds .header {
+            border-bottom: 2px solid #223F61;
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .ds .header-tag {
+            font-size: .75rem;
+            font-weight: 600;
+            color: #E78C3B;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .ds .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #93B6EE;
+        }
+
+        .ds .header .meta {
+            font-size: .85rem;
+            color: #8b949e;
+            margin-top: 6px;
+        }
+
+        .ds .header .meta span {
+            color: #E78C3B;
+            font-weight: 600;
+        }
+
+        .ds .section {
+            margin-bottom: 40px;
+        }
+
+        .ds .section-title {
+            font-size: .7rem;
+            font-weight: 700;
+            color: #E78C3B;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .ds .card {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .ds .card.highlight {
+            border-left: 3px solid #E78C3B;
+        }
+
+        .ds .card.success {
+            border-left: 3px solid #2ecc71;
+        }
+
+        .ds .card.info {
+            border-left: 3px solid #93B6EE;
+        }
+
+        .ds .card.warning {
+            border-left: 3px solid #f39c12;
+        }
+
+        .ds .card h3 {
+            font-size: .95rem;
+            font-weight: 600;
+            color: #e6edf3;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ds .card p {
+            font-size: .85rem;
+            color: #8b949e;
+        }
+
+        .ds .card code {
+            background: #21262d;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: .8rem;
+            color: #93B6EE;
+        }
+
+        .ds .badge {
+            font-size: .65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ds .badge.done {
+            background: #1a3a25;
+            color: #2ecc71;
+        }
+
+        .ds .badge.fixed {
+            background: #1a2a3a;
+            color: #93B6EE;
+        }
+
+        .ds .badge.pending {
+            background: #3a2a0a;
+            color: #E78C3B;
+        }
+
+        .ds .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .ds .timeline::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #21262d;
+        }
+
+        .ds .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .ds .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #E78C3B;
+            border: 2px solid #0d1117;
+        }
+
+        .ds .timeline-item .time {
+            font-size: .7rem;
+            color: #8b949e;
+            margin-bottom: 2px;
+        }
+
+        .ds .timeline-item .desc {
+            font-size: .9rem;
+            color: #e6edf3;
+        }
+
+        .ds .timeline-item .detail {
+            font-size: .8rem;
+            color: #8b949e;
+            margin-top: 3px;
+        }
+
+        .ds .timeline-item code {
+            background: #21262d;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .8em;
+            color: #E78C3B;
+        }
+
+        .ds .git-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: .8rem;
+        }
+
+        .ds .git-block .hash {
+            color: #E78C3B;
+        }
+
+        .ds .git-block .branch {
+            color: #2ecc71;
+        }
+
+        .ds .git-block .msg {
+            color: #93B6EE;
+        }
+
+        .ds .git-block .stat {
+            color: #8b949e;
+        }
+
+        .ds table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .85rem;
+        }
+
+        .ds th {
+            background: #21262d;
+            color: #93B6EE;
+            font-weight: 600;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ds td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #21262d;
+            color: #e6edf3;
+        }
+
+        .ds tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ds td:first-child {
+            color: #E78C3B;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .ds pre {
+            background: #0a0f14;
+            border: 1px solid #1a2533;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: #a8b2bd;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: .85rem;
+            margin-top: 10px;
+        }
+
+        .ds .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid #21262d;
+            font-size: .75rem;
+            color: #484f58;
+            text-align: center;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           DARK ALT SCOPE (.das) — Report JQ0004 (23 Feb)
+        ═══════════════════════════════════════════════════════════════ */
+        .das {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000814;
+            color: #ffffff;
+            line-height: 1.6;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .das .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .das .header {
+            border-bottom: 2px solid #ac8421;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .das .header h1 {
+            color: #ac8421;
+            margin: 0;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .das .header .meta {
+            color: #95a5a6;
+            font-size: .9rem;
+            text-align: right;
+        }
+
+        .das .header .meta strong {
+            color: #fff;
+        }
+
+        .das .card {
+            background: #15202b;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+        }
+
+        .das .card h2 {
+            color: #90A1A2;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+        }
+
+        .das .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: .8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .das .status-success {
+            background: rgba(39, 174, 96, .2);
+            color: #27ae60;
+            border: 1px solid rgba(39, 174, 96, .5);
+        }
+
+        .das .status-warning {
+            background: rgba(241, 196, 15, .2);
+            color: #f1c40f;
+            border: 1px solid rgba(241, 196, 15, .5);
+        }
+
+        .das .status-danger {
+            background: rgba(231, 76, 60, .2);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, .5);
+        }
+
+        .das ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .das li {
+            padding: 15px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, .1);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .das li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .das .icon {
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .das .card-details {
+            flex: 1;
+        }
+
+        .das .card-details h3 {
+            margin: 0 0 5px;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        .das .card-details p {
+            margin: 0;
+            color: #95a5a6;
+            font-size: .95rem;
+        }
+
+        .das code {
+            color: #ac8421;
+            background: rgba(172, 132, 33, .1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ─── Print ──────────────────────────────────────────────────── */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .bitacora-wrap {
+                max-width: 100%;
+            }
+
+            .blt-header {
+                background: #223F61 !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            details.rpt {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+
+            details.rpt>summary {
+                display: none;
+            }
+
+            details.rpt:not([open])>div {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bitacora-wrap">
+
+        <!-- ════════════════════════════════════════════════════
+         MASTER HEADER
+    ════════════════════════════════════════════════════ -->
+        <div class="blt-header">
+            <div>
+                <div class="blt-brand">JACQUIN Academia Musical</div>
+                <h1>Bitácora de Reportes de Desarrollo</h1>
+                <div class="blt-subtitle">Registro cronológico · El más reciente al inicio · ID único y secuencial por
+                    entrada</div>
+            </div>
+            <div class="blt-meta">
+                Total reportes: <strong class="accent">9</strong><br>
+                Período: <strong>18 Feb – 2 Mar 2026</strong><br>
+                Último: <span class="accent">02/03/2026/A00009</span><br>
+                Siguiente ID: <strong>A00010</strong>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════
+         ÍNDICE DE REPORTES
+    ════════════════════════════════════════════════════ -->
+        <div class="rpt-index-wrap">
+            <div class="rpt-index-label">Índice — Todos los Reportes</div>
+            <table class="rpt-index">
+                <thead>
+                    <tr>
+                        <th>ID de Reporte</th>
+                        <th>Fecha</th>
+                        <th>Título</th>
+                        <th>Módulos</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#A00009">02/03/2026/A00009</a></td>
+                        <td>2 Mar 2026</td>
+                        <td>Hero Carousel v3 · Enrollment Status Sync · Modal UX Improvements</td>
+                        <td>Hero · Enrollment · Modal · Hooks</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00008">27/02/2026/A00008</a></td>
+                        <td>27 Feb 2026</td>
+                        <td>Hero Carousel · Header Transparente · Orquestación de Agentes</td>
+                        <td>Hero · CSS · Agent · PWA</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00007">26/02/2026/A00007</a></td>
+                        <td>26 Feb 2026</td>
+                        <td>Hero Dinámico &amp; Gestión de Configuración</td>
+                        <td>Hero · Config · UI</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00006">25/02/2026/A00006</a></td>
+                        <td>25 Feb 2026</td>
+                        <td>Chat Interno &amp; Correcciones Críticas</td>
+                        <td>JChat · Admin · Backend</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00005">24/02/2026/A00005</a></td>
+                        <td>24 Feb 2026</td>
+                        <td>Auditoría de Seguridad — Módulo Programas</td>
+                        <td>Security · API · Tests</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Seguro</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00004">23/02/2026/A00004</a></td>
+                        <td>23 Feb 2026</td>
+                        <td>Footer React &amp; Build de Producción</td>
+                        <td>Footer · MFE · Git</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00003">21/02/2026/A00003</a></td>
+                        <td>21 Feb 2026</td>
+                        <td>Auditoría Final y Centralización de Assets</td>
+                        <td>Assets · Avatares · Docs</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00002">20/02/2026/A00002</a></td>
+                        <td>20 Feb 2026</td>
+                        <td>Sincronización Visual — Programas, Eventos, Nosotros</td>
+                        <td>React · Swiper · CSS</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#A00001">18/02/2026/A00001</a></td>
+                        <td>18 Feb 2026</td>
+                        <td>Migración SPA React &amp; Tipografía Brandbook</td>
+                        <td>React · Brandbook · Git</td>
+                        <td style="color:#16a34a;font-weight:700;">✅ Completado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00009 — 2 Mar 2026 (ÚLTIMO)
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00009" open>
+            <summary>
+                <span class="rpt-id-badge">02/03/2026/A00009</span>
+                <span class="rpt-latest">Último</span>
+                <span class="summary-title">Hero Carousel v3 · Enrollment Status Sync · Modal UX Improvements</span>
+                <span class="summary-date">2 Mar 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ls">
+                <div class="page">
+                    <div class="report-header">
+                        <div>
+                            <div class="brand">JACQUIN Academia Musical</div>
+                            <h1>Reporte de Desarrollo Diario</h1>
+                            <div style="margin-top:.5rem; font-size:.9rem; color:#666666;">Módulos: <strong>Hero Carousel · Enrollment Sync · Modal UX · Custom Hooks</strong></div>
+                        </div>
+                        <div class="meta">
+                            Fecha: <strong>2 Mar 2026</strong><br>
+                            Build IDs: <strong>02032026CAROUSEL · 02032026ENROLL</strong><br>
+                            Agente: Claude Code Haiku<br>
+                            Estado: <strong style="color:#16a34a;">✅ REFACTORIZACIÓN COMPLETADA</strong>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Resumen Ejecutivo</div>
+                        <div class="card highlight">
+                            <h3>🎯 Objetivo de la Sesión</h3>
+                            <p>Resolver 3 problemas críticos de UX: (1) Cruce de 3 imágenes en transición backward del carrusel Hero, (2) Desincronización de estado de matrículas entre panel admin y footer, (3) Mejorar experiencia de usuarios con cierre automático de modales al hacer clic fuera. Implementar sistema de hooks reutilizable.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Línea de Tiempo de Trabajo</div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="time">Bug: Cruce de 3 imágenes</div>
+                                <div class="desc">Identificación y diagnóstico del problema</div>
+                                <div class="detail">Causa raíz: clase <code>.backward</code> aplicada globalmente a todos los slides. Solución: condicional en línea 325 de Hero.jsx para aplicar solo a slides activos/leaving.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">Sincronización matrículas</div>
+                                <div class="desc">Arquitectura de datos bidireccional</div>
+                                <div class="detail">EnrollmentTab usa API + Custom Event <code>enrollment-status-updated</code>. EnrollmentStatusBadge escucha evento y actualiza en tiempo real sin refresh. Auto-save en toggle.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">Modal UX Improvements</div>
+                                <div class="desc">Hook useOutsideClick para cierre automático</div>
+                                <div class="detail">Creación de hook reutilizable en <code>src/hooks/useOutsideClick.js</code>. Aplicado a 4 modales: ProgramModal, AuthPromptModal, ScheduleModal, About. Fallback onClick en overlays.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">Git + Documentación</div>
+                                <div class="desc">Commit y actualización de bitácoras</div>
+                                <div class="detail">Commit <code>27eb930</code> con mensaje detallado. Push a <code>origin/feature/despliegue-infinityfree</code>. Actualización de TASK.md, BITACORA_BUILD.html, BITACORA_REPORTES.html.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Estado de Tareas Completadas</div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Fix Hero Carousel — Transición Backward</h3>
+                            <p>Diagnosticado: clase <code>.backward</code> global. Solucionado: condicional <code>(isBackward && (idx === activeIdx || idx === prevIdx))</code>. Resultado: transiciones smooth sin cruzamientos.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Sincronización API — Enrollment Status</h3>
+                            <p><code>EnrollmentStatusBadge</code> ahora carga datos de <code>site_config.php</code> y escucha CustomEvent en tiempo real. Admin panel (EnrollmentTab) auto-guarda cambios sin formulario.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Hook useOutsideClick — Reutilizable</h3>
+                            <p>Creado en <code>src/hooks/useOutsideClick.js</code>. Implementado en ProgramModal, AuthPromptModal, ScheduleModal, About.jsx. Detecta clics fuera del modal y ejecuta callback onClose().</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; UI — Remover año del anuncio de matrículas</h3>
+                            <p>Badge ahora solo muestra "Matrículas Abiertas" o "Matrículas Cerradas". Año y fechas opcionales en mensaje personalizado configurado en admin.</p>
+                        </div>
+                        <div class="card">
+                            <h3><span class="badge pending">⏳ Pendiente</span>&nbsp; Debuggear cierre modal en todos los casos</h3>
+                            <p>Algunos modales aún no responden al clic externo. Verificar si hook se ejecuta correctamente o si fallback onClick requiere ajustes.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Archivos Modificados</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Archivo</th>
+                                    <th>Cambios Principales</th>
+                                    <th>Líneas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>src/components/Hero.jsx</code></td>
+                                    <td>Fix línea 325: condicional .backward solo para slides activos/leaving</td>
+                                    <td>+3, -2</td>
+                                </tr>
+                                <tr>
+                                    <td><code>src/components/EnrollmentStatusBadge.jsx</code></td>
+                                    <td>API integration, custom event listener, mensaje sincronizado</td>
+                                    <td>+42, -15</td>
+                                </tr>
+                                <tr>
+                                    <td><code>src/components/dashboard/admin-content-tabs/EnrollmentTab.jsx</code></td>
+                                    <td>Auto-save toggle, API sync, custom event dispatch</td>
+                                    <td>+35, -28</td>
+                                </tr>
+                                <tr>
+                                    <td><code>src/components/About.jsx</code></td>
+                                    <td>useOutsideClick hook + fallback onClick handler</td>
+                                    <td>+8, -2</td>
+                                </tr>
+                                <tr>
+                                    <td><code>src/components/ProgramModal.jsx</code></td>
+                                    <td>Hook call before conditional return, overlay onClick fallback</td>
+                                    <td>+5, -0</td>
+                                </tr>
+                                <tr>
+                                    <td><code>src/components/AuthPromptModal.jsx</code></td>
+                                    <td>Hook + fallback onClick implementation</td>
+                                    <td>+5, -0</td>
+                                </tr>
+                                <tr>
+                                    <td><code>src/components/ScheduleModal.jsx</code></td>
+                                    <td>Hook applied to all 4 render paths, overlay fallbacks</td>
+                                    <td>+8, -0</td>
+                                </tr>
+                                <tr>
+                                    <td><code>src/hooks/useOutsideClick.js</code></td>
+                                    <td>Nuevo archivo: hook reutilizable con click event listener</td>
+                                    <td>+32, -0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Secuencia Git</div>
+                        <div class="git-block">
+                            <div>$ git status</div>
+                            <div class="stat">4 files modified (About.jsx · EnrollmentStatusBadge.jsx · Hero.jsx · EnrollmentTab.jsx)</div><br>
+                            <div>$ git add src/components/{About,EnrollmentStatusBadge,Hero}.jsx src/components/dashboard/admin-content-tabs/EnrollmentTab.jsx</div><br>
+                            <div>$ git commit -m <span class="msg">"feat: carrusel Hero, sincronización de matrículas y cierre de modales por clic externo"</span></div><br>
+                            <div><span class="branch">[feature/despliegue-infinityfree 27eb930]</span> feat: carrusel Hero, sincronización de matrículas y cierre de modales por clic externo</div>
+                            <div class="stat">4 files changed, 152 insertions(+), 83 deletions(-)</div><br>
+                            <div>$ git push -u origin feature/despliegue-infinityfree</div>
+                            <div class="stat">d62ac39..27eb930 feature/despliegue-infinityfree → feature/despliegue-infinityfree ✅</div>
+                        </div>
+                    </div>
+
+                    <div class="footer">Jacquin Academia Musical · Reporte Generado: 2026-03-02T24:00 COT · Branch: feature/despliegue-infinityfree · SHA: 27eb930</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00008 — 27 Feb 2026
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00008">
+            <summary>
+                <span class="rpt-id-badge">27/02/2026/A00008</span>
+                <span class="summary-title">Hero Carousel Admin-Managed · Header Transparente · Orquestación de
+                    Agentes</span>
+                <span class="summary-date">27 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ls">
+                <div class="page">
+                    <div class="report-header">
+                        <div>
+                            <div class="brand">JACQUIN Academia Musical</div>
+                            <h1>Reporte de Desarrollo Diario</h1>
+                            <div style="margin-top:.5rem; font-size:.9rem; color:#666666;">Módulos: <strong>Hero
+                                    Carousel · Header UI · Traslape Fix · Orquestación de Agentes</strong></div>
+                        </div>
+                        <div class="meta">
+                            Fecha: <strong>27 Feb 2026</strong><br>
+                            Build IDs: <strong>27022026HEADER · 27022026HERO · 27022026AGENT</strong><br>
+                            Agente: Documentador Técnico Pro<br>
+                            Estado: <strong style="color:#16a34a;">✅ INTEGRACIÓN COMPLETADA</strong>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card" style="border-top:3px solid #E78C3B;">
+                            <div class="kpi-value" style="color:#E78C3B;">4</div>
+                            <div class="kpi-label">Tipos de slide soportados</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #2563eb;">
+                            <div class="kpi-value" style="color:#2563eb;">3</div>
+                            <div class="kpi-label">Capas de agente actualizadas</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #223F61;">
+                            <div class="kpi-value" style="color:#223F61;">11</div>
+                            <div class="kpi-label">Archivos impactados</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #16a34a;">
+                            <div class="kpi-value" style="color:#16a34a;">14vh</div>
+                            <div class="kpi-label">Header compensado (padding)</div>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 1: HEADER TRANSPARENTE -->
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-layout-wtf"></i> Bloque 1 — Header Transparente con
+                            Glassmorphism</div>
+                        <p style="font-size:.92rem; margin-bottom:1rem;">Se rediseñó completamente el sistema de
+                            cabecera para lograr un acabado premium de nivel internacional. El header arranca
+                            completamente transparente sobre el Hero fullscreen y adopta un efecto de <em>vidrio
+                                esmerilado</em> (Glassmorphism) al hacer scroll, comprimiéndose de <code>14vh</code> a
+                            <code>11vh</code> con bordure inferior sutil.</p>
+
+                        <div class="work-card" style="border-left:5px solid #2563eb;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">UI-001</span>
+                                    <h3 style="display:inline">Header Transparente &amp; Scroll Reveal</h3>
+                                </div>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>style.css</code></p>
+                            <div class="wc-row">
+                                <div class="wc-block">
+                                    <div class="wc-block-label">Estado base (sin scroll)</div>
+                                    <p style="font-size:.85rem;"><code>background: transparent</code> ·
+                                        <code>backdrop-filter: blur(0px)</code> · altura <code>14vh</code>. El Hero se
+                                        extiende detrás del menú.</p>
+                                </div>
+                                <div class="wc-block">
+                                    <div class="wc-block-label">Estado scrolled (.header.scrolled)</div>
+                                    <p style="font-size:.85rem;"><code>background: rgba(34,63,97,0.6)</code> ·
+                                        <code>blur(20px) saturate(180%)</code> · <code>box-shadow</code> tri-capa ·
+                                        altura comprimida a <code>11vh</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="work-card" style="border-left:5px solid #dc2626;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">FIX-001</span>
+                                    <h3 style="display:inline">Corrección de Traslape de Contenido</h3>
+                                </div><span class="badge badge-fixed">✓ Resuelto</span>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>style.css</code> · <code>hero.css</code></p>
+                            <p style="font-size:.9rem; margin-bottom:.8rem;"><strong>Causa raíz:</strong> Al poner el
+                                header transparente, se eliminó el <code>padding-top</code> global. El Dashboard y
+                                páginas de gestión quedaban con el contenido tapado por el
+                                menú.<br><strong>Solución:</strong> Se restauró <code>padding-top: 14vh</code> en
+                                <code>body&gt;main</code> y <code>.jam-main-content</code>. Para el Hero (que debe
+                                quedar detrás del menú), se aplicó <code>margin-top: -14vh</code> +
+                                <code>height: 114vh</code>, compensando el espacio sin romper el diseño fullscreen.</p>
+                            <div class="wc-row">
+                                <div class="wc-block">
+                                    <div class="wc-block-label">Páginas de gestión/admin</div>
+                                    <p style="font-size:.85rem;"><code>padding-top: 14vh</code> → contenido siempre
+                                        visible bajo el header fijo.</p>
+                                </div>
+                                <div class="wc-block">
+                                    <div class="wc-block-label">Home / Hero Section</div>
+                                    <p style="font-size:.85rem;"><code>margin-top: -14vh</code> → la imagen sube detrás
+                                        del header transparente. Efecto overlay premium sin romper el flujo del
+                                        documento.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="work-card" style="border-left:5px solid #E78C3B;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">UI-002</span>
+                                    <h3 style="display:inline">Piano Tile Navigation &amp; Auth Buttons</h3>
+                                </div>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>style.css</code></p>
+                            <ul style="font-size:.85rem; margin-left:1.5rem; color:#475569;">
+                                <li>Tiles: <code>105×60px</code> · <code>border-radius: 12px</code> · fondo
+                                    <code>var(--color-principal-azul)</code> sólido.</li>
+                                <li>Botones auth: <code>border-radius: 50px</code> tipo píldora · animación
+                                    <code>emergencyPulse</code> en Inscríbete.</li>
+                                <li>Efecto <code>btnGleam</code>: destello naranja diagonal que cruza los botones cada
+                                    5s, desfasado 2.5s entre ambos.</li>
+                                <li>Hover: presionado Neumórfico con <code>box-shadow: inset</code>.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 2: HERO CAROUSEL -->
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-collection-play"></i> Bloque 2 — Hero Carousel
+                            Admin-Managed</div>
+                        <p style="font-size:.92rem; margin-bottom:1rem;">Se evolucionó el Hero de fondo estático a un
+                            carrusel multimedia fullscreen gestionado desde el panel administrador. El sistema soporta
+                            imágenes, videos nativos, YouTube, Google Drive y Vimeo. Carga perezosa de iframes para no
+                            bloquear rendimiento.</p>
+
+                        <div class="work-card" style="border-left:5px solid #16a34a;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">FEAT-001</span>
+                                    <h3 style="display:inline">Sistema de Carrusel Fullscreen (Hero.jsx)</h3>
+                                </div><span class="badge badge-new">Nuevo</span>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>src/components/Hero.jsx</code> · <code>css/hero.css</code>
+                            </p>
+                            <table style="font-size:.82rem; margin-top:.8rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Característica</th>
+                                        <th>Implementación</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tipos de media</td>
+                                        <td>Imagen URL · Video .mp4/webm · YouTube · Google Drive · Vimeo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detección automática</td>
+                                        <td><code>parseVideoUrl()</code> con regex por plataforma</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Transición</td>
+                                        <td>Deslizamiento horizontal <code>translateX</code> · 750ms · cubic-bezier</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Auto-avance</td>
+                                        <td><code>setInterval</code> de 7 segundos · se pausa al interactuar</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Carga perezosa</td>
+                                        <td>iframes: <code>src=""</code> hasta que el slide es activo → sin bloquear red
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fallback</td>
+                                        <td>Si <code>hero_slides</code> vacío → imagen <code>hero-banner.jpg</code>
+                                            estática</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tagline por slide</td>
+                                        <td>Cada slide puede tener su <code>label</code> con animación
+                                            <code>taglineFade</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="work-card" style="border-left:5px solid #2563eb;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">API-001</span>
+                                    <h3 style="display:inline">Endpoint hero_slides (Backend PHP)</h3>
+                                </div>
+                            </div>
+                            <p class="wc-meta">Archivos: <code>site_config.php (GET)</code> ·
+                                <code>admin_site_config.php (POST)</code></p>
+                            <p style="font-size:.9rem; margin-bottom:.8rem;">Se añadió la clave <code>hero_slides</code>
+                                al sistema de configuración clave-valor. El getter la decodifica de JSON y la incluye en
+                                la respuesta. El setter valida tipo array, limita a 4 slides y sanitiza cada objeto con
+                                <code>url</code>, <code>label</code> y <code>active</code>.</p>
+                            <div class="flow-container">
+                                <div class="flow-row"><span class="fn">Admin POST hero_slides</span><span
+                                        class="arrow">→</span><span class="fn-cond">validate array</span><span
+                                        class="arrow">→</span><span class="fn">slice(0,4)</span><span
+                                        class="arrow">→</span><span class="fn-green">json_encode → UPSERT
+                                        site_config</span></div>
+                                <div class="flow-row"><span class="fn">GET site_config.php</span><span
+                                        class="arrow">→</span><span class="fn">json_decode hero_slides</span><span
+                                        class="arrow">→</span><span class="fn-green">filter active &amp;&amp; url →
+                                        Hero.jsx</span></div>
+                            </div>
+                        </div>
+
+                        <div class="work-card" style="border-left:5px solid #223F61;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">UI-003</span>
+                                    <h3 style="display:inline">Controles del Carrusel</h3>
+                                </div>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>hero.css</code></p>
+                            <ul style="font-size:.85rem; margin-left:1.5rem; color:#475569;">
+                                <li>Botones prev/next: circulares <code>48×48px</code> · vidrio esmerilado · hover
+                                    naranja.</li>
+                                <li>Dots de posición: <code>9×9px</code> · dot activo naranja con glow y escala 1.4×.
+                                </li>
+                                <li>Accesibilidad: atributos <code>aria-label</code> en todos los controles.</li>
+                                <li>Responsive: <code>38×38px</code> en móvil · dots desplazados a <code>18vh</code>
+                                    desde el fondo.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 3: ORQUESTACIÓN DE AGENTES -->
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-diagram-3"></i> Bloque 3 — Arquitectura de
+                            Orquestación de Agentes</div>
+                        <p style="font-size:.92rem; margin-bottom:1rem;">Se reestructuró el repositorio de agentes
+                            (<code>modusaxon-hub/agent</code>) bajo una arquitectura de 4 categorías lógicas y se creó
+                            el manifiesto central <code>.agent-manifest.json</code> como puente de comunicación entre
+                            plataformas (Antigravity y Claude).</p>
+
+                        <div class="work-card" style="border-left:5px solid #7c3aed;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">ARCH-001</span>
+                                    <h3 style="display:inline">Reorganización en 4 Categorías + .agent-manifest.json
+                                    </h3>
+                                </div><span class="badge badge-new">Nuevo</span>
+                            </div>
+                            <table style="font-size:.82rem; margin-top:.8rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Categoría</th>
+                                        <th>Agentes</th>
+                                        <th>Propósito</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>01-Core-Orchestrator</code></td>
+                                        <td>planificacion-pro · configurador-global · creador-de-skills</td>
+                                        <td>Núcleo de inteligencia y orquestación</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>02-Builder-Stack</code></td>
+                                        <td>doc-to-app · react-components · shadcn-ui · stitch-loop…</td>
+                                        <td>Construcción y generación de código</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>03-Compliance-Docs</code></td>
+                                        <td>documentador-tecnico · compliance-legal</td>
+                                        <td>Documentación y cumplimiento legal</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>04-Optimization-Flow</code></td>
+                                        <td>enhance-prompt · personality_tracker</td>
+                                        <td>Optimización de prompts y producción</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="work-card" style="border-left:5px solid #7c3aed;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">ARCH-002</span>
+                                    <h3 style="display:inline">Actualización de Habilidades por Agente</h3>
+                                </div>
+                            </div>
+                            <table style="font-size:.82rem; margin-top:.8rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Agente</th>
+                                        <th>Habilidad Añadida</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>doc-to-app</code></td>
+                                        <td>Arquitectura App Shell obligatoria · <code>manifest.json</code> con iconos
+                                            192/512 · Service Worker Stale-while-revalidate</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>documentador-tecnico</code></td>
+                                        <td>Mandato de crear <code>AI_LOG_CUMPLIMIENTO.md</code> en cada nuevo proyecto
+                                            (Ley 1581, GDPR, Resolución 1519)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>configurador-global</code></td>
+                                        <td>HTTPS forzoso · Cookie Consent bloqueante · Aviso de Privacidad SIC 2026
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>react-components / shadcn-ui</code></td>
+                                        <td>Prioridad Mobile-First · Touch targets mínimos 44×44px</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>planificacion-pro</code></td>
+                                        <td>Protocolo de inicio: <strong>documentador-tecnico primero → doc-to-app
+                                                segundo</strong> en nuevos proyectos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-folder2-open"></i> Archivos Modificados — Resumen
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Capa</th>
+                                    <th>Archivo</th>
+                                    <th>Acción</th>
+                                    <th>Bloque</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Frontend CSS</td>
+                                    <td><code>public/css/style.css</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                    <td>Bloque 1</td>
+                                </tr>
+                                <tr>
+                                    <td>Frontend CSS</td>
+                                    <td><code>public/css/hero.css</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                    <td>Bloque 1 + 2</td>
+                                </tr>
+                                <tr>
+                                    <td>React SRC</td>
+                                    <td><code>src/components/Hero.jsx</code></td>
+                                    <td><span class="badge badge-new">Refactorizado</span></td>
+                                    <td>Bloque 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Backend API</td>
+                                    <td><code>jacquin_api/site_config.php</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                    <td>Bloque 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Backend API</td>
+                                    <td><code>jacquin_api/admin_site_config.php</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                    <td>Bloque 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Frontend JS</td>
+                                    <td><code>public/js/dashboard.js</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                    <td>Bloque 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Agent Skill</td>
+                                    <td><code>agent/skills/02-Builder-Stack/doc-to-app/SKILL.md</code></td>
+                                    <td><span class="badge badge-new">Actualizado</span></td>
+                                    <td>Bloque 3</td>
+                                </tr>
+                                <tr>
+                                    <td>Agent Skill</td>
+                                    <td><code>agent/skills/03-Compliance-Docs/documentador-tecnico/SKILL.md</code></td>
+                                    <td><span class="badge badge-new">Actualizado</span></td>
+                                    <td>Bloque 3</td>
+                                </tr>
+                                <tr>
+                                    <td>Agent Skill</td>
+                                    <td><code>agent/skills/01-Core-Orchestrator/configurador-global/INSTRUCTIONS.md</code>
+                                    </td>
+                                    <td><span class="badge badge-new">Actualizado</span></td>
+                                    <td>Bloque 3</td>
+                                </tr>
+                                <tr>
+                                    <td>Agent Skill</td>
+                                    <td><code>agent/skills/02-Builder-Stack/react-components/SKILL.md</code></td>
+                                    <td><span class="badge badge-new">Actualizado</span></td>
+                                    <td>Bloque 3</td>
+                                </tr>
+                                <tr>
+                                    <td>Agent Config</td>
+                                    <td><code>project_jacquin/.agent-manifest.json</code></td>
+                                    <td><span class="badge badge-fixed">Creado</span></td>
+                                    <td>Bloque 3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <footer><strong>Project Jacquin</strong> · Reporte 27/02/2026 · Build IDs: 27022026HEADER ·
+                        27022026HERO · 27022026AGENT · Antigravity AI</footer>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00007 — 26 Feb 2026
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00007">
+            <summary>
+                <span class="rpt-id-badge">26/02/2026/A00007</span>
+                <span class="summary-title">Hero Dinámico &amp; Gestión de Configuración</span>
+                <span class="summary-date">26 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ls">
+                <div class="page">
+                    <div class="report-header">
+                        <div>
+                            <div class="brand">JACQUIN Academia Musical</div>
+                            <h1>Reporte de Desarrollo Diario</h1>
+                            <div style="margin-top:.5rem; font-size:.9rem; color:#666666;">Módulos: <strong>Hero Section
+                                    · Gestión de Configuración · UI Refinamiento</strong></div>
+                        </div>
+                        <div class="meta">
+                            Fecha: <strong>26 Feb 2026</strong><br>
+                            Build IDs: <strong>26022026HERO · 26022026UI</strong><br>
+                            Agente: Documentador Técnico Pro<br>
+                            Estado: <strong style="color:#16a34a;">✅ INTEGRACIÓN COMPLETADA</strong>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card" style="border-top:3px solid #2563eb;">
+                            <div class="kpi-value" style="color:#2563eb;">2</div>
+                            <div class="kpi-label">Nuevos Endpoints API</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #E78C3B;">
+                            <div class="kpi-value" style="color:#E78C3B;">1</div>
+                            <div class="kpi-label">Módulo UI Rediseñado</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #223F61;">
+                            <div class="kpi-value" style="color:#223F61;">7</div>
+                            <div class="kpi-label">Archivos Impactados</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #16a34a;">
+                            <div class="kpi-value" style="color:#16a34a;">100%</div>
+                            <div class="kpi-label">Dinamicidad Hero</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-file-earmark-text"></i> Resumen de Jornada</div>
+                        <p style="font-size:.92rem; margin-bottom:1rem;">Se ha transformado la sección principal (Hero)
+                            de estática a dinámica, permitiendo que el administrador gestione no solo la imagen de fondo
+                            sino también los textos de impacto (Tagline y CTA) sin intervención técnica. Además, se ha
+                            refinado estéticamente el encabezado de "doble nivel" para maximizar la elegancia
+                            solicitada.</p>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-tools"></i> Detalle de Implementación</div>
+                        <div class="work-card" style="border-left:5px solid #2563eb;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">API-001</span>
+                                    <h3 style="display:inline">Gestión Global de Configuración (Site Config)</h3>
+                                </div>
+                            </div>
+                            <p class="wc-meta">Archivos: <code>admin_site_config.php</code>,
+                                <code>site_config.php</code></p>
+                            <p style="font-size:.9rem;">Se habilitó un sistema persistente basado en clave-valor para
+                                parámetros globales. El endpoint <code>admin_site_config.php</code> ahora acepta y
+                                actualiza de forma atómica:</p>
+                            <ul style="font-size:.85rem; margin-left:1.5rem; color:#475569;">
+                                <li><code>hero_tagline</code>: Frase de impacto en la portada.</li>
+                                <li><code>hero_cta_text</code>: Texto del botón de llamado a la acción.</li>
+                                <li><code>enrollment_open/year</code>: Estado de matrículas (integrado previamente).
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="work-card" style="border-left:5px solid #E78C3B;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">UI-001</span>
+                                    <h3 style="display:inline">Rediseño del Hero Manager</h3>
+                                </div>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>dashboard.js</code>, <code>Hero.jsx</code></p>
+                            <p style="font-size:.9rem;">Se unificó la administración de la portada en un solo modal
+                                premium:</p>
+                            <ul style="font-size:.85rem; margin-left:1.5rem; color:#475569;">
+                                <li><strong>Visual Cropper:</strong> Ajuste manual de la imagen de fondo (16:9).</li>
+                                <li><strong>Content Editor:</strong> Inputs dinámicos para textos con previsualización
+                                    de carga.</li>
+                                <li><strong>React Sync:</strong> El componente <code>Hero.jsx</code> consume los datos
+                                    en tiempo real.</li>
+                            </ul>
+                        </div>
+                        <div class="work-card" style="border-left:5px solid #223F61;">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">UI-002</span>
+                                    <h3 style="display:inline">Refinamiento Estético del Header</h3>
+                                </div>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>style.css</code></p>
+                            <p style="font-size:.9rem;">Ajustes críticos para lograr un acabado premium:</p>
+                            <ul style="font-size:.85rem; margin-left:1.5rem; color:#475569;">
+                                <li>Reducción de altura del nivel superior (Login/Reg) para mayor sutileza.</li>
+                                <li>Efecto de cristal esmerilado (Glassmorphism) suavizado al hacer scroll.</li>
+                                <li>Rediseño del "Menú Piano" con fondo semi-transparente y tipografía refinada.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-folder2-open"></i> Sincronización de Archivos</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Capa</th>
+                                    <th>Archivo</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Backend API</td>
+                                    <td><code>jacquin_api/site_config.php</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Backend API</td>
+                                    <td><code>jacquin_api/admin_site_config.php</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Frontend JS</td>
+                                    <td><code>web_page/pages/public/js/dashboard.js</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Frontend CSS</td>
+                                    <td><code>web_page/pages/public/css/style.css</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>React SRC</td>
+                                    <td><code>web_page/pages/src/components/Hero.jsx</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>React SRC</td>
+                                    <td><code>web_page/pages/src/services/api.js</code></td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer>Project Jacquin — Reporte de Ingeniería Generado por Antigravity AI</footer>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00006 — 25 Feb 2026
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00006">
+            <summary>
+                <span class="rpt-id-badge">25/02/2026/A00006</span>
+                <span class="summary-title">Chat Interno &amp; Correcciones Críticas (5 bugs)</span>
+                <span class="summary-date">25 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ls">
+                <div class="page">
+                    <div class="report-header">
+                        <div>
+                            <div class="brand">JACQUIN Academia Musical</div>
+                            <h1>Reporte de Desarrollo Diario</h1>
+                            <div style="margin-top:.5rem; font-size:.9rem; color:#666666;">Módulos: <strong>Chat Interno
+                                    · Gestión Académica · Panel Admin</strong></div>
+                        </div>
+                        <div class="meta">
+                            Fecha: <strong>25 Feb 2026</strong><br>
+                            Build IDs: <strong>25022026CHAT · 25022026BUGFIX</strong><br>
+                            Agente: Documentador Técnico Pro<br>
+                            Estado: <strong style="color:#16a34a;">✅ TODOS LOS ISSUES RESUELTOS</strong>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card" style="border-top:3px solid #93B6EE;">
+                            <div class="kpi-value" style="color:#93B6EE;">1</div>
+                            <div class="kpi-label">Feature nuevo implementado</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #dc2626;">
+                            <div class="kpi-value" style="color:#dc2626;">4</div>
+                            <div class="kpi-label">Bugs resueltos</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #223F61;">
+                            <div class="kpi-value" style="color:#223F61;">8</div>
+                            <div class="kpi-label">Archivos modificados</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #16a34a;">
+                            <div class="kpi-value" style="color:#16a34a;">2</div>
+                            <div class="kpi-label">Capas (Frontend + Backend)</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-file-earmark-text"></i> Resumen Ejecutivo</div>
+                        <p style="font-size:.92rem; margin-bottom:1rem;">Jornada de desarrollo enfocada en la
+                            <strong>integración del sistema de chat interno</strong> y la <strong>resolución de 4 bugs
+                                críticos</strong> que impedían el correcto funcionamiento del panel de administración.
+                            Se identificó y corrigió un SyntaxError en cascade que bloqueaba toda la inicialización del
+                            módulo académico, y un bug de lógica en el backend de desasignación de docentes que no
+                            contemplaba la columna legacy <code>courses.teacher_id</code>.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tarea</th>
+                                    <th>Tipo</th>
+                                    <th>Severidad</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>FIX-001</code></td>
+                                    <td>Integración de <code>contactAdmin()</code> con Chat Interno (JChat)</td>
+                                    <td><span class="badge badge-new">Feature</span></td>
+                                    <td>—</td>
+                                    <td><span class="badge badge-fixed">✓ Completado</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>FIX-002</code></td>
+                                    <td>Autocompletado <code>@mention</code> no desplegaba usuarios</td>
+                                    <td><span class="badge badge-high">Bug UX</span></td>
+                                    <td><span class="badge badge-medium">Media</span></td>
+                                    <td><span class="badge badge-fixed">✓ Resuelto</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>FIX-003</code></td>
+                                    <td>SyntaxError en <code>admin_academic_schedules.js:872</code></td>
+                                    <td><span class="badge badge-critical">Bug Crítico</span></td>
+                                    <td><span class="badge badge-critical">Crítica</span></td>
+                                    <td><span class="badge badge-fixed">✓ Resuelto</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>FIX-004</code></td>
+                                    <td><code>openCourseManagement not found</code> — Error en cascada</td>
+                                    <td><span class="badge badge-critical">Bug Cascada</span></td>
+                                    <td><span class="badge badge-critical">Crítica</span></td>
+                                    <td><span class="badge badge-fixed">✓ Resuelto (vía FIX-003)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>FIX-005</code></td>
+                                    <td>Docente no se podía desasignar — <code>courses.teacher_id</code> no limpiado
+                                    </td>
+                                    <td><span class="badge badge-high">Bug Backend</span></td>
+                                    <td><span class="badge badge-high">Alta</span></td>
+                                    <td><span class="badge badge-fixed">✓ Resuelto</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-folder2-open"></i> Archivos Modificados</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Archivo</th>
+                                    <th>Capa</th>
+                                    <th>Acción</th>
+                                    <th>Fix relacionado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>web_page/.../js/dashboard.js</code></td>
+                                    <td>Frontend</td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                    <td>FIX-001</td>
+                                </tr>
+                                <tr>
+                                    <td><code>web_page/.../js/messaging_widget.js</code></td>
+                                    <td>Frontend</td>
+                                    <td><span class="badge badge-fixed">Corregido</span></td>
+                                    <td>FIX-002</td>
+                                </tr>
+                                <tr>
+                                    <td><code>web_page/.../js/admin_academic_schedules.js</code></td>
+                                    <td>Frontend</td>
+                                    <td><span class="badge badge-fixed">Corregido</span></td>
+                                    <td>FIX-003, FIX-004</td>
+                                </tr>
+                                <tr>
+                                    <td><code>web_page/.../gestion.html</code></td>
+                                    <td>Frontend</td>
+                                    <td><span class="badge badge-new">Modificado</span></td>
+                                    <td>FIX-001, FIX-002</td>
+                                </tr>
+                                <tr>
+                                    <td><code>jacquin_api/admin_unassign_teacher.php</code></td>
+                                    <td>Backend</td>
+                                    <td><span class="badge badge-fixed">Corregido</span></td>
+                                    <td>FIX-005</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-tools"></i> Detalle de Cambios</div>
+
+                        <div class="work-card risk-feature">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">FIX-001</span>
+                                    <h3 style="display:inline">Integración de <code>contactAdmin()</code> con Chat
+                                        Interno (JChat)</h3>
+                                </div><span class="badge badge-new"><i class="bi bi-plus-circle-fill"></i>
+                                    Feature</span>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>dashboard.js:906–957</code> · Dependencia:
+                                <code>messaging_widget.js</code></p>
+                            <p style="font-size:.9rem; margin-bottom:.8rem;">La función <code>contactAdmin()</code>
+                                usaba anteriormente la API de Brevo para enviar emails. Se reemplazó completamente para
+                                utilizar el widget de chat interno <code>JChat</code>, que abre una conversación
+                                preseleccionando a todos los usuarios con <code>role_id === 1</code> (administradores).
+                            </p>
+                            <div class="wc-row">
+                                <div class="wc-block">
+                                    <div class="wc-block-label">❌ Antes (email externo)</div>
+                                    <pre style="margin:0;font-size:.78rem;"><span class="c-gray">// Dependía de Brevo API key expuesta</span>
+<span class="c-red">fetch</span>(<span class="c-yellow">'https://api.brevo.com/v3/smtp/email'</span>, {
+  headers: { <span class="c-yellow">'api-key'</span>: <span class="c-red">'xkeysib-...'</span> }
+});</pre>
+                                </div>
+                                <div class="wc-block">
+                                    <div class="wc-block-label">✅ Después (chat interno)</div>
+                                    <pre style="margin:0;font-size:.78rem;"><span class="c-gray">// Usa JChat widget — 0 dependencias externas</span>
+<span class="c-blue">let</span> admins = data.filter(u => u.role_id === 1);
+<span class="c-green">JChat.openWith</span>(admins.map(a => a.id));</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="work-card risk-bug">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">FIX-002</span>
+                                    <h3 style="display:inline">Autocompletado @ Mention no Desplegaba Usuarios</h3>
+                                </div><span class="badge badge-high"><i class="bi bi-bug-fill"></i> Bug UX</span>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>messaging_widget.js:393–406, 550–558, 659–677</code></p>
+                            <p style="font-size:.9rem; margin-bottom:.8rem;"><strong>Causa raíz:</strong> el símbolo
+                                <code>@</code> se enviaba como parte del query a la API, que no encontraba usuarios con
+                                nombres que iniciaran con <code>@</code>. <strong>Solución:</strong> Se limpia el
+                                <code>@</code> del query antes de enviarlo, se dispara búsqueda inmediata al escribir
+                                solo <code>@</code> y se redujo el debounce.</p>
+                        </div>
+
+                        <div class="work-card risk-critical">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">FIX-003</span><span
+                                        class="badge-id" style="margin-right:.5rem;">FIX-004</span>
+                                    <h3 style="display:inline">SyntaxError en <code>admin_academic_schedules.js</code> —
+                                        Error en Cascada</h3>
+                                </div><span class="badge badge-critical"><i class="bi bi-exclamation-octagon-fill"></i>
+                                    Crítico</span>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>admin_academic_schedules.js:872</code> · Impacto: Bloqueo
+                                completo del módulo académico</p>
+                            <p style="font-size:.9rem; margin-bottom:.8rem;">El archivo contenía un <strong>escaping
+                                    corrupto</strong> en la línea 872 dentro de un template literal. Las barras
+                                invertidas estaban mal anidadas (<code>\\"\\\\\\\\'\\"}')\"</code>), causando un
+                                <code>SyntaxError: Invalid or unexpected token</code> al parsear el archivo.</p>
+                            <div class="flow-container">
+                                <div style="font-weight:700; margin-bottom:.6rem; color:#dc2626;">Cadena de fallo
+                                    (antes):</div>
+                                <div class="flow-row"><span class="fn-red">SyntaxError L:872</span><span
+                                        class="arrow">→</span><span class="fn-red">Archivo no parsea</span><span
+                                        class="arrow">→</span><span class="fn-red">AcademicManager =
+                                        undefined</span><span class="arrow">→</span><span class="fn-red">"Módulo
+                                        académico no cargado"</span></div>
+                                <div style="font-weight:700; margin:.8rem 0 .6rem; color:#16a34a;">Cadena funcional
+                                    (después):</div>
+                                <div class="flow-row"><span class="fn-green">Archivo carga OK</span><span
+                                        class="arrow">→</span><span class="fn-green">AcademicManager
+                                        definido</span><span class="arrow">→</span><span class="fn-green">init()
+                                        ejecuta</span><span class="arrow">→</span><span
+                                        class="fn-green">window.openCourseManagement ✓</span></div>
+                            </div>
+                        </div>
+
+                        <div class="work-card risk-high">
+                            <div class="wc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">FIX-005</span>
+                                    <h3 style="display:inline">Docente no se Podía Desasignar — Columna Legacy no
+                                        Limpiada</h3>
+                                </div><span class="badge badge-high"><i class="bi bi-bug-fill"></i> Bug Backend</span>
+                            </div>
+                            <p class="wc-meta">Archivo: <code>jacquin_api/admin_unassign_teacher.php:37–63</code> ·
+                                Tabla: <code>courses.teacher_id</code></p>
+                            <p style="font-size:.9rem; margin-bottom:.8rem;"><strong>Causa raíz:</strong> El endpoint de
+                                desasignación solo limpiaba <code>schedules.teacher_id</code> y
+                                <code>schedule_teachers</code>, <strong>ignorando la columna legacy
+                                    <code>courses.teacher_id</code></strong>. Se añadió un
+                                <code>UPDATE courses SET teacher_id = NULL WHERE id_course = ? AND teacher_id = ?</code>.
+                            </p>
+                            <table style="font-size:.82rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Tabla</th>
+                                        <th>Columna</th>
+                                        <th>Antes</th>
+                                        <th>Después</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>schedules</code></td>
+                                        <td><code>teacher_id</code></td>
+                                        <td>✅ SET NULL</td>
+                                        <td>✅ SET NULL</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>schedule_teachers</code></td>
+                                        <td><code>id_teacher</code></td>
+                                        <td>✅ DELETE</td>
+                                        <td>✅ DELETE</td>
+                                    </tr>
+                                    <tr style="background:#f0fdf4;">
+                                        <td><code>courses</code></td>
+                                        <td><code>teacher_id</code></td>
+                                        <td style="color:#dc2626;font-weight:700;">❌ No se tocaba</td>
+                                        <td style="color:#16a34a;font-weight:700;">✅ SET NULL (NUEVO)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-eye"></i> Observaciones y Deuda Técnica</div>
+                        <div class="work-card" style="border-left:5px solid #ca8a04;">
+                            <h3 style="margin-bottom:.8rem;"><i class="bi bi-exclamation-triangle"
+                                    style="color:#ca8a04;"></i> Archivos desincronizados detectados</h3>
+                            <p style="font-size:.88rem; margin-bottom:.6rem;">Se detectaron <strong>6 archivos
+                                    JS</strong> con diferencias de tamaño entre <code>web_page/</code> y
+                                <code>htdocs/</code>. Especial atención a <code>user_profile_modal.js</code> (diferencia
+                                de ~10 KB).</p>
+                            <table style="font-size:.82rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Archivo</th>
+                                        <th>web_page (bytes)</th>
+                                        <th>htdocs (bytes)</th>
+                                        <th>Riesgo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>notifications.js</code></td>
+                                        <td>9,384</td>
+                                        <td>12,110</td>
+                                        <td>htdocs más grande</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>user_profile_modal.js</code></td>
+                                        <td>59,193</td>
+                                        <td>49,628</td>
+                                        <td style="color:#dc2626;font-weight:600;">web_page significativamente más
+                                            grande</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>admin_programs.js</code></td>
+                                        <td>13,904</td>
+                                        <td>13,357</td>
+                                        <td>web_page más grande</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <footer><strong>Project Jacquin</strong> · Reporte 25/02/2026 · Build IDs: 25022026CHAT ·
+                        25022026BUGFIX · Antigravity AI</footer>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00005 — 24 Feb 2026
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00005">
+            <summary>
+                <span class="rpt-id-badge">24/02/2026/A00005</span>
+                <span class="summary-title">Auditoría de Seguridad — Módulo Programas (7 VULN)</span>
+                <span class="summary-date">24 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ls">
+                <div class="page">
+                    <div class="report-header">
+                        <div>
+                            <div class="brand">JACQUIN Academia Musical</div>
+                            <h1>Reporte de Auditoría de Seguridad</h1>
+                            <div style="margin-top:.5rem; font-size:.9rem; color:#666666;">Módulo: <strong>Nuestros
+                                    Programas</strong> — Ciclo completo Audit → Fix → Verify</div>
+                        </div>
+                        <div class="meta">
+                            Fecha: <strong>24 Feb 2026</strong><br>
+                            Build IDs: <strong>24022026SECAUDIT · 24022026SECFIX · 24022026STRESS</strong><br>
+                            Auditor: Agente Documentador Técnico Pro<br>
+                            Estado final: <strong style="color:#16a34a;">✅ MÓDULO SEGURO</strong>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card" style="border-top:3px solid #dc2626;">
+                            <div class="kpi-value" style="color:#dc2626;">7</div>
+                            <div class="kpi-label">Vulnerabilidades encontradas</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #16a34a;">
+                            <div class="kpi-value" style="color:#16a34a;">7</div>
+                            <div class="kpi-label">Vulnerabilidades cerradas</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #223F61;">
+                            <div class="kpi-value" style="color:#223F61;">37</div>
+                            <div class="kpi-label">Tests ejecutados — 0 fallos</div>
+                        </div>
+                        <div class="kpi-card" style="border-top:3px solid #E78C3B;">
+                            <div class="kpi-value" style="color:#E78C3B;">−99%</div>
+                            <div class="kpi-label">Reducción de tamaño JSON</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-file-earmark-text"></i> Resumen Ejecutivo</div>
+                        <p style="font-size:.92rem; margin-bottom:1rem;">El módulo <strong>"Nuestros Programas"</strong>
+                            presentaba una vulnerabilidad crítica (CVSS ~9.1) que permitía a cualquier actor externo
+                            sobrescribir o eliminar la configuración de programas mediante un simple POST anónimo. Se
+                            detectaron adicionalmente 6 vulnerabilidades de severidad alta, media y de rendimiento.
+                            Todas fueron remediadas en la misma sesión con verificación automatizada mediante suite de
+                            37 tests.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Vulnerabilidad</th>
+                                    <th>Severidad</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>VULN-001</code></td>
+                                    <td>Sin autenticación en endpoint de escritura (×2 archivos)</td>
+                                    <td><span class="badge badge-critical">Crítica · CVSS ~9.1</span></td>
+                                    <td><span class="badge badge-fixed">✓ Cerrada</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>VULN-002</code></td>
+                                    <td>Imágenes Base64 embebidas en JSON (838 KB en disco)</td>
+                                    <td><span class="badge badge-high">Alta — Performance</span></td>
+                                    <td><span class="badge badge-fixed">✓ Cerrada</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>VULN-003</code></td>
+                                    <td>Sin <code>LOCK_EX</code> en escrituras concurrentes</td>
+                                    <td><span class="badge badge-medium">Moderada</span></td>
+                                    <td><span class="badge badge-fixed">✓ Cerrada</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>VULN-004</code></td>
+                                    <td><code>mkdir(..., 0777)</code> — directorio world-writable</td>
+                                    <td><span class="badge badge-low">Baja-Media</span></td>
+                                    <td><span class="badge badge-fixed">✓ Cerrada</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>VULN-005</code></td>
+                                    <td>Sin cache headers en <code>get_programs_json.php</code></td>
+                                    <td><span class="badge badge-perf">Performance</span></td>
+                                    <td><span class="badge badge-fixed">✓ Cerrada</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>VULN-006</code></td>
+                                    <td>Endpoint duplicado — doble superficie de ataque</td>
+                                    <td><span class="badge badge-perf">Arquitectura</span></td>
+                                    <td><span class="badge badge-fixed">✓ Cerrada</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>VULN-007</code></td>
+                                    <td>Sin validación de payload (tamaño, tipo, vacío)</td>
+                                    <td><span class="badge badge-medium">Media</span></td>
+                                    <td><span class="badge badge-fixed">✓ Cerrada</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-shield-x"></i> Vulnerabilidades Destacadas</div>
+
+                        <div class="vuln-card risk-critical">
+                            <div class="vc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">VULN-001</span>
+                                    <h3 style="display:inline">Falta Total de Autenticación en el Endpoint de Escritura
+                                    </h3>
+                                </div>
+                                <div style="display:flex;gap:.4rem;"><span
+                                        class="badge badge-critical">Crítica</span><span class="badge badge-fixed">✓
+                                        Resuelta</span></div>
+                            </div>
+                            <p class="vc-meta">Archivos: <code>admin_save_programs_json.php</code> (raíz) y
+                                <code>public/admin_save_programs_json.php</code></p>
+                            <p style="font-size:.9rem; margin-bottom:.8rem;">Ninguno de los dos endpoints incluía
+                                <code>session_start()</code> ni verificación de rol. La "autenticación" era solo
+                                client-side. Cualquier POST anónimo podía sobrescribir o vaciar
+                                <code>programs.json</code>.</p>
+                            <div class="vc-row">
+                                <div class="vc-block">
+                                    <div class="vc-block-label">❌ Código vulnerable</div>
+                                    <pre style="margin:0;font-size:.78rem;"><span class="c-blue">require_once</span> <span class="c-yellow">'config/cors.php'</span>;
+<span class="c-gray">// ← CERO autenticación aquí</span>
+<span class="c-gray">// Cualquier POST anónimo pasa</span></pre>
+                                </div>
+                                <div class="vc-block">
+                                    <div class="vc-block-label">✅ Código seguro</div>
+                                    <pre style="margin:0;font-size:.78rem;"><span class="c-green">session_start</span>();
+<span class="c-red">if</span> (!<span class="c-blue">isset</span>(<span class="c-blue">$_SESSION</span>[<span class="c-yellow">'user'</span>]) ||
+    <span class="c-blue">$_SESSION</span>[<span class="c-yellow">'user'</span>][<span class="c-yellow">'id_rol'</span>] != 1) {
+    <span class="c-blue">http_response_code</span>(403); <span class="c-red">exit</span>;
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vuln-card risk-high">
+                            <div class="vc-head">
+                                <div><span class="badge-id" style="margin-right:.5rem;">VULN-002</span>
+                                    <h3 style="display:inline">Imágenes Base64 en JSON — 838 KB en Disco</h3>
+                                </div><span class="badge badge-fixed">✓ Resuelta</span>
+                            </div>
+                            <p style="font-size:.9rem; margin-bottom:1rem;">Un solo programa almacenaba 844,922 chars
+                                Base64. Con 9 programas × 3 MB: JSON de ~36 MB. <strong>Solución:</strong> Backend
+                                detecta <code>data:image/</code>, guarda PNG en disco, reemplaza campo por ruta (~30
+                                chars).</p>
+                            <div class="size-bar-wrap">
+                                <div class="size-label">Tamaño de <code>programs.json</code></div>
+                                <div style="display:flex;gap:.8rem;align-items:center;font-size:.82rem;"><span
+                                        style="width:90px;text-align:right;color:#dc2626;">Antes: 838 KB</span>
+                                    <div class="bar-track" style="flex:1">
+                                        <div class="bar-fill" style="width:100%;background:#dc2626;">858,635 bytes</div>
+                                    </div>
+                                </div>
+                                <div
+                                    style="display:flex;gap:.8rem;align-items:center;font-size:.82rem;margin-top:.4rem;">
+                                    <span style="width:90px;text-align:right;color:#16a34a;">Ahora: 5 KB</span>
+                                    <div class="bar-track" style="flex:1">
+                                        <div class="bar-fill" style="width:.6%;min-width:55px;background:#16a34a;">5,296
+                                            bytes</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title"><i class="bi bi-check2-all"></i> Suite de Tests — 37/37 PASS</div>
+                        <div class="test-grid">
+                            <div class="test-block">
+                                <div class="tb-title">Bloque 1 — Autenticación</div>
+                                <div class="tb-result tb-pass">5 / 5 ✓</div>
+                                <ul class="test-list">
+                                    <li>Sin sesión → 403</li>
+                                    <li>Rol estudiante (3) → 403</li>
+                                    <li>Admin (1) + payload válido → 200</li>
+                                </ul>
+                            </div>
+                            <div class="test-block">
+                                <div class="tb-title">Bloque 2 — Payload</div>
+                                <div class="tb-result tb-pass">6 / 6 ✓</div>
+                                <ul class="test-list">
+                                    <li>JSON malformado → rechaza</li>
+                                    <li>Array vacío [] → rechaza</li>
+                                    <li>11 MB → rechaza</li>
+                                </ul>
+                            </div>
+                            <div class="test-block">
+                                <div class="tb-title">Bloque 3 — Base64</div>
+                                <div class="tb-result tb-pass">9 / 9 ✓</div>
+                                <ul class="test-list">
+                                    <li>PNG válido → extrae a archivo</li>
+                                    <li>SVG → rechaza</li>
+                                    <li>6 MB → rechaza (límite 5 MB)</li>
+                                </ul>
+                            </div>
+                            <div class="test-block">
+                                <div class="tb-title">Bloque 4 — Concurrencia</div>
+                                <div class="tb-result tb-pass">2 / 2 ✓</div>
+                                <ul class="test-list">
+                                    <li>LOCK_EX presente</li>
+                                    <li>5 procesos paralelos → JSON válido</li>
+                                </ul>
+                            </div>
+                            <div class="test-block">
+                                <div class="tb-title">Bloque 5 — Cache</div>
+                                <div class="tb-result tb-pass">3 / 3 ✓</div>
+                                <ul class="test-list">
+                                    <li>Cache-Control presente</li>
+                                    <li>ETag presente</li>
+                                    <li>max-age = 300 s</li>
+                                </ul>
+                            </div>
+                            <div class="test-block">
+                                <div class="tb-title">Bloque 8 — Integridad</div>
+                                <div class="tb-result tb-pass">5 / 5 ✓</div>
+                                <ul class="test-list">
+                                    <li>programs.json &lt; 50 KB</li>
+                                    <li>JSON estructuralmente válido</li>
+                                    <li>Sin strings data:image/</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <footer><strong>Project Jacquin</strong> · Reporte de Seguridad 24/02/2026 · Antigravity AI</footer>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00004 — 23 Feb 2026
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00004">
+            <summary>
+                <span class="rpt-id-badge">23/02/2026/A00004</span>
+                <span class="summary-title">Footer React &amp; Build de Producción — Módulo Configuración</span>
+                <span class="summary-date">23 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="das">
+                <div class="container">
+                    <div class="header">
+                        <div>
+                            <h1>Reporte de Desarrollo</h1>
+                            <div style="color:#95a5a6; margin-top:5px;">Módulo de Configuración e Integración React
+                            </div>
+                        </div>
+                        <div class="meta">
+                            <div><strong>Fecha:</strong> 23 de Febrero de 2026</div>
+                            <div><strong>Agente:</strong> Antigravity</div>
+                            <div><strong>Estado General:</strong> <span style="color:#27ae60;">Estable</span></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2><span style="color:#27ae60;">✔</span> 1. Corrección y Optimización de Subida de Avatares
+                            <span class="status-badge status-success">Completado</span></h2>
+                        <ul>
+                            <li>
+                                <div class="icon">📷</div>
+                                <div class="card-details">
+                                    <h3>Centralización de Directorio</h3>
+                                    <p>Se modificó <code>admin_upload_avatar.php</code> para utilizar
+                                        <code>PathHelper</code>. Directorio unificado en
+                                        <code>jacquin_api/public/uploads/avatars/</code>, evitando conflictos entre SPA
+                                        y Legacy XAMPP/InfinityFree.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🔄</div>
+                                <div class="card-details">
+                                    <h3>Gestión Dinámica de Caché y URL</h3>
+                                    <p>Se refactorizó <code>ApiService.getAvatarUrl</code> con URL dinámica según host
+                                        (local o tunnel). Bug de no-actualización corregido insertando timestamp
+                                        <code>?t=Date.now()</code> en la previsualización HTML.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h2><span style="color:#ac8421;">⚡</span> 2. Migración del Footer a React Micro-Frontend <span
+                                class="status-badge status-success">Completado</span></h2>
+                        <ul>
+                            <li>
+                                <div class="icon">🧩</div>
+                                <div class="card-details">
+                                    <h3>Componente Footer Standalone</h3>
+                                    <p>Se creó <code>footer-mount.jsx</code> empaquetado con Esbuild como IIFE para
+                                        inyección en <code>&lt;div id="react-footer-root"&gt;</code> vía
+                                        <code>js/react-footer.bundle.js</code>.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🤖</div>
+                                <div class="card-details">
+                                    <h3>Script de Migración PowerShell</h3>
+                                    <p>Se creó <code>migrate_footer.ps1</code> que busca masivamente
+                                        <code>&lt;jam-footer&gt;</code> en <code>web_page/pages/public/</code> y los
+                                        sustituye por el Root ID de React. Elimina el obsoleto
+                                        <code>js/components/Footer.js</code>.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h2><span style="color:#90A1A2;">🔧</span> 3. Refactorización Git y Empaquetado de Producción
+                            <span class="status-badge status-success">Completado</span></h2>
+                        <ul>
+                            <li>
+                                <div class="icon">🗑️</div>
+                                <div class="card-details">
+                                    <h3>Remediación de Bloqueo Git LFS</h3>
+                                    <p>Incidencia: <em>pre-receive hook declined</em> por zip accidental de 122MB.
+                                        Solución: <code>git reset --soft HEAD~1</code> + <code>git rm --cached</code> +
+                                        regla <code>*.zip</code> permanente en <code>.gitignore</code>.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">📦</div>
+                                <div class="card-details">
+                                    <h3>Producción Final React Inyectado</h3>
+                                    <p>Reconstrucción (Build) de manifests y paquetes React con Node. Inyectados en
+                                        <code>admin_users.html</code> y pusheados a
+                                        <code>feature/despliegue-infinityfree</code> con éxito.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00003 — 21 Feb 2026
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00003">
+            <summary>
+                <span class="rpt-id-badge">21/02/2026/A00003</span>
+                <span class="summary-title">Auditoría Final y Centralización de Assets</span>
+                <span class="summary-date">21 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ds">
+                <div class="container">
+                    <div class="header">
+                        <div class="header-tag">Audit &amp; Refinement · Jacquin Academia Musical</div>
+                        <h1>Reporte de Auditoría Final</h1>
+                        <div class="meta">Fecha: <span>Sábado, 21 de Febrero de 2026</span> &nbsp;·&nbsp; Versión:
+                            <span>2.5 (Ready for Deploy)</span></div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Resumen Ejecutivo</div>
+                        <div class="card highlight">
+                            <h3>🎯 Consolidación y Optimización</h3>
+                            <p>Se realizó una limpieza profunda del sistema de archivos, centralizando todos los activos
+                                (imágenes y fuentes) en una carpeta única. Se corrigió el error crítico de visualización
+                                de avatares en los paneles de Docente y Estudiante y se actualizó la documentación con
+                                nuevos manuales de usuario por roles.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Línea de Tiempo del Desarrollo</div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="time">08:00 — Auditoría de Assets</div>
+                                <div class="desc">Detección de carpetas duplicadas e imágenes huérfanas.</div>
+                                <div class="detail">Identificadas múltiples carpetas 'images' y 'assets' en la raíz y
+                                    subcarpetas.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">08:30 — Reestructuración</div>
+                                <div class="desc">Creación de <code>public/assets/images</code> con subcarpetas
+                                    organizadas.</div>
+                                <div class="detail">Categorías: avatars, hero, about, programs, values.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">09:15 — Corrección de Avatares</div>
+                                <div class="desc">Ajuste de rutas en <code>gestion.html</code> y
+                                    <code>dashboard.js</code>.</div>
+                                <div class="detail">Eliminación de retrocesos '..' que rompían el enlace en producción.
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">11:00 — Documentación 2026</div>
+                                <div class="desc">Generación de Manual del Administrador y Guía de Usuario por Roles.
+                                </div>
+                                <div class="detail">Nuevos ficheros Markdown en <code>technical/manuals/</code>.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Resultados de la Auditoría</div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Centralización de Activos</h3>
+                            <p>Todos los recursos ahora residen en <code>web_page/pages/public/assets/</code>. Se
+                                eliminaron copias redundantes en la raíz.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Fix: Visibilidad de Avatar</h3>
+                            <p>El círculo del avatar ahora carga correctamente <code>default_avatar.svg</code> y las
+                                fotos subidas desde la API.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge fixed">🔧 Corregido</span>&nbsp; Lógica de Rutas Dinámicas</h3>
+                            <p><code>resolvePath</code> en el frontend ahora es compatible con despliegues en hosting
+                                compartido sin rutas relativas profundas.</p>
+                        </div>
+                    </div>
+
+                    <div class="footer">Jacquin Academia Musical · Reporte Final de Auditoría 2026-02-21 · Antigravity
+                        AI</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00002 — 20 Feb 2026
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00002">
+            <summary>
+                <span class="rpt-id-badge">20/02/2026/A00002</span>
+                <span class="summary-title">Sincronización Visual — Programas, Eventos, Nosotros</span>
+                <span class="summary-date">20 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ds">
+                <div class="container">
+                    <div class="header">
+                        <div class="header-tag">Sprint Log · Jacquin Academia Musical</div>
+                        <h1>Reporte de Desarrollo</h1>
+                        <div class="meta">Fecha: <span>Jueves, 20 de Febrero de 2026</span> &nbsp;·&nbsp; Rama:
+                            <span>main</span> &nbsp;·&nbsp; Commit: <span>ab5d409</span></div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Resumen Ejecutivo</div>
+                        <div class="card highlight">
+                            <h3>🎯 Objetivo del Día</h3>
+                            <p>Sincronización visual completa de las secciones <strong>Nuestros Programas</strong>,
+                                <strong>Eventos</strong> y <strong>Sobre Nosotros</strong> tomando como referencia el
+                                proyecto <code>jacquin-infinity</code>. Corrección de botones de carrusel, restauración
+                                de about.css, y ajustes de layout en tarjetas de valores.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Línea de Tiempo</div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="time">08:00 — Diagnóstico inicial</div>
+                                <div class="desc">Inspección del proyecto de referencia <code>jacquin-infinity</code>
+                                </div>
+                                <div class="detail">Comparación: breakpoints de Swiper, clases CSS, estructura HTML.
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">08:40 — Programs.jsx</div>
+                                <div class="desc">Reescritura completa con configuración exacta de Infinity</div>
+                                <div class="detail">Breakpoints: 480→1.2, 768→2.2, 1024→3.2, 1366→4, 1600→5 slides.
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">09:00 — Events.jsx</div>
+                                <div class="desc">Reescritura completa sincronizando misma configuración Swiper</div>
+                                <div class="detail">loop activado cuando hay más de 3 eventos. pauseOnMouseEnter
+                                    habilitado.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">09:30 — Botones de navegación</div>
+                                <div class="desc">Corrección del bug de doble flecha en botones prev/next del carrusel
+                                </div>
+                                <div class="detail">Causa: clases <code>swiper-button-prev/next</code> en divs custom
+                                    generaban flecha duplicada.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">11:00 — about.css restaurado</div>
+                                <div class="desc">Restauración completa de <code>about.css</code> con todos los estilos
+                                    faltantes</div>
+                                <div class="detail">Modales, tarjetas premium, sección misión/valores.
+                                    <code>.card-wide-infinity</code> a 320px.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">12:15 — Git + Documentación</div>
+                                <div class="desc">Commit + push a origin/main</div>
+                                <div class="detail">9 archivos · 403 insertions · 1406 deletions · SHA: ab5d409</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Comparativa Swiper — Antes vs. Infinity</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Breakpoint</th>
+                                    <th>Antes (incorrecto)</th>
+                                    <th>Ahora (= Infinity)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>480px</td>
+                                    <td>1 · 20px</td>
+                                    <td>1.2 · 15px</td>
+                                </tr>
+                                <tr>
+                                    <td>768px</td>
+                                    <td>2 · 20px</td>
+                                    <td>2.2 · 20px</td>
+                                </tr>
+                                <tr>
+                                    <td>1024px</td>
+                                    <td>3 · 20px</td>
+                                    <td>3.2 · 20px</td>
+                                </tr>
+                                <tr>
+                                    <td>1366px</td>
+                                    <td>4 · 20px</td>
+                                    <td>4 · 25px</td>
+                                </tr>
+                                <tr>
+                                    <td>speed</td>
+                                    <td>sin definir</td>
+                                    <td>600ms</td>
+                                </tr>
+                                <tr>
+                                    <td>pauseOnMouseEnter</td>
+                                    <td>false</td>
+                                    <td>true</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Estado de Tareas</div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Sincronización visual Programas ↔
+                                Infinity</h3>
+                            <p>Breakpoints, spaceBetween, speed, autoplay pauseOnMouseEnter.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Sincronización visual Eventos ↔
+                                Infinity</h3>
+                            <p>Misma configuración Swiper. Filtros de búsqueda y tipo funcionales.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge fixed">🔧 Corregido</span>&nbsp; Bug: doble flecha en botones de
+                                carrusel</h3>
+                            <p>Causa: conflicto entre clase <code>swiper-button-prev</code> y estilos custom. Solución:
+                                divs sin esa clase + <code>::after</code> manual con ‹ ›.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Restauración about.css</h3>
+                            <p>Modales, tarjetas equipo, misión/valores, responsive. <code>.value-item</code> → 280px.
+                            </p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Secuencia Git + Push</h3>
+                            <p>Commit <code>ab5d409</code> en rama <code>main</code>. 9 archivos clave modificados.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Secuencia Git</div>
+                        <div class="git-block">
+                            <div>$ git commit -m <span class="msg">"feat(ui): sincronización visual completa secciones
+                                    Programas, Eventos y Nosotros"</span></div><br>
+                            <div><span class="branch">[main ab5d409]</span> feat(ui): sincronización visual completa
+                                secciones Programas, Eventos y Nosotros</div>
+                            <div class="stat">9 files changed, 403 insertions(+), 1406 deletions(-)</div><br>
+                            <div>$ git push origin main</div>
+                            <div class="stat"><span class="hash">c9a07b0</span>..<span class="hash">ab5d409</span> main
+                                → main ✅</div>
+                        </div>
+                    </div>
+
+                    <div class="footer">Jacquin Academia Musical · Reporte Generado: 2026-02-20T12:15 COT · Branch: main
+                        · SHA: ab5d409</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ════════════════════════════════════════════════════
+         REPORTE A00001 — 18 Feb 2026 (INICIAL)
+    ════════════════════════════════════════════════════ -->
+        <details class="rpt" id="A00001">
+            <summary>
+                <span class="rpt-id-badge">18/02/2026/A00001</span>
+                <span class="summary-title">Migración SPA React &amp; Tipografía Brandbook — Reporte Inicial</span>
+                <span class="summary-date">18 Feb 2026</span>
+                <span class="summary-arrow">›</span>
+            </summary>
+            <div class="ds">
+                <div class="container">
+                    <div class="header">
+                        <div class="header-tag">Sprint Log · Jacquin Academia Musical</div>
+                        <h1>Reporte de Desarrollo</h1>
+                        <div class="meta">Fecha: <span>Miércoles, 18 de Febrero de 2026</span> &nbsp;·&nbsp; Rama:
+                            <span>main</span> &nbsp;·&nbsp; Commit: <span>85835b6</span></div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Resumen Ejecutivo</div>
+                        <div class="card highlight">
+                            <h3>🎯 Objetivo del Día</h3>
+                            <p>Refinamiento UI de Jacquin Academia Musical: corrección de tipografía alineada al
+                                brandbook oficial, simplificación del Hero component, ajustes de header, y commit + push
+                                de la migración completa a React SPA.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Línea de Tiempo</div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="time">Hero Section</div>
+                                <div class="desc">Refactorización del componente Hero.jsx</div>
+                                <div class="detail">Se eliminaron: <code>hero-badge</code>, <code>hero-title</code>,
+                                    <code>hero-subtitle</code>. Solo tagline + botón CTA.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">Tipografía — Análisis Brandbook</div>
+                                <div class="desc">Extracción de fuentes del PDF oficial vía análisis /BaseFont</div>
+                                <div class="detail">Fuentes detectadas: HelveticaNeue-CondensedBold ·
+                                    HelveticaNeue-Light · Marion-Regular · Futura-Bold.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">Tipografía — Corrección Final</div>
+                                <div class="desc">Implementación estricta: Solo 2 fuentes del brandbook</div>
+                                <div class="detail">HelveticaNeue (Cond. Bold + Light) y Marion Regular. Archivos
+                                    locales TTF/OTF. Sin CDN externo.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time">Git Sequence</div>
+                                <div class="desc">Commit + Push a origin/main</div>
+                                <div class="detail">132 files · 10,207 insertions · SHA: 85835b6</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Tipografía Oficial — Manual de Identidad</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Familia</th>
+                                    <th>Variante</th>
+                                    <th>Uso en el Sitio</th>
+                                    <th>Archivo Local</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>HelveticaNeue</td>
+                                    <td>Condensed Bold</td>
+                                    <td>Titulares, logo, nav activo, hero</td>
+                                    <td>HelveticaNeueCondensedBold.ttf</td>
+                                </tr>
+                                <tr>
+                                    <td>HelveticaNeue</td>
+                                    <td>Light</td>
+                                    <td>Cuerpo, párrafos, menú, web</td>
+                                    <td>HelveticaNeueLight.ttf</td>
+                                </tr>
+                                <tr>
+                                    <td>Marion</td>
+                                    <td>Regular (italic)</td>
+                                    <td>Tagline hero, textos secundarios elegantes</td>
+                                    <td>marion_regular.otf</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Estado de Tareas</div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Refactorización Hero Component</h3>
+                            <p>Solo tagline "Donde la pasión se convierte en arte" + botón CTA naranja.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Corrección Tipografía Brandbook</h3>
+                            <p>2 familias oficiales implementadas desde archivos locales. style.css, hero.css,
+                                index.html actualizados.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Documentación Técnica</h3>
+                            <p>ARCHITECTURE.md · brandbook-jacquin.json · TASK.md actualizados.</p>
+                        </div>
+                        <div class="card success">
+                            <h3><span class="badge done">✅ Completado</span>&nbsp; Sistema SPA React</h3>
+                            <p>132 archivos commiteados. Componentes: Hero, Header, Navbar, Events, Programs, About,
+                                Login, AdminEvents. API centralizado (1172 líneas).</p>
+                        </div>
+                        <div class="card">
+                            <h3><span class="badge pending">⏳ Pendiente</span>&nbsp; Events Component — Revisión estilos
+                            </h3>
+                            <p>Carrusel Swiper, botones de navegación y filtros requieren validación visual final.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Secuencia Git</div>
+                        <div class="git-block">
+                            <div>$ git commit -m <span class="msg">"feat(ui+brandbook): Migración SPA React + Tipografía
+                                    Oficial Brandbook"</span></div><br>
+                            <div><span class="branch">[main 85835b6]</span> feat(ui+brandbook): Migración SPA React +
+                                Tipografía Oficial Brandbook</div>
+                            <div class="stat">132 files changed, 10,207 insertions(+)</div><br>
+                            <div>$ git push origin main</div>
+                            <div class="stat"><span class="hash">32ff1cb</span>..<span class="hash">85835b6</span> main
+                                → main ✅</div>
+                        </div>
+                    </div>
+
+                    <div class="footer">Jacquin Academia Musical · Reporte Generado: 2026-02-18T21:21 COT · Branch: main
+                        · SHA: 85835b6</div>
+                </div>
+            </div>
+        </details>
+
+    </div><!-- end .bitacora-wrap -->
+</body>
+
+</html>

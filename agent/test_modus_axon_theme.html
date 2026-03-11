@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODUS AXON Test</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap');
+
+        :root {
+            /* MODUS AXON Power (Sci-Fi / AI Tech) */
+            --brand-primary: #00FFAA;
+            /* Cyber Matrix Green */
+            --brand-secondary: #05050A;
+            /* Obsidian Core */
+            --brand-accent: #7B00FF;
+            /* Neural Quantum Purple */
+            --text-main: #E0E5EC;
+            --text-light: #F5F5F5;
+            --bg-page: #05050A;
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 1.5cm;
+            }
+
+            body {
+                background: white !important;
+                font-size: 11pt !important;
+                padding: 0 !important;
+                color: #111 !important;
+            }
+
+            .paper-a4 {
+                box-shadow: none !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: none !important;
+                border-top: 5px solid var(--brand-primary) !important;
+                background: white !important;
+            }
+
+            h1,
+            h2,
+            h3 {
+                color: #111 !important;
+            }
+
+            .hook-status {
+                border: 1px solid #ccc !important;
+                background: #fafafa !important;
+                border-left: 5px solid var(--brand-primary) !important;
+            }
+
+            table th {
+                background: #eee !important;
+                color: #333 !important;
+            }
+
+            table td {
+                color: #333 !important;
+            }
+
+            pre,
+            code {
+                background: #f4f4f4 !important;
+                color: #333 !important;
+                border: 1px solid #ddd !important;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            background: var(--bg-page);
+            margin: 0;
+            padding: 40px;
+        }
+
+        .paper-a4 {
+            background: #0A0A12;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 45px 50px;
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.15);
+            border-top: 8px solid var(--brand-primary);
+            position: relative;
+        }
+
+        .paper-a4::before {
+            content: "MODUS AXON";
+            position: absolute;
+            top: 40px;
+            right: -40px;
+            transform: rotate(45deg);
+            background: var(--brand-accent);
+            color: white;
+            font-size: 0.7em;
+            font-weight: 900;
+            padding: 5px 60px;
+            letter-spacing: 2px;
+            z-index: 10;
+        }
+
+        .paper-a4::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--brand-accent) 0%, transparent 50%);
+            opacity: 0.1;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--brand-secondary);
+        }
+
+        h1 {
+            border-bottom: 3px solid var(--brand-accent);
+            padding-bottom: 15px;
+            font-size: 2.8em;
+            margin-top: 0;
+            color: #fff;
+        }
+
+        h2 {
+            border-left: 4px solid var(--brand-primary);
+            padding-left: 15px;
+            margin-top: 1.5em;
+            color: #fff;
+        }
+
+        .hook-status {
+            background: rgba(0, 255, 170, 0.05);
+            border-left: 5px solid var(--brand-primary);
+            padding: 20px;
+            margin-bottom: 35px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            color: #A0C0D0;
+        }
+
+        pre,
+        code {
+            background: #020205;
+            color: var(--brand-accent);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            page-break-inside: avoid;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid rgba(123, 0, 255, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(0, 255, 170, 0.1);
+            color: var(--brand-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--brand-primary);
+        }
+
+        td {
+            color: #A0C0D0;
+        }
+
+        .footer {
+            margin-top: 60px;
+            font-size: 0.75em;
+            text-align: center;
+            color: rgba(224, 229, 236, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            line-height: 2;
+        }
+
+        .brand-seal {
+            font-weight: 900;
+            color: var(--brand-primary);
+            letter-spacing: -1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="paper-a4">
+        <header>
+            <div
+                style="color: var(--brand-primary); font-weight: bold; font-size: 0.75em; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 10px;">
+                TEST — MODUS AXON System</div>
+            <h1>Prueba de Tema Oscuro</h1>
+        </header>
+
+        <div class="hook-status">
+            <strong>PROPÓSITO:</strong> Validar estética <br>
+            <strong>RIESGO DE OMISIÓN:</strong> Bajo
+        </div>
+
+        <main>
+            <h2>Validando Tabla</h2>
+            <table>
+                <tr>
+                    <th>Variable</th>
+                    <th>Color</th>
+                </tr>
+                <tr>
+                    <td>--brand-primary</td>
+                    <td>#00FFAA</td>
+                </tr>
+            </table>
+
+            <h2>Validando Código</h2>
+            <pre><code>function isAI() { return true; }</code></pre>
+        </main>
+
+        <footer class="footer">
+            <span class="brand-seal">MODUS AXON</span> — Ingeniería de Documentación de Alto Rendimiento <br>
+            Generado por Antigravity | Hoy | Propiedad de TEST SM
+        </footer>
+    </div>
+</body>
+
+</html>

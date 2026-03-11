@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel Pertuz - Propuesta 7: Caligrafía Magistral</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fuentes de Caligrafía Elegante y Pura -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Tangerine:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --velvet-black: #0c0c0c;
+            --gold-leaf: #d4af37;
+            --pure-white: #ffffff;
+            --muted-gold: #c5a059;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--velvet-black);
+            color: var(--pure-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+        }
+
+        .presentation-container {
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 60px;
+            font-family: sans-serif;
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaa;
+            font-weight: 300;
+        }
+
+        .signature-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            margin-bottom: 70px;
+            align-items: center;
+        }
+
+        .signature-item {
+            position: relative;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* 
+           Opción 1: Great Vibes. 
+           Clásica, súper elegante, balanceada y "diciente".
+        */
+        .sig1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 6rem;
+            line-height: 1;
+            color: var(--gold-leaf);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* 
+           Opción 2: Pinyon Script. 
+           Romántica, trazos refinados, inclinada y aristocrática.
+        */
+        .sig2 {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 6rem;
+            line-height: 1;
+            color: var(--pure-white);
+        }
+
+        /* Efecto de firma dividida (nombre dorado, apellido blanco) */
+        .color-split .firstName {
+            color: var(--gold-leaf);
+        }
+
+        .color-split .lastName {
+            color: var(--pure-white);
+        }
+
+        /* 
+           Opción 3: Tangerine Bold. 
+           Alta, imponente, muy caligráfica de pluma ancha.
+        */
+        .sig3 {
+            font-family: 'Tangerine', cursive;
+            font-size: 7.5rem;
+            font-weight: 700;
+            line-height: 0.8;
+            color: var(--muted-gold);
+            letter-spacing: 2px;
+        }
+
+        .font-label {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            color: #777;
+            letter-spacing: 3px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .concept-text {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: left;
+            font-family: sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #aaa;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+        }
+
+        .concept-text strong {
+            color: var(--gold-leaf);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="presentation-container">
+        <div class="header">
+            <h1>Propuesta 7: Caligrafía Magistral</h1>
+        </div>
+
+        <div class="signature-showcase">
+
+            <div class="signature-item">
+                <div class="sig1">Manuel Pertuz</div>
+                <div class="font-label">Fuente: Great Vibes (Fluida, Clásica, "El Caballero")</div>
+            </div>
+
+            <div class="signature-item">
+                <div class="sig2 color-split">
+                    <span class="firstName">Manuel</span> <span class="lastName">Pertuz</span>
+                </div>
+                <div class="font-label">Fuente: Pinyon Script (Romántica y Aristocrática)</div>
+            </div>
+
+            <div class="signature-item">
+                <div class="sig3">Manuel Pertuz</div>
+                <div class="font-label">Fuente: Tangerine (Pluma de Maestro, Alta y Diciente)</div>
+            </div>
+
+        </div>
+
+        <div class="concept-text">
+            <p><strong>Concepto Visual:</strong> Retorno a la caligrafía pura, dura y de altísima elegancia. Trazos
+                fluidos, florituras calculadas y una estructura <em>Script</em> impecable que simula la firma magistral
+                de un cantautor clásico. Es "diciente" porque cada curva denota maestría técnica y vocal.</p>
+            <p><strong>Fundamento de Identidad:</strong> Evoca directamente <strong>"La Elegancia y Respeto"</strong>
+                (la esencia de Gilberto Santa Rosa) fusionada con la sensibilidad de Jean Carlos Centeno. Más que un
+                rápido garabato, es una rúbrica pensativa e imponente que grita "música de alto nivel".</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

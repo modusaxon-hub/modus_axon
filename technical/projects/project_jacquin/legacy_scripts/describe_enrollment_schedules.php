@@ -1,0 +1,11 @@
+<?php
+include_once 'config/connection.php';
+try {
+    $stmt = $pdo->query("DESCRIBE enrollment_schedules");
+    while ($row = $stmt->fetch()) {
+        echo "  {$row['Field']} - {$row['Type']}\n";
+    }
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>

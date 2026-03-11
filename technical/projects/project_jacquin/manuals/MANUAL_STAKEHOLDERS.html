@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Stakeholders V1.0.5 - JACQUIN Academia Musical</title>
+
+    <!-- BRANDBOOK FONTS - Local Support -->
+    <style>
+        @font-face {
+            font-family: 'HelveticaNeue';
+            src: url('./web_page/pages/public/assets/fonts/HelveticaNeueCondensedBold.ttf') format('truetype');
+            font-weight: 700;
+        }
+
+        @font-face {
+            font-family: 'HelveticaNeue';
+            src: url('./web_page/pages/public/assets/fonts/HelveticaNeueLight.ttf') format('truetype');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Marion';
+            src: url('./web_page/pages/public/assets/fonts/marion_regular.otf') format('opentype');
+            font-weight: 400;
+        }
+
+        :root {
+            --brand-primary: #223F61;
+            --brand-light: #93B6EE;
+            --brand-accent: #E78C3B;
+            --brand-white: #f8fafc;
+            --brand-gray: #CDCDCD;
+            --brand-bg: #0a1428;
+            --font-main: 'HelveticaNeue', 'Inter', sans-serif;
+            --font-serif: 'Marion', 'Georgia', serif;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --border-ui: rgba(147, 182, 238, 0.2);
+        }
+
+        /* --- PRINT CONFIG (A4) --- */
+        @media print {
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+            }
+
+            .container {
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .card {
+                background: white !important;
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
+                color: black !important;
+                page-break-inside: avoid;
+                margin-bottom: 2rem !important;
+            }
+
+            .role-badge {
+                border: 1px solid #000 !important;
+                color: #000 !important;
+                background: transparent !important;
+            }
+
+            header {
+                border-bottom: 2px solid #000 !important;
+            }
+
+            h2,
+            h3 {
+                color: black !important;
+            }
+
+            .version-badge {
+                color: black !important;
+            }
+
+            .jam-logo-container img {
+                filter: grayscale(1);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            font-weight: 300;
+            background-color: var(--brand-bg);
+            color: var(--brand-white);
+            line-height: 1.7;
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(34, 63, 97, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(231, 140, 59, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        /* --- COMPONENTE LOGO (FIDELIDAD 1:1) --- */
+        .jam-logo-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 80px;
+            margin-bottom: 3rem;
+        }
+
+        .jam-logo-container .letters {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+
+        .jam-logo-container .piano-svg {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+
+        /* --- TYPOGRAPHY & HEADERS --- */
+        header {
+            margin-bottom: 100px;
+            border-bottom: 1px solid var(--border-ui);
+            padding-bottom: 60px;
+        }
+
+        h1 {
+            font-family: var(--font-main);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 3rem;
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-top: 1.5rem;
+        }
+
+        header p {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--brand-light);
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .version-badge {
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--brand-accent);
+            text-transform: uppercase;
+        }
+
+        /* --- SECTIONS & CARDS --- */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-ui);
+            border-radius: 24px;
+            padding: 60px;
+            margin-bottom: 60px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-family: var(--font-main);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--brand-accent);
+            font-size: 2rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--brand-accent), transparent);
+            opacity: 0.3;
+        }
+
+        h3 {
+            font-family: var(--font-main);
+            font-weight: 700;
+            color: var(--brand-light);
+            margin: 45px 0 20px 0;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        h4 {
+            font-family: var(--font-serif);
+            color: var(--brand-white);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--brand-accent);
+            font-weight: 700;
+        }
+
+        /* --- ROLE UI --- */
+        .role-badge {
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-ui);
+        }
+
+        .badge-visitor {
+            color: var(--brand-gray);
+        }
+
+        .badge-student {
+            color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .badge-teacher {
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.4);
+        }
+
+        .badge-admin {
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        /* --- TABLES (ENTERPRISE GRADE) --- */
+        .table-responsive {
+            margin: 40px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-ui);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 25px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-ui);
+        }
+
+        th {
+            background: rgba(34, 63, 97, 0.4);
+            color: var(--brand-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+        }
+
+        td strong {
+            color: var(--brand-accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 120px;
+            padding-top: 60px;
+            border-top: 1px solid var(--border-ui);
+            color: var(--brand-gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-brand {
+            font-family: var(--font-main);
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--brand-light);
+            margin-bottom: 10px;
+        }
+
+        /* --- CODE / TECH CHIPS --- */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(231, 140, 59, 0.1);
+            color: var(--brand-accent);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="jam-logo-container">
+                <img src="./web_page/pages/src/assets/logo_hr_jam.png" alt="Jacquin Letters" class="letters">
+                <img src="./web_page/pages/src/assets/piano.svg" alt="Jacquin Piano" class="piano-svg">
+            </div>
+            <h1>Documentación de Stakeholders</h1>
+            <p>Ecosistema Digital JACQUIN Academia Musical</p>
+            <div class="version-badge">Build ID: 06032026-STAKEHOLDER-DOC • MARZO 2026</div>
+        </header>
+
+        <!-- VISION -->
+        <div class="card">
+            <h2>Arquitectura de la Experiencia</h2>
+            <p>La plataforma JACQUIN opera bajo el estándar <strong>MODUS AXON High-Performance SPA</strong>. Se ha
+                diseñado como un entorno fluido donde la elegancia institucional se encuentra con la precisión
+                administrativa. La interfaz utiliza un sistema de capas (Glassmorphism) para mantener la jerarquía sin
+                sacrificar la profundidad visual.</p>
+            <h4>Principios de Identidad</h4>
+            <ul>
+                <li><strong>Cromatismo:</strong> Dominancia del Azul Jacquin (#223F61) con acentos de Naranja Enérgico
+                    (#E78C3B).</li>
+                <li><strong>Tipografía:</strong> HelveticaNeue Condensed Bold para impacto y Marion para distinción
+                    narrativa.</li>
+            </ul>
+        </div>
+
+        <!-- ROL: VISITANTE -->
+        <div class="card">
+            <div class="role-badge badge-visitor">Nivel 0: Acceso Público</div>
+            <h2>Visitantes & Prospectos</h2>
+            <p>Entrada principal al universo Jacquin. Diseñada para convertir el interés en suscripción académica.</p>
+            <h3>Rituales Críticos</h3>
+            <ul>
+                <li><strong>Hero Experience:</strong> Carrusel de alto impacto sincronizado con la disponibilidad de
+                    matrículas en tiempo real.</li>
+                <li><strong>Hub de Programas:</strong> Catálogo interactivo con filtrado por categoría. Cada curso
+                    despliega un <code>ProgramModal</code> con beneficios, intensidad horaria y requisitos.</li>
+                <li><strong>Omnicanalidad:</strong> Widget inteligente <code>WhatsAppButton</code> y sistema de chat
+                    interno <code>ContactModal</code> sincronizado para atención prioritaria.</li>
+            </ul>
+        </div>
+
+        <!-- ROL: ESTUDIANTE -->
+        <div class="card">
+            <div class="role-badge badge-student">Nivel 1: Perfil Académico Estudiante</div>
+            <h2>El Estudiante</h2>
+            <p>Usuario central de la formación. Su dashboard es el centro de mando de su avance artístico.</p>
+            <h3>Funcionalidades de Empoderamiento</h3>
+            <ul>
+                <li><strong>Mi Academia:</strong> Visualización de cursos matriculados con indicador de "Docente
+                    Asignado".</li>
+                <li><strong>Gestión de Horarios:</strong> Chips interactivos que muestran los días y bloques horarios
+                    exactos, evitando cruces de agenda.</li>
+                <li><strong>Solicitudes en Red:</strong> Flujo simplificado para aplicar a nuevos programas conservando
+                    su historial previo.</li>
+                <li><strong>Perfil Unificado:</strong> Modal de configuración <code>ProfileSettings</code> para
+                    actualización de datos bajo ley 1581 (Habeas Data).</li>
+            </ul>
+        </div>
+
+        <!-- ROL: DOCENTE -->
+        <div class="card">
+            <div class="role-badge badge-teacher">Nivel 2: Perfil Académico Docente</div>
+            <h2>El Docente</h2>
+            <p>Facilitador del arte. Su interfaz prioriza la gestión de tiempo y el reporte de progreso.</p>
+            <h3>Herramientas de Cátedra</h3>
+            <ul>
+                <li><strong>Calendario Semanal:</strong> Vista consolidada de todos los bloques horarios asignados por
+                    el administrador.</li>
+                <li><strong>Control Biométrico/Manual:</strong> Sistema de toma de asistencia por clase con reporte
+                    inmediato al sistema central.</li>
+                <li><strong>Evaluación Integral:</strong> Módulo de registro de calificaciones y observaciones
+                    pedagógicas.</li>
+            </ul>
+        </div>
+
+        <!-- ROL: ADMINISTRADOR -->
+        <div class="card">
+            <div class="role-badge badge-admin">Nivel 3: Administrador (God-Mode)</div>
+            <h2>Administración Central</h2>
+            <p>Control total sobre la operación técnica, académica y financiera de la academia.</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Módulo Maestro</th>
+                            <th>Capacidades Operativas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Gestión Universitaria</strong></td>
+                            <td>Control de usuarios total. Edición de roles. <strong>Inscripción Maestro:</strong>
+                                Seleccionador multi-horario con envío de notificación consolidada vía email.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Content Management (CMS)</strong></td>
+                            <td>Sub-tabs de contenido web: <code>Hero</code>, <code>Misión</code>, <code>Valores</code>,
+                                <code>Galería</code> y el Switch global de <code>Disponibilidad de Matrículas</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hub de Programas</strong></td>
+                            <td>Gestión de oferta académica: títulos, íconos, descripciones y activos multimedia subidos
+                                a <code>cloud/assets</code>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estructura Organizacional</strong></td>
+                            <td>Gestión de Cargos y Posiciones. Asignación de docentes a programas específicos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seguridad & Logs</strong></td>
+                            <td>Acceso a <code>Almacenamiento</code>, Bitácoras de cambios y auditoría de sesiones.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- REGLAS DE NEGOCIO -->
+        <div class="card">
+            <h2>Gobernanza del Sistema</h2>
+            <h4>Seguridad de Capas</h4>
+            <p>Implementación de <code>ProtectedRoute</code> en React que garantiza que solo usuarios con
+                <code>role_id: 1</code> accedan a funciones de escritura. Validación doble vía JWT y sesión PHP.</p>
+
+            <h4>Optimización de Experiencia</h4>
+            <p>Uso de <code>useOutsideClick</code> en todos los componentes modales para una navegación sin fricciones y
+                <code>HashScroller</code> para persistencia de posición tras ediciones de contenido.</p>
+        </div>
+
+        <footer>
+            <div class="footer-brand">JACQUIN ACADEMIA MUSICAL</div>
+            <p>&copy; 2026 Todos los derechos reservados.</p>
+            <div class="version-badge">DOCUMENTO AUTOCONTENIDO • APTO PARA IMPRESIÓN A4</div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

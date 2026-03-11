@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora de Construcción — Project Jacquin</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1a202c;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .wrap {
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        /* ── Master Header ── */
+        .blt-header {
+            background: #081d33;
+            color: #fff;
+            padding: 2.5rem 3rem;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .blt-brand {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #c5a065;
+            margin-bottom: .4rem;
+            text-transform: uppercase;
+        }
+
+        .blt-header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: .3rem;
+        }
+
+        .blt-subtitle {
+            font-size: .85rem;
+            color: #93B6EE;
+        }
+
+        .blt-meta {
+            font-size: .82rem;
+            color: #93b6ee;
+            line-height: 2;
+            text-align: right;
+        }
+
+        .blt-meta strong {
+            color: #fff;
+        }
+
+        .accent {
+            color: #c5a065;
+        }
+
+        /* ── Index ── */
+        .idx-wrap {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .04);
+        }
+
+        .idx-label {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c5a065;
+            margin-bottom: 1rem;
+        }
+
+        .idx {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .83rem;
+        }
+
+        .idx th {
+            background: #081d33;
+            color: #fff;
+            padding: .5rem 1rem;
+            text-align: left;
+            font-size: .74rem;
+            letter-spacing: .5px;
+        }
+
+        .idx td {
+            padding: .5rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+
+        .idx tr:last-child td {
+            border-bottom: none;
+        }
+
+        .idx tr:hover td {
+            background: #f8fafc;
+        }
+
+        .idx td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .74rem;
+            font-weight: 700;
+            color: #081d33;
+        }
+
+        .idx a {
+            color: #153e6b;
+            text-decoration: none;
+        }
+
+        .idx a:hover {
+            text-decoration: underline;
+            color: #c5a065;
+        }
+
+        /* ── Accordion ── */
+        details.be {
+            background: #fff;
+            border-radius: 10px;
+            margin-bottom: .9rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .04);
+            overflow: hidden;
+        }
+
+        details.be>summary {
+            display: flex;
+            align-items: center;
+            gap: .9rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            border-left: 5px solid #153e6b;
+            transition: background .15s;
+        }
+
+        details.be>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.be[open]>summary {
+            border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        details.be>summary:hover {
+            background: #f8fafc;
+        }
+
+        .arrow {
+            margin-left: auto;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            transition: transform .2s;
+            flex-shrink: 0;
+        }
+
+        details.be[open]>summary .arrow {
+            transform: rotate(90deg);
+        }
+
+        .bid {
+            background: #081d33;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem;
+            padding: .2rem .6rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .blatest {
+            background: #c5a065;
+            color: #fff;
+            font-size: .62rem;
+            font-weight: 700;
+            padding: .15rem .5rem;
+            border-radius: 20px;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .stitle {
+            font-size: .88rem;
+            font-weight: 600;
+            color: #081d33;
+        }
+
+        .sdate {
+            font-size: .78rem;
+            color: #94a3b8;
+            flex-shrink: 0;
+        }
+
+        .orig-bid {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: #64748b;
+        }
+
+        /* ── Entry Content ── */
+        .be-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .be-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .be-section-label {
+            font-size: .68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #94a3b8;
+            font-weight: 700;
+            margin-bottom: .5rem;
+        }
+
+        .prompt-box {
+            font-style: italic;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid #cbd5e1;
+            font-size: .9rem;
+        }
+
+        .tech-box {
+            color: #153e6b;
+            font-size: .88rem;
+        }
+
+        .tech-box ul {
+            margin-top: .7rem;
+            padding-left: 1.4rem;
+        }
+
+        .tech-box li {
+            margin-bottom: .4rem;
+            font-size: .86rem;
+            color: #334155;
+        }
+
+        .tech-box strong {
+            color: #081d33;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #f1f5f9;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: .82rem;
+            color: #153e6b;
+        }
+
+        .result-pass {
+            font-weight: 700;
+            color: #16a34a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <!-- HEADER -->
+        <div class="blt-header">
+            <div>
+                <div class="blt-brand">PROJECT JACQUIN</div>
+                <h1>Bitácora de Construcción</h1>
+                <div class="blt-subtitle">Registro de instrucciones, planes técnicos y traducciones de requerimientos
+                </div>
+            </div>
+            <div class="blt-meta">
+                Total entradas: <strong class="accent">13</strong><br>
+                Período: <strong>18 Feb – 6 Mar 2026</strong><br>
+                Última: <span class="accent">06/03/2026/B00013</span><br>
+                Siguiente ID: <strong>B00014</strong>
+            </div>
+        </div>
+
+        <!-- INDEX -->
+        <div class="idx-wrap">
+            <div class="idx-label">Índice de Entradas de Construcción</div>
+            <table class="idx">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Build ID Original</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#B00013">06/03/2026/B00013</a></td>
+                        <td>6 Mar 2026</td>
+                        <td>06032026STAKEHOLDER</td>
+                        <td>Saneamiento de Marca & Manual de Stakeholders V1.0.5</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00012">02/03/2026/B00012</a></td>
+                        <td>2 Mar 2026</td>
+                        <td>02032026CAROUSEL</td>
+                        <td>Hero Carousel v3 + Enrollment Sync + Modal UX</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00011">26/02/2026/B00011</a></td>
+                        <td>26 Feb 2026</td>
+                        <td>26022026UIMojo</td>
+                        <td>UI Refactor &amp; Corrección Mojibake</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00010">25/02/2026/B00010</a></td>
+                        <td>25 Feb 2026</td>
+                        <td>25022026BUGFIX</td>
+                        <td>Bugfixes Críticos — SyntaxError + Desasignar Docente</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00009">25/02/2026/B00009</a></td>
+                        <td>25 Feb 2026</td>
+                        <td>25022026CHAT</td>
+                        <td>Chat Interno — contactAdmin() + @mention</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00008">24/02/2026/B00008</a></td>
+                        <td>24 Feb 2026</td>
+                        <td>24022026ENROLL</td>
+                        <td>Reconexión Flujo Inscripción — Modal Programas</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00007">24/02/2026/B00007</a></td>
+                        <td>24 Feb 2026</td>
+                        <td>24022026STRESS</td>
+                        <td>Suite de Pruebas de Estrés &amp; Seguridad 37/37</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00006">24/02/2026/B00006</a></td>
+                        <td>24 Feb 2026</td>
+                        <td>24022026SECFIX</td>
+                        <td>Remediación de Seguridad — 7 Vulnerabilidades Cerradas</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00005">24/02/2026/B00005</a></td>
+                        <td>24 Feb 2026</td>
+                        <td>24022026SECAUDIT</td>
+                        <td>Auditoría de Seguridad — Módulo Programas</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00004">18/02/2026/B00004</a></td>
+                        <td>18 Feb 2026</td>
+                        <td>180220261100HEADER</td>
+                        <td>Fix Avatar 404 en Header.js</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00003">18/02/2026/B00003</a></td>
+                        <td>18 Feb 2026</td>
+                        <td>180220261055FIX</td>
+                        <td>Fix Assets 404 — Avatares y Eventos</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00002">18/02/2026/B00002</a></td>
+                        <td>18 Feb 2026</td>
+                        <td>180220261050AUDIT</td>
+                        <td>Auditoría Integral de Código y Seguridad</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#B00001">18/02/2026/B00001</a></td>
+                        <td>18 Feb 2026</td>
+                        <td>180220261015INIT</td>
+                        <td>Inicialización — Sistema de Trazabilidad</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- B00013 -->
+        <details class="be" id="B00013" open>
+            <summary>
+                <span class="bid">06/03/2026/B00013</span>
+                <span class="blatest">Última</span>
+                <span class="stitle">Saneamiento de Marca & Manual de Stakeholders V1.0.5</span>
+                <span class="sdate">06 Mar 2026</span>
+                <span class="orig-bid">06032026STAKEHOLDER</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"perfecto, si se puede! todos esos son detalles de agentes, no se estan
+                        teniemdo en cuenta las habilidades, para que están? el cliente ve como sagrado su marca...
+                        Debémos ser serios desde todo punto de vista!"</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Acciones Ejecutadas</div>
+                    <div class="tech-box">
+                        Corrección profunda de identidad de marca en la documentación técnica y alineación con los
+                        "Skills" institucionales.
+                        <ul>
+                            <li><strong>[BRAND-001]</strong> Integración de <code>JamLogo.jsx</code>: Replicación exacta
+                                del logo institucional (PNG + SVG) en el manual HTML.</li>
+                            <li><strong>[DOC-001]</strong> Actualización v1.0.5: Reescritura total del manual de
+                                stakeholders cubriendo los 4 niveles de acceso detectados en el código.</li>
+                            <li><strong>[COMPLIANCE-01]</strong> Formato Enterprise: Optimización para impresión A4 y
+                                uso estricto de fuentes HelveticaNeue y Marion según Brandbook.</li>
+                            <li><strong>[AGENCY-01]</strong> Trazabilidad Legal: Registro de decisiones en
+                                <code>AI_LOG_CUMPLIMIENTO.md</code> enfocadas en protección de marca y veracidad de
+                                información.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00012 -->
+        <details class="be" id="B00012">
+            <summary>
+                <span class="bid">02/03/2026/B00012</span>
+                <span class="stitle">Hero Carousel v3 + Enrollment Sync + Modal UX</span>
+                <span class="sdate">2 Mar 2026</span>
+                <span class="orig-bid">02032026CAROUSEL</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"El carrusel principal debe ser actualizado a la versión 3, la
+                        sincronización de inscripciones no está funcionando y el modal de experiencia de usuario
+                        necesita mejoras."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Acciones Ejecutadas</div>
+                    <div class="tech-box">
+                        Actualización del Hero Carousel a la versión 3, implementación de sincronización de
+                        inscripciones y mejoras en la UX del modal.
+                        <ul>
+                            <li><strong>[FEAT-001]</strong> <code>hero_carousel.js</code>: Actualizado a la versión 3,
+                                incluyendo nuevas animaciones y transiciones.</li>
+                            <li><strong>[SYNC-001]</strong> <code>enrollment_sync.php</code>: Implementada la lógica de
+                                sincronización de inscripciones con la base de datos.</li>
+                            <li><strong>[UX-001]</strong> <code>modal_ux.js</code>: Mejoras en la experiencia de usuario
+                                del modal, incluyendo validaciones y mensajes de éxito/error.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00011 -->
+        <details class="be" id="B00011" open>
+            <summary>
+                <span class="bid">26/02/2026/B00011</span>
+                <span class="blatest">Última</span>
+                <span class="stitle">UI Refactor &amp; Corrección Mojibake</span>
+                <span class="sdate">26 Feb 2026</span>
+                <span class="orig-bid">26022026UIMojo</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"Ajustar icono de asignar docente y corregir errores de codificación
+                        (caracteres extraños) en títulos y botones."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Acciones Ejecutadas</div>
+                    <div class="tech-box">
+                        Optimización de UI en módulo académico y saneamiento de codificación de caracteres (Mojibake).
+                        <ul>
+                            <li><strong>[UI-001]</strong> <code>admin_academic_schedules.js</code>: Reposicionamiento de
+                                icono <code>bi-person-plus</code>. Alineado con "Sin docente", bajo el botón editar.
+                            </li>
+                            <li><strong>[FIX-006 / Backend]</strong> <code>get_user_details.php</code>: Añadido soporte
+                                para <code>schedule_teachers</code> en vista de perfil de usuario.</li>
+                            <li><strong>[FIX-007 / Encoding]</strong> <code>admin_positions.js</code> y otros:
+                                Corrección de Mojibake (<code>GestiÃ³n</code> → <code>Gestión</code>).</li>
+                            <li><strong>[FIX-008 / UX]</strong> <code>admin_unassign_teacher.php</code>: Manejo
+                                silencioso de desasignaciones redundantes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00010 -->
+        <details class="be" id="B00010">
+            <summary>
+                <span class="bid">25/02/2026/B00010</span>
+                <span class="stitle">Bugfixes Críticos — SyntaxError + Desasignar Docente</span>
+                <span class="sdate">25 Feb 2026</span>
+                <span class="orig-bid">25022026BUGFIX</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"El panel de administración muestra error 'Módulo académico no cargado' y
+                        'SyntaxError: Invalid or unexpected token'. Además, el profesor tiene una asignación de curso
+                        que no se puede eliminar."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Acciones Ejecutadas</div>
+                    <div class="tech-box">
+                        Resolución de error crítico en cascada (SyntaxError → AcademicManager undefined →
+                        openCourseManagement not found) y bug de lógica en desasignación de docentes.
+                        <ul>
+                            <li><strong>[FIX-003 / CRÍTICO]</strong> <code>admin_academic_schedules.js:872</code>:
+                                Escaping corrupto (<code>\\"\\\\\\\\'\\"}')\"</code>) causaba <code>SyntaxError</code>
+                                que impedía el parseo completo del archivo.</li>
+                            <li><strong>[FIX-004 / CASCADA]</strong> Error derivado de FIX-003:
+                                <code>AcademicManager</code> nunca se definía → <code>init()</code> nunca ejecutaba →
+                                <code>window.openCourseManagement = undefined</code>. Resuelto al corregir FIX-003.
+                            </li>
+                            <li><strong>[FIX-005 / BACKEND]</strong> <code>admin_unassign_teacher.php:37–63</code>:
+                                Ignoraba columna legacy <code>courses.teacher_id</code>. Añadido:
+                                <code>UPDATE courses SET teacher_id = NULL WHERE id_course = ? AND teacher_id = ?</code>
+                            </li>
+                            <li><strong>Deuda técnica detectada:</strong> 6 archivos JS con diferencias web_page vs
+                                htdocs. Crítico: <code>user_profile_modal.js</code> (59 KB vs 49 KB). Pendiente de
+                                auditoría.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00009 -->
+        <details class="be" id="B00009">
+            <summary>
+                <span class="bid">25/02/2026/B00009</span>
+                <span class="stitle">Chat Interno — contactAdmin() + @mention</span>
+                <span class="sdate">25 Feb 2026</span>
+                <span class="orig-bid">25022026CHAT</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"Integrar contactAdmin() con el sistema de chat interno JChat y corregir el
+                        autocompletado de @mention que no despliega la lista de usuarios."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Acciones Ejecutadas</div>
+                    <div class="tech-box">
+                        Reemplazo del canal de comunicación admin (Brevo email → JChat) y corrección de UX en
+                        autocompletado.
+                        <ul>
+                            <li><strong>[FIX-001 / Feature]</strong> <code>dashboard.js:906–957</code>:
+                                <code>contactAdmin()</code> reescrita. Busca <code>role_id === 1</code> via
+                                <code>chat_search_users.php</code> y abre JChat preseleccionando admins.
+                            </li>
+                            <li><strong>[FIX-002 / Bug UX]</strong> <code>messaging_widget.js:393–677</code>: Se limpia
+                                <code>@</code> del query, búsqueda inmediata al escribir <code>@</code>, comportamiento
+                                de focus añadido.
+                            </li>
+                            <li><strong>Archivos:</strong> <code>dashboard.js</code>, <code>messaging_widget.js</code>,
+                                <code>gestion.html</code> (script + cache bust <code>?v=9.0</code>).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00008 -->
+        <details class="be" id="B00008">
+            <summary>
+                <span class="bid">24/02/2026/B00008</span>
+                <span class="stitle">Reconexión Flujo de Inscripción — Modal Programas</span>
+                <span class="sdate">24 Feb 2026</span>
+                <span class="orig-bid">24022026ENROLL</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"Audita la lógica y el flujo perdido de la sección de nuestros programas.
+                        Cuando se cliquea en un programa ofertado, no se despliega el modal. Maneja todos los casos:
+                        logueado, no logueado, no registrado, intento de inscripción y recuperación del hilo del
+                        proceso."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Causa Raíz Identificada</div>
+                    <div class="tech-box">
+                        <strong>Conflicto de paradigma: Vanilla JS vs. React SPA.</strong>
+                        <code>programs_carousel.js</code> (472 líneas) implementa modal/inscripción en Vanilla JS pero
+                        <em>nunca fue incluido</em> en <code>index.html</code> de la SPA.
+                        <code>window.openProgramModal</code> era <code>undefined</code> silenciosamente.
+                        <ul>
+                            <li><strong>Bug secundario:</strong> <code>navigate('/#programas')</code> no dispara
+                                <code>DOMContentLoaded</code> en SPA → recovery de intent nunca ocurría.
+                            </li>
+                            <li><strong>Field mismatch:</strong> <code>programs_carousel.js:294</code> usaba
+                                <code>c.name</code> pero la API retorna <code>c.course_name</code>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Solución Implementada</div>
+                    <div class="tech-box">
+                        <ul>
+                            <li><strong>ProgramModal.jsx</strong> (CREADO): Modal React con imagen, título, descripción,
+                                beneficios, botón "Inscribirme".</li>
+                            <li><strong>ScheduleModal.jsx</strong> (CREADO): Carga cursos, match por nombre, selección
+                                de horario, <code>requestEnrollment()</code>.</li>
+                            <li><strong>AuthPromptModal.jsx</strong> (CREADO): Overlay para visitantes. Guarda intent en
+                                <code>sessionStorage</code> antes de redirigir.
+                            </li>
+                            <li><strong>Programs.jsx</strong> (REFACTORIZADO): State <code>selectedKey</code> +
+                                <code>modalStep</code>. Recovery via <code>useLocation()</code>.
+                            </li>
+                            <li><strong>Login.jsx</strong> (CORREGIDO):
+                                <code>navigate('/', { state: { recoverEnrollment: true } })</code>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00007 -->
+        <details class="be" id="B00007">
+            <summary>
+                <span class="bid">24/02/2026/B00007</span>
+                <span class="stitle">Suite de Pruebas de Estrés &amp; Seguridad — 37/37 PASS</span>
+                <span class="sdate">24 Feb 2026</span>
+                <span class="orig-bid">24022026STRESS</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"perfecto, procede con pruebas de estrés"</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Resultado de Tests</div>
+                    <div class="tech-box">
+                        Suite PHP CLI de 9 bloques / 37 tests. <span class="result-pass">37/37 PASS — 0 fallos.</span>
+                        <ul>
+                            <li>Bloque 1 — Autenticación (5): sin sesión, rol 2, rol 3, rol 1 válido, SESSION
+                                malformada.</li>
+                            <li>Bloque 2 — Payload (6): JSON roto, <code>[]</code>, array secuencial, 11 MB, válido.
+                            </li>
+                            <li>Bloque 3 — Base64 (9): PNG/JPEG/WEBP, SVG rechazado, PDF, 6 MB rechazado, corrupto,
+                                multi-programa.</li>
+                            <li>Bloque 4 — Concurrencia (2): LOCK_EX + 5 procesos paralelos.</li>
+                            <li>Bloque 5 — Cache (3): Cache-Control, ETag, max-age.</li>
+                            <li>Bloque 6 — Endpoint duplicado (3): session_start, id_rol, 403/410.</li>
+                            <li>Bloque 7 — Permisos (2): ausencia 0777, presencia 0755.</li>
+                            <li>Bloque 8 — Integridad (5): tamaño, JSON válido, sin base64, conteo, archivo físico.</li>
+                            <li>Bloque 9 — Carga (2): 100 saves (~0.02 ms/req), 10 × 1 MB base64.</li>
+                            <li><strong>Bug descubierto en tests:</strong> <code>range(0,-1)</code> no capturaba
+                                <code>[]</code> vacío → corregido con <code>empty($data)</code> durante la ejecución.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00006 -->
+        <details class="be" id="B00006">
+            <summary>
+                <span class="bid">24/02/2026/B00006</span>
+                <span class="stitle">Remediación de Seguridad — 7 Vulnerabilidades Cerradas</span>
+                <span class="sdate">24 Feb 2026</span>
+                <span class="orig-bid">24022026SECFIX</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"perfecto procede!" (tras confirmación de las 7 vulnerabilidades
+                        identificadas en B00005)</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Acciones Ejecutadas</div>
+                    <div class="tech-box">
+                        <ul>
+                            <li><strong>[VULN-001 / CRÍTICA]</strong> <code>admin_save_programs_json.php</code>:
+                                <code>session_start()</code> + guard <code>$_SESSION['user']['id_rol'] != 1</code> →
+                                HTTP 403. Patrón idéntico a <code>admin_create_event.php</code>.
+                            </li>
+                            <li><strong>[VULN-001b]</strong> <code>public/admin_save_programs_json.php</code>: mismo
+                                guard + marcado deprecado (HTTP 410).</li>
+                            <li><strong>[VULN-001c]</strong> <code>api.js</code> (legacy + React): añadido
+                                <code>credentials: 'include'</code>.
+                            </li>
+                            <li><strong>[VULN-002]</strong> Backend extrae <code>data:image/</code> → guarda PNG en
+                                <code>public/uploads/programs/</code>. JSON: 858 KB → <strong>5 KB (−99.4%)</strong>.
+                            </li>
+                            <li><strong>[VULN-003]</strong> <code>file_put_contents()</code> con flag
+                                <code>LOCK_EX</code> en ambos endpoints.
+                            </li>
+                            <li><strong>[VULN-004]</strong> <code>mkdir(..., 0777)</code> → <code>0755</code>.</li>
+                            <li><strong>[VULN-005]</strong> <code>get_programs_json.php</code>:
+                                <code>Cache-Control: public, max-age=300</code> + <code>ETag</code> +
+                                <code>304 Not Modified</code>.
+                            </li>
+                            <li><strong>[VULN-006]</strong> Endpoint duplicado en <code>public/</code> neutralizado con
+                                HTTP 410.</li>
+                            <li><strong>[VULN-007]</strong> Límite 10 MB + rechazo <code>[]</code> vacío
+                                (<code>empty()</code>) + rechazo array secuencial.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00005 -->
+        <details class="be" id="B00005">
+            <summary>
+                <span class="bid">24/02/2026/B00005</span>
+                <span class="stitle">Auditoría de Seguridad — Módulo Programas</span>
+                <span class="sdate">24 Feb 2026</span>
+                <span class="orig-bid">24022026SECAUDIT</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"🚨 REPORTE DE AUDITORÍA: Módulo Nuestros Programas — 1. Vulnerabilidad
+                        Crítica: Falta de Autenticación de Administrador. 2. Defecto de Rendimiento/Arquitectura:
+                        Almacenado de Imágenes en formato Base64. 3. Seguridad de Datos Concurrentes: Falta de Bloqueo
+                        de Archivos. Realiza auditoría profunda y completa y confirma la información de
+                        vulnerabilidades."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Plan</div>
+                    <div class="tech-box">
+                        Auditoría de seguridad integral de <code>admin_save_programs_json.php</code> y ecosistema
+                        relacionado.
+                        <ul>
+                            <li><strong>Alcance:</strong> 8 archivos auditados —
+                                <code>admin_save_programs_json.php</code> (raíz + public),
+                                <code>get_programs_json.php</code>, <code>programs.json</code>,
+                                <code>admin_programs.js</code>, <code>Programs.jsx</code>, <code>api.js</code> (legacy +
+                                React).
+                            </li>
+                            <li><strong>Resultado:</strong> 3 vulnerabilidades reportadas <strong>confirmadas</strong> +
+                                4 hallazgos adicionales descubiertos.</li>
+                            <li><strong>Evidencia clave:</strong> <code>programs.json</code> pesaba <strong>858,635
+                                    bytes (838 KB)</strong> por 1 imagen base64. Sin <code>session_start()</code> ni
+                                verificación de rol en ninguno de los endpoints de escritura.</li>
+                            <li><strong>Referencias:</strong> VULN-001 a VULN-007 → <em>BITACORA_ERRORES.html</em>
+                                (E00007–E00013)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00004 -->
+        <details class="be" id="B00004">
+            <summary>
+                <span class="bid">18/02/2026/B00004</span>
+                <span class="stitle">Fix Avatar 404 en Header.js</span>
+                <span class="sdate">18 Feb 2026</span>
+                <span class="orig-bid">180220261100HEADER</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"Persiste avatar_4_1767578041.png 404 (Not Found) en Header.js"</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Plan</div>
+                    <div class="tech-box">
+                        Corrección de rutas residuales en componentes compartidos.
+                        <ul>
+                            <li><strong>Incidente:</strong> El componente <code>Header.js</code> apuntaba a
+                                <code>web_page/pages/uploads</code>.
+                            </li>
+                            <li><strong>Acción:</strong> Refactorizar <code>Header.js</code> para usar
+                                <code>API_CONFIG.BASE_URL</code> dinámico.
+                            </li>
+                            <li><strong>Referencia:</strong> ERR-004 → BITACORA_ERRORES.html (E00006)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00003 -->
+        <details class="be" id="B00003">
+            <summary>
+                <span class="bid">18/02/2026/B00003</span>
+                <span class="stitle">Fix Assets 404 — Avatares y Eventos</span>
+                <span class="sdate">18 Feb 2026</span>
+                <span class="orig-bid">180220261055FIX</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">[IMAGEN] Reporte visual de errores 404 en consola al cargar avatares de
+                        usuario (<code>admin_users.html</code>).</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Plan</div>
+                    <div class="tech-box">
+                        Diagnóstico y corrección de rutas de recursos estáticos (Assets Pathing).
+                        <ul>
+                            <li><strong>Incidente:</strong> 404 Not Found en
+                                <code>jacquin_api/public/uploads/avatars/...</code>
+                            </li>
+                            <li><strong>Causa Probable:</strong> Inconsistencia en <code>ApiService.BASE_URL</code> o
+                                falta de archivos en entorno de despliegue.</li>
+                            <li><strong>Acción:</strong> Validar existencia física y ajustar prefijo de URL en JS.</li>
+                            <li><strong>Referencia:</strong> ERR-003 → BITACORA_ERRORES.html (E00003)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00002 -->
+        <details class="be" id="B00002">
+            <summary>
+                <span class="bid">18/02/2026/B00002</span>
+                <span class="stitle">Auditoría Integral de Código y Seguridad</span>
+                <span class="sdate">18 Feb 2026</span>
+                <span class="orig-bid">180220261050AUDIT</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"Auditar nuevamente @project_jacquin detectar e informar errores y acciones
+                        a seguir."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Plan</div>
+                    <div class="tech-box">
+                        Ejecución de auditoría integral de código y seguridad (Health Check).
+                        <ul>
+                            <li><strong>Alcance:</strong> Directorio raíz y submódulos de Project Jacquin.</li>
+                            <li><strong>Objetivos:</strong> Identificar archivos huérfanos/debug
+                                (<code>debug_*.php</code>), verificar integridad API, validar assets en
+                                <code>web_page</code>.
+                            </li>
+                            <li><strong>Entregable:</strong> Plan de remediación + actualización ERROR_LOG.</li>
+                            <li><strong>Referencias generadas:</strong> SEC-001, SEC-002 → BITACORA_ERRORES.html
+                                (E00004, E00005)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00001 -->
+        <details class="be" id="B00001">
+            <summary>
+                <span class="bid">18/02/2026/B00001</span>
+                <span class="stitle">Inicialización — Sistema de Trazabilidad de Construcción</span>
+                <span class="sdate">18 Feb 2026</span>
+                <span class="orig-bid">180220261015INIT</span>
+                <span class="arrow">›</span>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"Quiero que el documentador técnico agregue un archivo BUILD_PROJECT para
+                        registrar instrucciones y relacionar errores con IDs."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Plan</div>
+                    <div class="tech-box">
+                        Implementación de sistema de trazabilidad de requerimientos (Traceability Matrix).
+                        <ul>
+                            <li><strong>Módulo:</strong> Agente Documentador Técnico.</li>
+                            <li><strong>Acción:</strong> Refactorización de SKILL.md e INSTRUCTIONS.md.</li>
+                            <li><strong>Objetivo:</strong> Bitácora estructurada que vincula instrucciones originales,
+                                planes técnicos y errores mediante Build IDs únicos.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B00012: Hero Carousel v3 + Enrollment Sync + Modal UX -->
+        <details class="be" id="B00012">
+            <summary>
+                <div class="stitle"><i class="bi bi-sliders"></i> Hero Carousel v3 + Enrollment Sync + Modal UX</div>
+                <div class="sdate">02/03/2026</div>
+                <div class="bid">B00012</div>
+                <div class="blatest">Latest</div>
+                <div class="arrow">→</div>
+            </summary>
+            <div class="be-body">
+                <div class="be-section">
+                    <div class="be-section-label">Build Original</div>
+                    <div class="orig-bid">02032026CAROUSEL</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Instrucción Original</div>
+                    <div class="prompt-box">"El carrusel se cruza con 3 imágenes visibles. Arregla transiciones. En el
+                        panel admin y footer las matrículas muestran estado diferente. Sincroniza en tiempo real. En
+                        todos los modales, al hacer clic por fuera, cerrar modal."</div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Traducción Técnica / Plan</div>
+                    <div class="tech-box">
+                        Refactorización de Hero Carousel, sincronización bidireccional de estado de matrículas y mejora
+                        UX de modales.
+                        <ul>
+                            <li><strong>CAROUSEL:</strong> Diagnóstico: clase <code>.backward</code> aplicada
+                                globalmente → cruce de 3 slides. Fix condicional en línea 325 de Hero.jsx: solo aplicar
+                                a `(idx === activeIdx || idx === prevIdx)`. Resultado: transiciones smooth sin
+                                cruzamientos.</li>
+                            <li><strong>ENROLLMENT SYNC:</strong> EnrollmentStatusBadge y EnrollmentTab desincronizados.
+                                Solución: API `getEnrollmentStatus()` + Custom Event `enrollment-status-updated`.
+                                EnrollmentTab auto-guarda toggle sin formulario. Badge escucha evento y actualiza en
+                                tiempo real.</li>
+                            <li><strong>MODAL UX:</strong> Crear hook `useOutsideClick.js` para detección de clics fuera
+                                de modal. Implementar en ProgramModal, AuthPromptModal, ScheduleModal, About.jsx con
+                                fallback onClick en overlay.</li>
+                            <li><strong>Archivos modificados:</strong> Hero.jsx, hero.css, EnrollmentStatusBadge.jsx,
+                                EnrollmentTab.jsx, About.jsx, ProgramModal.jsx, AuthPromptModal.jsx, ScheduleModal.jsx,
+                                useOutsideClick.js (nuevo).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Estado Implementado</div>
+                    <div class="tech-box">
+                        <ul>
+                            <li><strong style="color: #16a34a;">[HERO-FIX-01]</strong> Cruce de 3 imágenes en transición
+                                backward → <span class="result-pass">FIXED</span></li>
+                            <li><strong style="color: #16a34a;">[ENROLL-SYNC-01]</strong> Sincronización admin ↔ footer
+                                → <span class="result-pass">IMPLEMENTED</span></li>
+                            <li><strong style="color: #16a34a;">[ENROLL-SYNC-02]</strong> API getEnrollmentStatus()
+                                integrada → <span class="result-pass">WORKING</span></li>
+                            <li><strong style="color: #16a34a;">[ENROLL-UI-01]</strong> Remover año del anuncio → <span
+                                    class="result-pass">DONE</span></li>
+                            <li><strong style="color: #16a34a;">[MODAL-UX-01]</strong> Hook useOutsideClick creado →
+                                <span class="result-pass">CREATED</span>
+                            </li>
+                            <li><strong style="color: #16a34a;">[MODAL-UX-02]</strong> Fallback onClick en overlays →
+                                <span class="result-pass">ADDED</span>
+                            </li>
+                            <li><strong style="color: #16a34a;">[MODAL-REFACTOR-01-03]</strong> Aplicar pattern a 4
+                                modales → <span class="result-pass">APPLIED</span></li>
+                            <li><strong style="color: #16a34a;">[GIT-01]</strong> Commit 27eb930 + push origen → <span
+                                    class="result-pass">SUCCESS</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="be-section">
+                    <div class="be-section-label">Pendiente para sesión siguiente</div>
+                    <div class="tech-box">
+                        <ul>
+                            <li><strong>Debuggear modal close:</strong> Algunos modales aún no responden al clic
+                                externo. Verificar si hook se ejecuta o si fallback onClick es necesario refinar.</li>
+                            <li><strong>QA Carousel:</strong> Probar navegación adelante/atrás sin cruzamientos.
+                                Verificar circular transition.</li>
+                            <li><strong>QA Enrollment:</strong> Cambiar status en admin → verificar footer actualiza sin
+                                page reload.</li>
+                            <li><strong>Aplicar pattern a TicketModal y AdminContentWeb:</strong> Extender
+                                useOutsideClick a todos los modales restantes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+    </div>
+</body>
+
+</html>
