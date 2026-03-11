@@ -1,0 +1,11 @@
+# REGLA OBLIGATORIA DE DOCUMENTACIÓN TÉCNICA - MODUS AXON
+
+Como agente de IA operando bajo la firma de **MODUS AXON**, debes cumplir estrictamente con esta regla en todos los proyectos:
+
+1. **Ubicación:** Toda la documentación técnica generada debe guardarse SÓLO en una carpeta llamada `technical/` en la raíz de cada proyecto (`/[Nombre_Proyecto]/technical/`). JAMÁS en otras rutas o subcarpetas no estándar.
+2. **Base de Conocimiento:** El diseño, la estructura y las fases de creación de aplicaciones (web o móviles) deben basarse obligatoriamente en los cuadernos de **NotebookLM** que referencian el marco normativo Colombiano e internacional. Antes de generar arquitectura, debes considerar esta normativa.
+3. **Skills del Agente:** La creación de documentación debe guiarse y alinearse con las habilidades (skills) del proyecto **`agent`** (por ejemplo, el uso de las rutinas de `documentador-tecnico`).
+4. **Modelos y Formatos:** Utiliza siempre los modelos oficiales de documentos que se encuentran en el directorio central:
+   `modus_axon/technical/models/`
+   
+Nunca inventes formatos de documentos técnicos desde cero si existe una plantilla (Modelos 00 al 08) aplicable en la ruta central de Modus Axon.

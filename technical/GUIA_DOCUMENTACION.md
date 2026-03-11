@@ -54,7 +54,8 @@ Cuando inicies un nuevo proyecto o audites uno existente:
 - `05-BUILD_PROJECT.html`: Bitácora ejecutiva de **Prompts e Instrucciones del Líder**.
 - `06-CONTRATO_TERMINOS_PRIVACIDAD.md`: MSA, T&C y Política de Tratamiento de Datos (Ley 1581).
 - `07-PROPUESTA_COMERCIAL_COTIZACION.md`: Cotización, hitos y cronograma comercial.
+- `08-REGLA_DOCUMENTACION_TECNICA.md`: Regla global para la creación y ubicación de documentos técnicos en NotebookLM.
 
 ---
 **MODUS AXON** — Cualquier sistema, perfeccionado.
-*v3.1.0 · Bio-Digital Futurism · 2026*
+*v3.2.0 · Bio-Digital Futurism · 2026*
