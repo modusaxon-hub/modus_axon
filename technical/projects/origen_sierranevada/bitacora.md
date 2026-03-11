@@ -15,6 +15,7 @@ ID: PRJ-OSN-2026
 | 008 | 2026-03-11 | Local Environtment Manual | [OSN-LOC-008](file:///d:/Documentos/Proyectos%20ADSO/modus_axon/technical/projects/origen_sierranevada/2026-03-11_ID-008_Local-Manual.md) |
 | 009 | 2026-03-11 | Legal Terms & Privacy | [OSN-LEG-009](file:///d:/Documentos/Proyectos%20ADSO/modus_axon/technical/projects/origen_sierranevada/2026-03-11_ID-009_Legal-Terms.md) |
 | 010 | 2026-03-11 | Commercial Proposal | [OSN-COM-010](file:///d:/Documentos/Proyectos%20ADSO/modus_axon/technical/projects/origen_sierranevada/2026-03-11_ID-010_Commercial-Proposal.md) |
+| 011 | 2026-03-11 | Hotfix: Auth Import Error | `FIX_AUTH_IMPORT` |
 
 ---
 *Sincronizado con MODUS AXON Master Flow*
