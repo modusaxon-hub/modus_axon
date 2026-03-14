@@ -1,0 +1,63 @@
+==========================================================================================
+13/03/2026
+==========================================================================================
+
+La idea es crear un sistema de control financiero que permita a los usuarios gestionar sus finanzas personales y del hogar de manera sencilla y eficiente.
+
+Repositorio: https://github.com/modusaxon-hub/control_financiero.git
+
+
+El sistema permitirá a los usuarios:
+
+1 - FINANCIEROS:
+    * Llevar un control de ingresos y egresos.
+    * Generar un balance de sus finanzas.
+    * integrar el control de gastos de sostenimiento del hogar.
+    * Generar informes y estadísticas de sus finanzas.
+    * Progrmar gastos recurrentes.
+    * Generar balance de capacidad de endeudamiento sano.
+    * programar pagos de cuotas de créditos ya sean de préstamos de libre inversión, préstamos hipotecarios, préstamos educativos etc...
+
+    1.1 - PANEL DE GASTOS RECURRENTES:
+            * listado descriptivo del gasto.
+            * valor del gasto.
+            * fecha del gasto.
+            * si es a cuotas, valor real del producto, valor de la cuota, número de cuotas y levantar el informe finaciero de conveniencia o inconveniecia y considerar si se puede considerar el gasto como un gasto recurrente, cuanto tiempo le tomaría ahorrar para cubrir el gasto para no recurrir al crédito, ventajas y desventajas de la opción de crédito. Mediante modal.
+            
+    1.2 - PANEL DE GASTOS ESPORÁDICOS:
+            * listado descriptivo del gasto.
+            * si paga planes de suscripción, anual o mensial de IA.
+            *crear subpaneles de miembros del hogar que aporten, registrando como en una cuenta individual y decidir si van o no a aportar a ahorro general del nucleo familiar, con el objetivo de planear viajes o compras de bienes de mayor valor.
+            * Crear registro como idividual o familiar, con el objetivo de tener un control de gastos mas preciso.
+            * Si es cuenta familiar se puede crear un registro de gastos con paneles individuales por cada integrante de la familia.
+
+        US-002: Gestión de Miembros del Hogar (Modo Familiar)
+            Criterios de Aceptación:
+                * El miembro puede marcar su información financiera como privada (no visible para otros miembros, solo para el admin) - No, nadie debe ver la información financiera de otro miembro, ni siquiera el admin. Solo el usuario que crea la cuenta puede ver su información financiera.
+
+        US-004: Análisis de Conveniencia de Crédito (Modal)
+            Criterios de Aceptación:
+                * El usuario puede puede decidir si procede o no con el compromiso.
+
+
+ Agrega n US-009: asistente virtual de IA
+        Como usuario cuenta individal, quiero poder llevar un registro predictivo para que me ayude con la declaración de renta, gastos deducibles, etc...
+
+Nota: si se necesita un sistema de comunicación para envío de e-mails, se puede usar el servicio de correo electrónico de Google, mediante Brevo.
+
+* Diseña el header y el footer con todos y cada uno de sus elementos como componentes react, donde quiera que aparezca un footer o un header que sea react-component. nada de páginas fijas!
+
+* deja abierto el esoacio para el logo de la empresa en el header y el footer.
+
+* Ya que están establecidas las características del proyecto, crea el Brand del proyecto, con su espacio para el logo, colores, tipografía, etc... en .html y .css.
+
+* Prioriza el modo de tema en oscuro por defecto.
+
+* Crear sección que corresponde a la despensa familiar, un espacio dónde se puedan crear listas de compra para la despensa, marcar listas favoritas, marcar productos como favoritos de acuerdo a las preferencias del usuario tanto de producto como tienda, dónde el usuario pueda crear una lista de elementos, ya sea por secciones, destinar un presupuesto cerrado para compras, y el sistema le muestre en que tienda puede comprar los productos a mejor precio, con el poder del scrapping AI.
+*  Que pueda marcar las tiendas para la muestra de precios.
+* Que pueda colocar un presupuesto como por ejemplo, si voy a la plaza de mercado dónde las facturas son un problema, el pueda decidir establecer un presupuesto para ese tipo de compras, que el sistema pueda identificar si a su correo electrónico llegan facturas de compras, y pueda identificar los productos y precios para actualizar la lista de compras y tener en cuenta para declaración de renta.
+* Que pueda subir las facturas de compra ya sean digitales o por medio de la cámara de los dispositivos.
+* Despues de haber establecido los precios y el total de la operación de la despensa sea semanal, quincenal o mensual, el sistema lo identifique y lo añada a los gastos recurrentes correspondientes a despensa o mercado, para las cuentas del mes o quincena.
+* Que se puedan establecer compromisos para pagos de productos, por ejemplo, el arriendo lo pago mesual y en las quincenas dispongo del presupuesto para otro compromiso, sienpre y cuando el corte se establesca quincenal o semanal.
+* Realizar la sincronizacion del proyecto con el repositorio correspondiente, con sus ignores y commits correspondientes, no subas archivos innecesarios, no subas archivos .env, no subas archivos .md, no subas archivos .gitignore, el lo posible y preferente solo lleva los arhivos que se trasladarán al hosting.
+* Secuencia git completa ,status, add, commit, push.

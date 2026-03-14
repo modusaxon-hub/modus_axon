@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Identity — FamilyFlow · MODUS AXON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Branding Colors */
+            --color-primary: #1B2A4A;
+            --color-primary-light: #2D4A7A;
+            --color-secondary: #10B981;
+            --color-secondary-light: #D1FAE5;
+            --color-accent-warm: #F59E0B;
+            --color-accent-alert: #EF4444;
+
+            /* Neutral — Dark Mode (Default as requested) */
+            --bg: #0F172A;
+            --surface: #1E293B;
+            --surface-elevated: #334155;
+            --text: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --border: #334155;
+
+            /* Typography */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            /* Spacing */
+            --space-container: 1200px;
+            --space-section: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            background: linear-gradient(180deg, rgba(27, 42, 74, 0.4) 0%, transparent 100%);
+        }
+
+        .container {
+            max-width: var(--space-container);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: var(--color-primary-light);
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 48px;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--color-primary-light);
+            padding-left: 16px;
+        }
+
+        .section {
+            padding: var(--space-section) 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--color-primary-light);
+            background: linear-gradient(90deg, #60A5FA, #10B981);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* ADN Section */
+        .adn-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .adn-card {
+            background: var(--surface);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .adn-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary-light);
+        }
+
+        .adn-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--color-primary-light);
+        }
+
+        /* Color Palette */
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .color-card {
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .color-block {
+            height: 120px;
+            width: 100%;
+        }
+
+        .color-info {
+            padding: 16px;
+        }
+
+        .color-name {
+            font-weight: 600;
+            display: block;
+        }
+
+        .color-hex {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+
+        /* Typography */
+        .typo-specimen {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 24px;
+            margin-bottom: 24px;
+        }
+
+        .typo-row {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .typo-label {
+            width: 120px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .typo-sample {
+            flex: 1;
+        }
+
+        /* Logo Placeholder */
+        .logo-box {
+            width: 200px;
+            height: 200px;
+            background: var(--color-primary);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            color: white;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 32px;
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade {
+            animation: fadeIn 1s ease-in;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="badge">Brand Guidelines v1.0</div>
+            <h1>FamilyFlow</h1>
+            <p class="subtitle">Manual de Identidad Visual · MODUS AXON</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Hero Concept -->
+        <section class="section hero visible">
+            <div class="logo-box">LOGO</div>
+            <h1>Control Financiero Familiar</h1>
+            <p class="subtitle">Simplicidad, confianza y bienestar financiero para el hogar.</p>
+        </section>
+
+        <!-- ADN -->
+        <section class="section" id="adn">
+            <h2>ADN de Marca</h2>
+            <div class="adn-grid">
+                <div class="adn-card">
+                    <h3>Familiar</h3>
+                    <p>Cálido, inclusivo y accesible. Diseñado para que cada integrante del hogar se sienta parte del
+                        proceso.</p>
+                </div>
+                <div class="adn-card">
+                    <h3>Limpio</h3>
+                    <p>Sin ruido visual. Jerarquía clara y manejo del espacio para reducir el estrés financiero.</p>
+                </div>
+                <div class="adn-card">
+                    <h3>Confiable</h3>
+                    <p>Seguro, profesional y preciso. Los datos son sagrados y la privacidad es la máxima prioridad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Colores -->
+        <section class="section" id="colores">
+            <h2>Paleta de Colores</h2>
+            <div class="palette-grid">
+                <div class="color-card">
+                    <div class="color-block" style="background: #1B2A4A;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Deep Navy (Primario)</span>
+                        <span class="color-hex">#1B2A4A</span>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-block" style="background: #2D4A7A;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Slate Blue</span>
+                        <span class="color-hex">#2D4A7A</span>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-block" style="background: #10B981;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Emerald (Secundario)</span>
+                        <span class="color-hex">#10B981</span>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-block" style="background: #F59E0B;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Amber (Acento)</span>
+                        <span class="color-hex">#F59E0B</span>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-block" style="background: #EF4444;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Coral (Alerta)</span>
+                        <span class="color-hex">#EF4444</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipografía -->
+        <section class="section" id="tipografia">
+            <h2>Tipografía</h2>
+
+            <div class="typo-specimen">
+                <div class="badge">Fuentes Primarias</div>
+                <div class="typo-row">
+                    <div class="typo-label">Heading / Titles</div>
+                    <div class="typo-sample">
+                        <span style="font-family: var(--font-heading); font-size: 32px; font-weight: 700;">Outfit Bold ·
+                            700</span>
+                    </div>
+                </div>
+                <div class="typo-row">
+                    <div class="typo-label">Heading / Sub</div>
+                    <div class="typo-sample">
+                        <span style="font-family: var(--font-heading); font-size: 24px; font-weight: 600;">Outfit
+                            SemiBold · 600</span>
+                    </div>
+                </div>
+                <div class="typo-row">
+                    <div class="typo-label">Body / General</div>
+                    <div class="typo-sample">
+                        <span style="font-family: var(--font-body); font-size: 16px;">Inter Regular · 400. La claridad
+                            en la lectura es fundamental para gestionar dinero.</span>
+                    </div>
+                </div>
+                <div class="typo-row">
+                    <div class="typo-label">Body / UI</div>
+                    <div class="typo-sample">
+                        <span style="font-family: var(--font-body); font-size: 14px; font-weight: 500;">Inter Medium ·
+                            500. Perfecto para labels y navegación.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uso de Marca -->
+        <section class="section" id="uso">
+            <h2>Uso en Interfaz</h2>
+            <div class="adn-grid">
+                <div class="adn-card" style="background: var(--color-primary); color: white;">
+                    <h3 style="color: white;">Fondo Oscuro</h3>
+                    <p style="opacity: 0.8;">Uso de Deep Navy para headers y elementos de navegación de alto contraste.
+                    </p>
+                </div>
+                <div class="adn-card" style="background: var(--surface); border: 2px solid var(--color-primary-light);">
+                    <h3>Focus State</h3>
+                    <p>Los elementos activos utilizan Slate Blue como borde y Emerald como indicador de éxito o
+                        progreso.</p>
+                </div>
+                <div class="adn-card"
+                    style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); color: white;">
+                    <h3 style="color: white;">Gradients</h3>
+                    <p style="opacity: 0.8;">Balance y estados premium se visualizan con gradientes diagonales suaves.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>FamilyFlow BRAND IDENTITY · MODUS AXON &copy; 2026</p>
+            <p style="margin-top: 8px; font-size: 11px;">Documento generado bajo el estándar de calidad MODUS AXON</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolved Vision 2.0 — FamilyFlow · MODUS AXON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1B2A4A;
+            --primary-light: #2D4A7A;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --bg: #0F172A;
+            --surface: #1E293B;
+            --text: #F1F5F9;
+            --text-dim: #94A3B8;
+            --border: #334155;
+            --font-h: 'Outfit', sans-serif;
+            --font-b: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-b);
+            line-height: 1.6;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 4px solid var(--primary-light);
+            margin-bottom: 60px;
+        }
+
+        .badge {
+            background: var(--secondary);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-family: var(--font-h);
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        p.lead {
+            font-size: 18px;
+            color: var(--text-dim);
+        }
+
+        .module-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .module-card h2 {
+            font-family: var(--font-h);
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 3px solid var(--primary-light);
+        }
+
+        .feature-item strong {
+            display: block;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .feature-item span {
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #1B2A4A;
+            border-radius: 16px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .flow-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .flow-step .icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .flow-arrow {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .ai-badge {
+            background: linear-gradient(90deg, #60A5FA, #A855F7);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            margin-left: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="badge">Evolved Strategy</div>
+            <h1>FamilyFlow Vision 2.0</h1>
+            <p class="lead">De Control Financiero a Cerebro de Logística Doméstica</p>
+        </header>
+
+        <!-- Múltiplo: La Despensa Inteligente -->
+        <section class="module-card">
+            <h2>🥫 Despensa Familiar Core <span class="ai-badge">AI POWERED</span></h2>
+            <p>Un sistema de gestión de suministros que optimiza el flujo de caja del hogar mediante el rastreo
+                inteligente de precios y existencias.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <strong>Listas Dinámicas</strong>
+                    <span>Favoritos por producto y marca. Organización por pasillos o secciones del hogar.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Price Scrapping AI</strong>
+                    <span>Comparativa en tiempo real entre tiendas favoritas marcadas por el usuario.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Presupuesto Cerrado</strong>
+                    <span>Control estricto para compras en efectivo (plazas/mercados) vs compras digitales.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Ciclo de Recurrencia</strong>
+                    <span>El total del mercado se inyecta automáticamente en los gastos recurrentes del mes.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flujo de Datos -->
+        <section class="module-card">
+            <h2>🔄 El Flujo de la Verdad Financiera</h2>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="icon">📧</div>Factura Email
+                </div>
+                <div class="flow-arrow">➜</div>
+                <div class="flow-step">
+                    <div class="icon">📸</div>Sube Foto
+                </div>
+                <div class="flow-arrow">➜</div>
+                <div class="flow-step">
+                    <div class="icon">🤖</div>AI OCR
+                </div>
+                <div class="flow-arrow">➜</div>
+                <div class="flow-step">
+                    <div class="icon">📈</div>Presupuesto
+                </div>
+            </div>
+            <p>La IA identifica productos y precios tanto de archivos digitales como de fotos de la cámara, actualizando
+                las listas de precios de referencia para futuras compras inteligentes.</p>
+        </section>
+
+        <!-- Compromisos Flexibles -->
+        <section class="module-card">
+            <h2>⚖️ Gestión de Compromisos Flexibles</h2>
+            <p>Adaptación a la realidad de ingresos variables o cortes de pago personalizados (Quincenal / Semanal).</p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <strong>Cortes Personalizados</strong>
+                    <span>Configuración de fechas de corte según el ciclo salarial del núcleo familiar.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Priorización de Saldo</strong>
+                    <span>Cálculo automático: Arriendo (Mensual) vs Mercado (Quincenal/Semanal).</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Deducciones Predictivas</strong>
+                    <span>Ayuda automática para declaración de renta basada en factures procesadas.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>Nudge de Disponibilidad</strong>
+                    <span>Alertas: "Dispones de $X para este compromiso sin afectar el arriendo del mes".</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>DISEÑO ESTRATÉGICO · MODUS AXON &copy; 2026</p>
+            <p style="font-size: 12px; margin-top: 5px;">Documento 06-evolved-vision.html · Confidencial</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
