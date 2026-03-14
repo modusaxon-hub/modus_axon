@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Architecture — FamilyFlow · MODUS AXON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@700&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F172A;
+            --surface: #1E293B;
+            --primary: #1B2A4A;
+            --primary-light: #2D4A7A;
+            --secondary: #10B981;
+            --text: #F1F5F9;
+            --text-dim: #94A3B8;
+            --border: #334155;
+            --code-bg: #000000;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-def {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #A5D6FF;
+            margin-top: 10px;
+        }
+
+        .table-def div {
+            margin-bottom: 4px;
+        }
+
+        .type {
+            color: #FF7B72;
+        }
+
+        .attr {
+            color: #79C0FF;
+        }
+
+        .comment {
+            color: #8B949E;
+            font-style: italic;
+        }
+
+        .rls-badge {
+            background: #1e3a8a;
+            color: #93c5fd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .diagram {
+            margin-top: 60px;
+            padding: 40px;
+            background: var(--surface);
+            border-radius: 24px;
+            text-align: center;
+            border: 2px dashed var(--border);
+        }
+
+        .footer {
+            margin-top: 80px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="badge">Backend Design · Phase 2</div>
+            <h1>Arquitectura de Datos Supabase</h1>
+            <p style="color: var(--text-dim)">Modelo Relacional para Logística Familiar y Despensa IA</p>
+        </div>
+
+        <div class="grid">
+
+            <!-- Perfiles y Familia -->
+            <div class="card">
+                <div class="rls-badge">PRIVACY LEVEL: FAMILY_ISOLATION</div>
+                <h3>👥 Núcleo Familiar</h3>
+                <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">Relación 1:N entre Familias y
+                    Perfiles. Gestión de roles y aportes.</p>
+                <div class="table-def">
+                    <div><span class="attr">families</span> { id, nombre, plan_tipo }</div>
+                    <div><span class="attr">profiles</span> { id, family_id, full_name, role, aporte_pct }</div>
+                </div>
+            </div>
+
+            <!-- Despensa -->
+            <div class="card">
+                <div class="rls-badge">MODULE: DESPENSA_IA</div>
+                <h3>🥫 Logística de Despensa</h3>
+                <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">Maestro de productos favoritos
+                    y comparativa de tiendas.</p>
+                <div class="table-def">
+                    <div><span class="attr">shopping_lists</span> { id, family_id, status, total_estimado }</div>
+                    <div><span class="attr">fav_products</span> { id, name, category, pref_store, last_price }</div>
+                </div>
+            </div>
+
+            <!-- Facturas y OCR -->
+            <div class="card">
+                <div class="rls-badge">MODULE: OCR_PROCESSOR</div>
+                <h3>📸 Facturación y Gastos</h3>
+                <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">Metadatos de imágenes y
+                    resultados del scrapping/OCR.</p>
+                <div class="table-def">
+                    <div><span class="attr">receipts</span> { id, user_id, storage_path, vendor, tax_deductible }</div>
+                </div>
+            </div>
+
+            <!-- Compromisos -->
+            <div class="card">
+                <div class="rls-badge">MODULE: FLEX_COMMITMENTS</div>
+                <h3>⚖️ Compromisos Flexibles</h3>
+                <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">Motor de pagos recurrentes con
+                    ciclos variables.</p>
+                <div class="table-def">
+                    <div><span class="attr">commitments</span> { id, category, amount, cycle, next_due_date }</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="diagram">
+            <h3 style="justify-content: center;">🛠️ Estrategia RLS (Row Level Security)</h3>
+            <p style="font-size: 15px; margin-bottom: 20px;">
+                "Nadie ve nada fuera de su familia."<br>
+                Implementaremos una política donde <code>family_id</code> sea la llave de acceso universal para todas
+                las tablas.
+            </p>
+            <div style="font-family: 'JetBrains Mono'; font-size: 14px; color: var(--secondary);">
+                CREATE POLICY "Family Access" ON "shopping_lists"<br>
+                FOR ALL USING (family_id = auth.get_family_id());
+            </div>
+        </div>
+
+        <div class="footer">
+            FAMILYFLOW BACKEND ARCHITECTURE · MODUS AXON &copy; 2026
+        </div>
+    </div>
+</body>
+
+</html>

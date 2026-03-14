@@ -40,12 +40,17 @@ Los documentos de esta carpeta siguen la convención:
 
 | # | Nombre del Archivo | Tipo | Versión | Fecha de Creación | Estado |
 |---|---|---|---|---|---|
-| 01 | [idea-de-negocio.txt](./idea-de-negocio.txt) | Idea / Notas | — | 2026-03-13 | ✅ Activo |
-| 02 | [01-product-vision.md](./product-vision.md) | Visión de Producto | v0.2 | 2026-03-13 | ✅ Activo |
-| 03 | [02-technical-spec.md](./02-technical-spec.md) | Especificación Técnica | v1.0 | 2026-03-13 | ✅ Activo |
+| 01 | [idea-de-negocio.txt](./01-idea-de-negocio.txt) | Idea / Notas | — | 2026-03-13 | ✅ Activo |
+| 02 | [02-product-vision.md](./02-product-vision.md) | Visión de Producto | v0.2 | 2026-03-13 | ✅ Activo |
+| 03 | [03-technical-spec.md](./03-technical-spec.md) | Especificación Técnica | v1.0 | 2026-03-13 | ✅ Activo |
 | 04 | [04-design-spec.md](./04-design-spec.md) | Diseño UI/UX | v1.0 | 2026-03-13 | ✅ Activo |
-| 05 | [05-brand-identity.html](./05-brand-identity.html) | Identidad de Marca (Manual) | v1.0 | 2026-03-13 | ✅ Activo |
+| 05 | [05-brand-identity.html](./05-brand-identity.html) | Identidad de Marca | v1.0 | 2026-03-13 | ✅ Activo |
 | 06 | [06-evolved-vision.html](./06-evolved-vision.html) | Visión Estratégica v2.0 | v2.0 | 2026-03-13 | ✅ Activo |
+| 07 | [07-local-setup-guide.html](./07-local-setup-guide.html) | Manual de Entorno | v1.0 | 2026-03-13 | ✅ Activo |
+| 08 | [08-backend-architecture.html](./08-backend-architecture.html) | Arquitectura Backend | v1.0 | 2026-03-13 | ✅ Activo |
+| 09 | [09-ai-compliance-log.html](./09-ai-compliance-log.html) | AI Compliance Log | v1.0 | 2026-03-13 | ✅ Activo |
+| 10 | [10-legal-spec.html](./10-legal-spec.html) | Legal & Privacidad | v1.0 | 2026-03-13 | ✅ Activo |
+| 11 | [11-commercial-quotation.html](./11-commercial-quotation.html) | Propuesta Comercial | v1.0 | 2026-03-13 | ✅ Activo |
 
 > **Estándar de Documentación:** A partir del documento #05, toda la documentación de calidad (Brand, UI, Manuales) se generará en formatos web (**HTML, CSS, JS**) para garantizar una visualización interactiva y de alta fidelidad, cumpliendo con la nueva regla de **MODUS AXON**.
 

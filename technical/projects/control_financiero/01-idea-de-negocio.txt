@@ -6,6 +6,12 @@ La idea es crear un sistema de control financiero que permita a los usuarios ges
 
 Repositorio: https://github.com/modusaxon-hub/control_financiero.git
 
+mantener mientras se sube a supa-secret "[BREVO_API_KEY_PLACEHOLDER]"
+
+token supabase: "[SUPABASE_CLI_TOKEN_PLACEHOLDER]"
+PUBLISHABLE_KEY: "[SUPABASE_ANON_KEY_PLACEHOLDER]"
+SECRET_KEY: "[SUPABASE_SERVICE_ROLE_KEY_PLACEHOLDER]"
+
 
 El sistema permitirá a los usuarios:
 
@@ -60,4 +66,7 @@ Nota: si se necesita un sistema de comunicación para envío de e-mails, se pued
 * Despues de haber establecido los precios y el total de la operación de la despensa sea semanal, quincenal o mensual, el sistema lo identifique y lo añada a los gastos recurrentes correspondientes a despensa o mercado, para las cuentas del mes o quincena.
 * Que se puedan establecer compromisos para pagos de productos, por ejemplo, el arriendo lo pago mesual y en las quincenas dispongo del presupuesto para otro compromiso, sienpre y cuando el corte se establesca quincenal o semanal.
 * Realizar la sincronizacion del proyecto con el repositorio correspondiente, con sus ignores y commits correspondientes, no subas archivos innecesarios, no subas archivos .env, no subas archivos .md, no subas archivos .gitignore, el lo posible y preferente solo lleva los arhivos que se trasladarán al hosting.
-* Secuencia git completa ,status, add, commit, push.
+* Secuencia git completa ,status, add, commit, push. importante no olvidar el .push!!!
+* Crea el archivo .bat para lanzar la app en local, un puerto estable, único, si hay problemas establecer la causa y solucionar, no saltar de puerto en puerto cada vez que se lance la app!
+* La misma política vamos a establecer para el tunel el cual se configurará con zrok con el link permanente de nombre "finanzas.inteligentes". Ruta Zrok: "C:\zrok_1.1.10\zrok.exe"
+

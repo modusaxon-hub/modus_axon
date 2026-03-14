@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 - Legal & Privacy Spec | FamilyFlow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --primary: #1B2A4A;
+            --secondary: #10B981;
+            --primary-light: #2D4A7A;
+            --text: #1e293b;
+            --text-dim: #64748b;
+            --accent: #ef4444;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .section {
+            background-color: var(--surface);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            border-left: 4px solid var(--secondary);
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin-top: 30px;
+            color: var(--text);
+        }
+
+        p,
+        li {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        .highlight-box {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: #1e40af;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">Legal Compliance</div>
+            <div class="brand">MODUS AXON · Document #10</div>
+            <h1>Especificación Legal y Privacidad</h1>
+            <p style="color:var(--text-dim)">FamilyFlow: Control Financiero Familiar Inteligente</p>
+        </header>
+
+        <div class="section">
+            <h2>1. Marco Normativo (Colombia)</h2>
+            <p>
+                El tratamiento de datos personales en <strong>FamilyFlow</strong> se rige bajo la <strong>Ley 1581 de
+                    2012</strong> (Ley de Protección de Datos Personales) y el Decreto 1377 de 2013.
+            </p>
+            <div class="highlight-box">
+                <strong>Principio de Finalidad:</strong> Los datos financieros y personales recolectados tienen como
+                único fin la prestación del servicio de analítica y control de gastos para el núcleo familiar del
+                usuario.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. Política de Privacidad</h2>
+            <h3>A. Tipos de Datos Recolectados</h3>
+            <ul>
+                <li><strong>Datos de Identificación:</strong> Nombre, correo electrónico.</li>
+                <li><strong>Datos Financieros (Sensibles):</strong> Ingresos, gastos, compromisos crediticios, facturas
+                    de compra.</li>
+                <li><strong>Datos Familiares:</strong> Estructura del núcleo familiar y roles.</li>
+            </ul>
+
+            <h3>B. Tratamiento de Datos Financieros</h3>
+            <p>
+                Los datos de gastos y facturas son procesados mediante modelos de IA para categorización automática.
+                <strong>FamilyFlow</strong> garantiza que estos datos no son compartidos con terceros con fines
+                publicitarios o de perfilamiento comercial externo.
+            </p>
+
+            <h3>C. Derechos del Titular (Habeas Data)</h3>
+            <p>
+                Cualquier usuario puede ejercer sus derechos de conocimiento, actualización, rectificación y supresión
+                de sus datos enviando una solicitud a través de la plataforma.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>3. Términos de Uso</h2>
+            <p>
+                El usuario es responsable de la veracidad de la información financiera suministrada. La aplicación
+                proporciona sugerencias de ahorro y análisis de crédito basadas en algoritmos predictivos, los cuales
+                deben ser tomados como referencia y no como asesoría financiera legalmente vinculante.
+            </p>
+            <h3>Seguridad</h3>
+            <p>
+                FamilyFlow utiliza cifrado de extremo a extremo y Row Level Security (RLS) en Supabase para asegurar que
+                solo los miembros autorizados del núcleo familiar puedan acceder a la información del grupo.
+            </p>
+        </div>
+
+        <div class="footer">
+            Documento de Referencia Legal · <strong>MODUS AXON</strong> · 2026<br>
+            Este documento es un borrador para revisión por parte del equipo jurídico del cliente.
+        </div>
+    </div>
+</body>
+
+</html>

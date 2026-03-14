@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11 - Propuesta Comercial | FamilyFlow</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --brand-main: #1B2A4A;
+            --brand-accent: #2D4A7A;
+            --brand-success: #10B981;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-soft: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 60px 20px;
+            line-height: 1.5;
+        }
+
+        .quotation-card {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .hero {
+            background-color: var(--brand-main);
+            color: white;
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(14, 165, 233, 0.1));
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: var(--brand-accent);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+            color: var(--brand-main);
+        }
+
+        .phase {
+            margin-bottom: 25px;
+            padding-left: 15px;
+            border-left: 3px solid var(--brand-accent);
+        }
+
+        .phase strong {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--brand-main);
+        }
+
+        .phase span {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .price-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.9rem;
+        }
+
+        .price-table .total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--brand-success);
+            padding-top: 20px;
+            border-bottom: none;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .btn-contact {
+            display: inline-block;
+            background: var(--brand-accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quotation-card">
+        <div class="hero">
+            <div class="brand-logo">MODUS AXON</div>
+            <h1>Propuesta de Desarrollo: FamilyFlow</h1>
+            <p style="opacity:0.8">Control Financiero Inteligente · MVP Phase 2026</p>
+        </div>
+
+        <div class="content">
+            <div class="grid">
+                <div>
+                    <h2>Roadmap de Entrega</h2>
+                    <div class="phase">
+                        <strong>Fase 1: Core & Despensa</strong>
+                        <span>Arquitectura Base, Auth, Gestión de Listas y Productos.</span>
+                    </div>
+                    <div class="phase">
+                        <strong>Fase 2: IA & OCR</strong>
+                        <span>Escaneo de facturas, comparador de precios y predicciones.</span>
+                    </div>
+                    <div class="phase">
+                        <strong>Fase 3: Family Connect</strong>
+                        <span>Módulos multi-usuario, roles familiares y reportes de ahorro.</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h2>Valor por Inversión</h2>
+                    <table class="price-table">
+                        <tr>
+                            <td>Setup Infraestructura (Next.js + Supabase)</td>
+                            <td style="text-align:right">$ 1.200.000</td>
+                        </tr>
+                        <tr>
+                            <td>Diseño UI/UX Premium (PWA Mobile)</td>
+                            <td style="text-align:right">$ 1.800.000</td>
+                        </tr>
+                        <tr>
+                            <td>Motor de IA & Integración OCR</td>
+                            <td style="text-align:right">$ 2.500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Documentación Técnica & Compliance</td>
+                            <td style="text-align:right">Incluido</td>
+                        </tr>
+                        <tr>
+                            <td class="total">Valor Total Propuesto (MVP)</td>
+                            <td class="total" style="text-align:right">$ 5.500.000 COP</td>
+                        </tr>
+                    </table>
+                    <p style="font-size:0.75rem; color:var(--text-light); margin-top:20px;">
+                        * Estimación basada en 6 semanas de desarrollo intensivo bajo metodología MODUS AXON Agile.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Propuesta comercial válida por 15 días · Generado por el Agente Antigravity<br>
+            <strong>MODUS AXON Signature</strong> · 2026
+        </div>
+    </div>
+</body>
+
+</html>

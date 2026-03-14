@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Local — FamilyFlow · MODUS AXON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@700&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F172A;
+            --surface: #1E293B;
+            --primary: #1B2A4A;
+            --secondary: #10B981;
+            --primary-light: #2D4A7A;
+            --text: #F1F5F9;
+            --text-dim: #94A3B8;
+            --border: #334155;
+            --code-bg: #000000;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background: var(--surface);
+            max-width: 800px;
+            width: 100%;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            padding: 48px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #A5D6FF;
+            position: relative;
+            margin: 16px 0;
+            border: 1px solid var(--border);
+        }
+
+        .code-block::after {
+            content: 'Terminal';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--border);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 24px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: var(--text-dim);
+        }
+
+        li strong {
+            color: var(--text);
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-dim);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Entorno Local Estable</h1>
+        <p class="subtitle">Guía de lanzamiento y configuración de túnel · MODUS AXON</p>
+
+        <h2>1. Ejecución Garantizada</h2>
+        <p>Para evitar conflictos de puertos y asegurar que la aplicación siempre corra en el <strong>puerto
+                3000</strong>, utiliza el lanzador centralizado:</p>
+        <div class="code-block">
+            launch.bat
+        </div>
+        <ul>
+            <li><strong>Estabilidad:</strong> El script detecta si el puerto está ocupado y lo libera automáticamente
+                antes de iniciar.</li>
+            <li><strong>Lanzamiento Dual:</strong> Inicia simultáneamente Next.js y el túnel de acceso público.</li>
+        </ul>
+
+        <h2>3. Control Total Supabase (CLI)</h2>
+        <p>Para gestionar la base de datos y generar tipos de TypeScript automáticamente, asegúrate de estar logueado:
+        </p>
+        <div class="code-block">
+            npx supabase login --token [TU_TOKEN]
+        </div>
+        <div class="code-block">
+            npx supabase link --project-ref eqksdtluiuaeigbjdzrk
+        </div>
+        <p>Generación de tipos (cada vez que cambie el esquema):</p>
+        <div class="code-block">
+            npx supabase gen types typescript --linked > src/lib/supabase/database.types.ts
+        </div>
+
+        <h2>4. Consideraciones Técnicas</h2>
+        <ul>
+            <li><strong>Node.js:</strong> Asegúrate de tener instalada la versión 18 o superior.</li>
+            <li><strong>Memoria:</strong> El servidor de desarrollo de Next.js requiere aproximadamente 200MB de RAM.
+            </li>
+            <li><strong>Seguridad:</strong> El túnel zrok es seguro, pero recuerda no exponer secretos en consola
+                mientras el túnel esté activo.</li>
+        </ul>
+
+        <div class="footer">
+            FAMILYFLOW · PROYECTO BAJO ESTÁNDARES MODUS AXON &copy; 2026
+        </div>
+    </div>
+</body>
+
+</html>
