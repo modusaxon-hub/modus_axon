@@ -7,9 +7,9 @@
 | **ID** | PRJ-OSN-2026 |
 | **MODUS AXON Hub** | [modus_axon](../../../) |
 | **Arquitecto de IA** | MODUS AXON — Antigravity Agent |
-| **Última Actualización** | 2026-03-11 · Sesión III |
-| **Versión del Documento** | v2.1.0 |
-| **Estado del Proyecto** | 🟢 Activo — Fase de Producción Continua |
+| **Última Actualización** | 2026-03-17 · Sesión II |
+| **Versión del Documento** | v2.3.0 |
+| **Estado del Proyecto** | 🟢 Activo — Estabilización Auth + Facturación |
 
 ---
 
@@ -116,6 +116,11 @@
 | `/admin/reports` | `SalesReports` | Solo Admin |
 | `/proveedor` | `ProveedorDashboard` | Solo Proveedor |
 | `/brandbook` | `Brandbook` | Autenticado |
+| `/invoice/:orderId` | `InvoicePage` | Autenticado (polling sesión) |
+| `/catalog` | `CatalogPage` | Público |
+| `/contact` | `ContactPage` | Público |
+| `/terms` | `TermsPage` | Público |
+| `/subscription` | `SubscriptionPage` | Autenticado |
 
 ---
 
@@ -134,6 +139,7 @@
 |---|---|
 | **RLS en `products`** | Solo admins pueden INSERT/UPDATE/DELETE |
 | **RLS en `orders`** | Solo el dueño o admin puede ver el pedido |
+| **RLS en `invoices`** | `view_own_invoices` (owner) + `admin_all_invoices` (admin full access) |
 | **Trigger `validate_order_stock`** | Revierte la transacción si stock insuficiente |
 | **JWT verificado** | Todas las Edge Functions requieren token válido |
 | **PKCE auth flow** | Flujo seguro de auth con code verifier |
@@ -172,5 +178,42 @@
 - `MobileMenuDrawer` ajustado a `pt-[64px]` para alineación correcta.
 
 ---
+
+## 📋 Observaciones de Implementación (17-03-2026)
+
+### Optimización de Performance (Data Fetching)
+- **N+1 Query Resolution**: Se refactorizó `productService.ts` para cargar productos y variantes en una sola transacción mediante un `JOIN` de Supabase (`select('*, variants:product_variants(*)')`).
+- **Auth Boot Optimization**: Implementado `initAuth` paralelo al listener de Supabase para reducir el tiempo de bloqueo inicial. 
+- **Fail-safe Loading**: Añadido temporizador de seguridad de 5s en `HomePage` y 4.5s en `AuthContext` para forzar la visualización del contenido en condiciones de alta latencia (túneles remotos).
+
+### Calidad de Código y SEO
+- **Hydration Error Fix**: El componente `Logo` fue refactorizado para aceptar una prop `asDiv`, eliminando la anidación de etiquetas `<a>` detectada en `Header` y `Footer`.
+- **Network Stability**: Inicialización manual de la tabla `site_configs` para evitar errores 406 al consultar `testimonios` y `fincas`.
+
+---
+
+## 📋 Observaciones de Implementación (17-03-2026 · Sesión II)
+
+### Estabilización de Autenticación (Critical Fix)
+- **Web Lock Contention Eliminada**: `AuthContext` refactorizado para usar **exclusivamente** `onAuthStateChange` como fuente de verdad. Se eliminó la llamada separada a `getSession()` que causaba `AbortError: Lock broken by another request with the 'steal' option`.
+- **signOut() Robusto**: Nuevo flujo de cierre de sesión en 5 pasos:
+  1. Desuscribir auth listener **primero** (previene restauración de sesión)
+  2. Remover suscripción de perfil Realtime
+  3. `supabase.auth.signOut()` con `Promise.race` timeout de 2s (previene hang por Web Lock)
+  4. Limpieza manual de `localStorage` + `sessionStorage` (claves `sb-*`, `supabase*`, `auth*`)
+  5. Reset de estado React
+- **Hard Reload Universal**: Los 8 componentes con logout (`AdminHeader`, `UserDropdown`, `MobileMenuDrawer`, `ProtectedRoute`, `AdminDashboard`, `Brandbook`, `ProveedorDashboard`, `UserDashboard`) ahora usan `window.location.reload()` para destruir completamente el árbol React y prevenir restauración de sesión en memoria.
+
+### Facturación Electrónica
+- **Modal Inline**: La factura ahora se abre en un modal overlay dentro de `OrderManager` en lugar de una nueva pestaña. Usa `InvoicePrototype` directamente con datos cargados via Supabase.
+- **InvoicePage Resiliente**: Para acceso directo por URL (`/#/invoice/:orderId`), la página ahora hace polling de sesión cada 500ms hasta 8s (tolerante a latencia de nueva pestaña) sin redirigir a login.
+- **Razón Social Corregida**: Factura muestra "ORIGEN SIERRA NEVADA" (sin S.A.S.).
+- **RLS Verificado**: Tabla `invoices` tiene políticas `view_own_invoices` (owner) y `admin_all_invoices` (admin) correctamente configuradas.
+
+### CSP (Content Security Policy)
+- `wss://*.supabase.co` agregado a `connect-src` para permitir WebSocket de Supabase Realtime.
+- `https://generativelanguage.googleapis.com` agregado para Google Gemini AI (ChatWidget).
+
+---
 **MODUS AXON** — Cualquier sistema, perfeccionado.
-*PRJ-OSN-2026 · v2.1.0 · Bio-Digital Futurism · 2026*
+*PRJ-OSN-2026 · v2.3.0 · Bio-Digital Futurism · 2026*

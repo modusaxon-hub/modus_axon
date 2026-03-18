@@ -5,10 +5,10 @@
 |---|---|
 | **Proyecto** | Origen Sierra Nevada SM |
 | **ID** | PRJ-OSN-2026 |
-| **Versión de Protocolo** | v3.2.0 |
+| **Versión de Protocolo** | v3.3.0 |
 | **Jurisdicción Principal** | Colombia (Ley 1581 de 2012) |
 | **Cumplimiento Global** | GDPR (UE), MinTIC Res. 1519/2020 |
-| **Última Actualización** | 2026-03-11 · Sesión III |
+| **Última Actualización** | 2026-03-17 · Sesión II |
 
 ---
 
@@ -26,6 +26,13 @@
 | `OSN-AI-006` | 2026-03-10 | "Implementar estados de pedido y modales" | Flujo pending → paid → shipped → delivered + modales institucionales | Estándar de UX y comunicación institucional |
 | `OSN-AI-007` | 2026-03-11 | "Audit responsivo mobile/tablet" | Refactor MobileNav + padding auth pages + logo deduplication | Accesibilidad y UX en dispositivos móviles |
 | `OSN-AI-008` | 2026-03-11 | "Historia y Trazabilidad dinámicas por café activo" | Columna `traceability` en DB + props en HistoriaSection/MapaOrigenSection + campos en ProductManager | Requisito de diferenciación de marca y trazabilidad real de origen |
+| `OSN-AI-009` | 2026-03-17 | "Optimizar carga de productos y variantes" | Refactor `getAllProducts` a query única con JOIN | Reducción de latencia N+1 (Critical UX Path) |
+| `OSN-AI-010` | 2026-03-17 | "Resolver bloqueo de spinner inicial (Auth)" | Init explícito de sesión + Fail-safe timeout 4.5s | Prevención de abandono por carga lenta vía túneles |
+| `OSN-AI-011` | 2026-03-17 | "Corregir errores de hidratación y red 406" | Refactor Logo (avoid nested links) + Init `site_configs` | Calidad de SEO, UX y estabilidad de red |
+| `OSN-AI-012` | 2026-03-17 | "No puedo cerrar sesión, la sesión persiste" | Refactor completo de signOut: listener-first, Promise.race timeout, limpieza storage, hard reload en 8 componentes | Race condition entre Web Lock de Supabase y listener que restauraba sesión |
+| `OSN-AI-013` | 2026-03-17 | "Eliminar AbortError: Lock broken by 'steal'" | AuthContext usa solo `onAuthStateChange` (eliminar `getSession()` separado) | Web Lock contention entre dos operaciones auth simultáneas |
+| `OSN-AI-014` | 2026-03-17 | "Factura redirige a login desde panel admin" | InvoicePage con polling de sesión (8s), sin auto-redirect + Modal inline en OrderManager | Nueva pestaña no hereda auth state inmediatamente |
+| `OSN-AI-015` | 2026-03-17 | "Quitar S.A.S. del nombre en factura" | InvoicePrototype: "ORIGEN SIERRA NEVADA" | Corrección de razón social por indicación del líder |
 
 ---
 
@@ -79,7 +86,15 @@
 | Hard delete dejaba usuarios en `auth.users` | Alta | ✅ Corregido (Edge Function elimina de Auth + DB) |
 | Stock no se validaba en tiempo real en checkout | Alta | ✅ Corregido (Trigger DB + validación multi-capa) |
 | Logo duplicado en MobileNav | Baja | ✅ Corregido (Refactor a barra única) |
+| Errores 406 (Not Acceptable) en config inicial | Baja | ✅ Corregido (Poblado de `site_configs` en Supabase) |
+| Spinner inicial bloqueado por Auth Latency | Alta | ✅ Corregido (Async Fast-Init + Timeout fail-safe) |
+| Hydration Error: `<a>` descendant of `<a>` | Media | ✅ Corregido (Refactor semántico de Componente Logo) |
+| AbortError: Web Lock contention en auth | Alta | ✅ Corregido (Solo `onAuthStateChange`, sin `getSession()`) |
+| signOut() no cierra sesión (listener restaura) | Crítica | ✅ Corregido (Listener-first teardown + Promise.race 2s + hard reload) |
+| `window.location.href` no recarga con HashRouter | Alta | ✅ Corregido (`window.location.reload()` en 8 componentes) |
+| Factura redirige a login en nueva pestaña | Alta | ✅ Corregido (Polling de sesión 8s + modal inline) |
+| CSP bloquea WebSocket Supabase Realtime | Media | ✅ Corregido (`wss://*.supabase.co` en connect-src) |
 
 ---
 **MODUS AXON** — Cualquier sistema, perfeccionado.
-*PRJ-OSN-2026 · v3.2.0 · Bio-Digital Futurism · 2026*
+*PRJ-OSN-2026 · v3.4.0 · Bio-Digital Futurism · 2026*
