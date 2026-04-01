@@ -1,0 +1,83 @@
+** ACCIONES GENERALES **
+
+1. Colocar todos los elementos del componente header de forma horizontal.
+2. revisar que los perfiles puedan editar y guardar su informaci´´on, reportan no poder modificar imagen de avatar.
+3. Edición y actualización de listado de cursos:
+        Piano
+        Exploración Musical
+        Iniciación Musical
+        Técnica Vocal
+        Violín
+        Percusión
+        Guitarra
+        Bajo.
+    Los cursos que no están dentro de ésta lista eliminar de todas las instancias incluida base de datos.
+
+    Horarios: de lunes a viernes de 3 PM a 6 PM.
+              Sábados de 9 AM a 12 PM.
+    Sesiones de una hora por curso. 
+
+4. Mantener centrado el contenido de los dashboards.
+
+** PANEL ESTUDIANTE **
+
+1. Quitar tarjeta de whatsapp.
+2. Quitar tarjeta de matricula.
+3. Verificar información de base de datos y concatenar toda la información con el perfil del estudiante.
+4. En la tarjeta de mis cursos, colocar la opción de inscribirse a un curso.
+5. Crear manual de uso de la aplicación para estudiantes dónde se detalle cada una las acciones que puede realizar en ella.
+
+
+** PANEL DOCENTE **
+
+1. Revisar la información de base de datos y concatenar toda la información con el perfil del profesor.
+2. revisar información de latarjeta "mi semana" y comparar con base de datos para mostrar la información correcta.
+3. Crear manual de uso de la aplicación para profesores dónde se detalle cada una las acciones que puede realizar en ella.
+
+
+** PANEL ADMINISTRADOR **
+
+1. Revisar la información de base de datos y concatenar toda la información con el perfil del administrador.
+2. revisar información de latarjeta "mi semana" y comparar con base de datos para mostrar la información correcta.
+3. Crear manual de uso de la aplicación para profesores dónde se detalle cada una las acciones que puede realizar en ella.
+4. Colocar opción de eliminar usuario, inexistente en el momento.
+5. Al asignar curso y horarios no se vieron reflejados, ni en la información del estudiante ni en la del profesor. Revisar, corregir y aplicar cambios en base de datos,,revisar la persisyencia de la información.
+6. Sección "gestión de contenido/Misión y valores" no hay opción de agregar imágen a cada uno de los elementos.
+7. Sección "gestión de contenido/Sobre Nosotros" verificar botón de subir imágen se desborda de la caja contenedora.
+8. Sección "gestión de contenido" quitar scroll vertical de ls nombres de las tarjetas o secciones, "sobre nosotros, misión y valores, matriculas, etc".
+9. Sección "gestión de contenido/Galería" verificar que se muestrela información actualizada, aunque hay conntenido actualmente en esa sección, no se ve reflejada en el panel del administrador.
+10. Gestion de eventos y presentaciones, no tiene asociada las imágenes actuales.
+11. Sección de almacenamiento, no refleja información real del contenido de la app, verificar y corregir y aplicar, verificar persistencia de información.
+12. Quitar tarjeta de whatsapp directo.
+13. Revisar fab de chat que no se muestra en el panel del administrador.
+14. Crear un panel de administración de horario donde muestre los cursos, al seleccionar uno despliegue un calendario con diaas de la semana, horas y cupos disponibles por secciones para asignación express.
+
+
+-------// 310326 //-------
+* Realiza revisión de evolución del proceso de la app!
+* realizar las siguientes modificaciones:
+    - Permitir que el usuario con Cargo de "secrertario o recepcionista" tenga acceso al panel de administración de inscripciones y pueda inscribir estudiantes a cursos.
+    - Rediseñar el sistema que muestra la cantidad de estudiantes por cursos y modificarlo a cantidad de estudiantes inscritos, no mostrar cupos restantes, puesto que no se va a manejar cupos por cursos.
+    - Permitir que el usuario con Cargo de "estudiante" pueda inscribirse a cursos.
+    - Permitir que el usuario con Cargo de "profesor" pueda ver los cursos que tiene asignados.
+    - Permitir que el usuario con Cargo de "administrador" pueda ver todos los cursos y estudiantes.
+    - Que el administrador pueda ver un registro de que usuario realizó el último cambio en cualquiera de los sistemas de la app.
+    - Limitar el intento de errores en el usuario y contraseña a 5 intentos máximos, bloqueando el usuario por 10 minutos, si en el siguiente intento vuelve a fallar, realizar obligatoriamente el proceso de cambio de contraseña.
+
+* Cambio Forzado de Contraseña: 
+    - Se implementó una política que obliga al usuario a cambiar su contraseña si: 
+        - Han pasado más de 90 días desde su último cambio. (no pongas límites en éste aspecto, no es muy agradable estar cambiando la contraseña muy seguido, obliga al usuario a usar notas o memos que se pueden volver incontrolables y se pueden estraviar)
+        - Un administrador marca manualmente su cuenta con force_reset.
+
+* Procede con la acomodación de los archivos y colocarlos donde deben ir, nada archivos volando fuera de las carpetas en lugares externos o donde no deben ir, elimina archivos temporales, test y otros que completaron su ciclo de vida, procede.
+* Verifica los .sql cual debe permanecer y cuales ya se pueden eliminar, con el cambio implementado anteriormente, dime cual es el archivo edfinitivo actualizado que debo exportar a MyAdmin.
+
+* revisar los modales para poder cerrarlos de manera correcta ya sea haciendo clic en el icono de cerrar o haciendo clic por fuera del modal.
+
+* Sigue mostrando limites de cupos, no debe ser asi, debe mostrar la cantidad de estudiantes inscritos.
+* Ojo a ala reacción del modal al presionar teclado tambie´n se cierra el modal, no debe ser asi.
+* que el colaborador con cargo de secretario o recepcionista solo pueda gestionar matriculas, no pueda gestionar usuarios.
+* Que el colaborador con cargo de secretario o recepcionista pueda gestionar su perfil.
+que el panel de colaboradores muestrre las secciones a las que pueda acceder de acuerdo al cargo asignado, unifica el panel de colabiorador y gestiona que puede ver en el panel cada colaborador deacuerdo al cargo que se le asigne.
+
+

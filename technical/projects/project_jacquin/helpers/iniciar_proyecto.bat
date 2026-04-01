@@ -4,7 +4,7 @@ ECHO Iniciando aplicacion web...
 ECHO ----------------------------------------
 
 :: Navegar a la carpeta donde esta el package.json
-cd /d "%~dp0\web_page\pages"
+cd /d "d:\Documentos\Proyectos ADSO\project_jacquin\web_page\pages"
 
 :: Verificar si existe node_modules, si no, instalar
 IF NOT EXIST "node_modules" (
