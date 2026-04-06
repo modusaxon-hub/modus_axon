@@ -77,7 +77,104 @@
 * Sigue mostrando limites de cupos, no debe ser asi, debe mostrar la cantidad de estudiantes inscritos.
 * Ojo a ala reacción del modal al presionar teclado tambie´n se cierra el modal, no debe ser asi.
 * que el colaborador con cargo de secretario o recepcionista solo pueda gestionar matriculas, no pueda gestionar usuarios.
+
 * Que el colaborador con cargo de secretario o recepcionista pueda gestionar su perfil.
 que el panel de colaboradores muestrre las secciones a las que pueda acceder de acuerdo al cargo asignado, unifica el panel de colabiorador y gestiona que puede ver en el panel cada colaborador deacuerdo al cargo que se le asigne.
 
+-------// 010426 //-------
+* Reintentando establecer bitácora de acciones de usuarios para el control de acciones en la app por parte de administradores.
+
+
+La tabla audit_log existe en la BD con dos definiciones contradictorias (una con FK hard y otra más flexible).
+El helper logAudit() concatena action + target_type en un solo campo, incompatible con la segunda definición de la tabla que tiene columnas separadas action, entity_type, entity_id.
+El endpoint admin_get_audit_log.php hace JOIN con usuario usando a.user_id = u.id_usuario — compatible, pero depende de que la tabla final tenga user_id.
+El login ya implementa: bloqueo a 5 intentos, locked_until, force_password_reset.
+SecretarioPanel.jsx existe pero es básico.
+Faltan llamadas a logAudit() en la mayoría de los endpoints críticos.
+User Review Required
+IMPORTANT
+
+Definición definitiva de audit_log: El SQL de restauración tiene DOS definiciones contradictorias. La segunda (líneas 957–975) tiene columnas user_name, action, entity_type, entity_id separadas, sin FK hard. Se usará esta segunda versión como canónica y se actualizará audit_helper.php para que coincida.
+
+WARNING
+
+Sin eliminar el login de 90 días: Las instrucciones piden explícitamente que NO se fuerce cambio de contraseña por tiempo (solo por force_reset manual del admin). Esto ya está implementado — no se tocará.
+
+IMPORTANT
+
+Archivos sueltos en raíz: Hay archivos como check_audit_db.php, dump_courses.php, dump_db.php, test_audit.php, get_columns.php en la raíz del proyecto. Estos son temporales/de prueba. Se moverán o eliminarán según el estado de cada uno.
+
+Cambios Propuestos
+Bloque 1 — Base de Datos
+[MODIFY] RESTORE_FULL_DB.sql
+Unificar las dos definiciones de audit_log en una sola definitiva (la segunda más flexible). Esta es la versión que debes exportar desde phpMyAdmin — solo la segunda.
+
+[NEW] jacquin_api/migrations/add_audit_log_v2.sql
+Script SQL incremental para aplicar sobre una BD ya existente:
+
+ALTER TABLE audit_log para agregar columnas faltantes (user_name, entity_type) si no existen.
+Quitar FK hard fk_audit_user si existe.
+Agregar índices necesarios.
+Bloque 2 — Audit Helper + Endpoint
+[MODIFY] jacquin_api/helpers/audit_helper.php
+Actualizar logAudit($pdo, $action, $target_type, $target_id, $details) para que:
+
+Guarde user_name además de user_id (leído de $_SESSION['full_name']).
+Use columnas separadas: action, entity_type, entity_id.
+Mantenga firma de 5 parámetros (sin romper llamadas existentes).
+[MODIFY] jacquin_api/admin_get_audit_log.php
+Adaptar query al nuevo schema con entity_type, entity_id y user_name directo en tabla + JOIN de respaldo.
+
+Bloque 3 — Instrumentar endpoints con logAudit
+Agregar llamadas a logAudit() en los endpoints más críticos que aún no la tienen:
+
+Endpoint	Acción a auditar
+admin_delete_user.php	DELETE / usuario
+admin_enroll_student.php	ENROLL / estudiante
+admin_handle_enrollment.php	APPROVE/REJECT / enrollment
+admin_assign_teacher.php	ASSIGN / teacher
+admin_update_user_full.php	UPDATE / usuario
+admin_assign_schedules.php	ASSIGN / schedule
+login.php	LOGIN_SUCCESS / usuario
+register.php	REGISTER / usuario
+Bloque 4 — Panel Colaborador/Secretario
+[MODIFY] SecretarioPanel.jsx
+Mostrar solo los módulos a los que tiene acceso el secretario: Gestión de Matrículas (inscripciones).
+Quitar gestión de usuarios del vista del secretario.
+Agregar acceso a Gestión de Perfil propio.
+[MODIFY] AdminUsersManager.jsx
+Asegurar que cuando el rol es secretario (cargo 2 en positions), no pueda acceder a la pestaña de usuarios.
+[MODIFY] Dashboard.jsx
+Verificar que el routing dirige al SecretarioPanel para colaboradores con cargo de Secretario/Recepcionista (position_id = 2).
+Bloque 5 — Estudiantes inscritos (sin mostrar cupos)
+[MODIFY] AdminSchedulesManager.jsx
+Reemplazar mostrar "X cupos restantes / Y cupos" por solo "Z estudiantes inscritos".
+[MODIFY] EstudiantePanel.jsx
+Verificar que al mostrar horarios muestre estudiantes inscritos, no cupos disponibles.
+Bloque 6 — Limpieza de archivos temporales/tests
+Archivos a eliminar de la raíz del proyecto (completaron su ciclo de vida):
+
+check_audit_db.php
+dump_courses.php
+dump_db.php
+test_audit.php
+get_columns.php
+audit_debug_standard.log
+email_logs.txt
+Archivos a conservar en raíz (documentación/relevantes):
+
+TASK.md, AI_LOG_CUMPLIMIENTO.md, INDEX_DOCUMENTACION.html
+modus-connector.md, zrok_overview.txt
+Bloque 7 — SQL definitivo para exportar a phpMyAdmin
+El archivo RESTORE_FULL_DB.sql se actualizará para ser la fuente de verdad definitiva. Se entregará instrucción clara de qué archivo exportar.
+
+Verificación
+Automática
+Verificar que admin_get_audit_log.php retorna JSON con éxito (sin errores 500).
+Confirmar que logAudit() inserta correctamente en la nueva estructura.
+Manual
+Hacer login con admin → verificar que aparece entrada en bitácora.
+Eliminar un usuario desde admin → verificar entrada en bitácora.
+Ingresar con cuenta de secretario → verificar que solo ve inscripciones y su perfil.
+Revisar que horarios muestran "estudiantes inscritos" en lugar de cupos.
 
