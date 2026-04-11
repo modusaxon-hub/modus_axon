@@ -90,3 +90,8 @@ que el panel de colaboradores muestrre las secciones a las que pueda acceder de 
     - Verificación de la bitácora de acciones en la app.
     - Ya no se muestra la cantidad de cupos restantes, ahora se muestra la cantidad de estudiantes inscritos. Revisa que se muestre la información correcta dónde quiera que ésta se muestre.
     - 
+
+-------// 090426 //-------
+    - Implementación y mejora del sistema para registro de asistencia a clases.
+    - Implementación de control de entrada y salida de personal de la academia.
+    - Control de permisos y descansos de colaboradores y profesores. 
