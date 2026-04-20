@@ -34,21 +34,22 @@ Facilitador del arte y responsable del seguimiento pedagógico.
 - **Reporte Académico:** Registro de calificaciones y comentarios sobre el desempeño artístico.
 
 ### 3. Administrador (Control Total)
-Nodo central de mando. Opera sobre el núcleo de la plataforma mediante 6 módulos especializados.
-- **Gestión Universitaria:**
-  - Control total de perfiles y roles.
-  - Inscripción Manual: Asistente para inscribir estudiantes seleccionando múltiples horarios.
-  - Notificaciones automáticas de inscripción vía email (Consolidado).
+Nodo central de mando. Opera sobre el núcleo de la plataforma mediante múltiples módulos especializados.
+- **Gestión Universitaria (Usuarios e Inscripciones):**
+  - Control total de perfiles y roles (Ascenso/Degradación).
+  - Eliminación segura con resolución de dependencias de registros huérfanos.
+  - Inscripción Manual y automatización de aprobaciones de estudiantes sin solapamiento horario.
+- **Auditoría y Trazabilidad:**
+  - `Bitácora Cero-Pérdida`: Todo acceso, cambio de rol y eliminación de cuentas es registrado con fecha, hora y detalle de contexto.
+- **Gestión de Cargos y Personal:**
+  - Asignación manual de jerarquías administrativas a miembros del equipo (Directores, Coordinadores, etc.), notificándoles automáticamente vía correo.
+- **Hub de Programas y Horarios:**
+  - CRUD Premium y despliegue del catálogo (Títulos, Íconos, Material Gráfico).
+  - Control Inteligente de Matrículas (Cierre automático de opciones basadas en "Inscritos" contra la capacidad o aforo).
 - **Gestión de Contenido (CMS):**
-  - Edición del `Hero Carousel`.
-  - Configuración de `Misión`, `Valores` y `Sobre Nosotros`.
-  - **Switch Dimensional:** Habilitación/Deshabilitación global de inscripciones (Matrículas Abiertas/Cerradas).
-- **Hub de Programas:**
-  - CRUD Premium: Título, Ícono, Imágenes y características de la oferta académica.
-- **Estructura Administrativa:**
-  - Asignación manual de docentes a programas y cargos específicos.
-- **Almacenamiento & Logs:**
-  - Gestión física de archivos y auditoría de cambios y errores.
+  - Textos de Inicio, Misión, Valores, Carrusel y switch de Temporada Académica.
+- **Almacenamiento y Eventos:**
+  - Gestión física de archivos y manejo de boletería a eventos físicos o virtuales.
 
 ---
 

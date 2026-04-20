@@ -1,43 +1,43 @@
 # 🛠️ Manual del Administrador — JACQUIN Academia Musical
 
-Este manual detalla todas las funciones que un administrador puede realizar en el panel de gestión.
+Este manual detalla todas las funciones avanzadas que un administrador o superusuario puede realizar en el panel de gestión.
 
 ## 1. Gestión de Usuarios
-- **Directorio de Usuarios**: Ubicado en el módulo "Usuarios". Permite ver a todos los registrados (Estudiantes, Docentes, Colaboradores).
-- **Cambio de Roles**: Puedes ascender a un estudiante a docente o colaborador.
-- **Edición de Perfiles**: Corregir nombres o teléfonos desde la vista de detalles.
-- **Eliminación**: Capacidad para dar de baja cuentas inactivas.
+- **Directorio de Usuarios**: Ubicado en el módulo "Usuarios". Permite ver a todos los registrados (Estudiantes, Docentes, Colaboradores y otros Administradores).
+- **Control de Roles del Sistema**: Puedes ascender o degradar usuarios modificando su nivel de acceso (ej: cambiar un estudiante a colaborador).
+- **Edición de Perfiles**: Actualización de nombres y teléfonos desde una vista unificada.
+- **Eliminación Segura**: Capacidad para dar de baja cuentas, incluyendo validaciones complejas que limpian inscripciones, asignaciones y dependencias antes de eliminar el registro.
 
-## 2. Gestión Académica (Cursos y Horarios)
-- **Creación de Cursos**: Define nombre, descripción y asocia una imagen de portada.
-- **Asignación de Horarios**: Cada curso puede tener múltiples franjas horarias.
-- **Asignación de Docentes**: Vincula a un docente específico con un horario de clase.
-- **Control de Cupos**: Establece un límite de estudiantes por horario (por defecto 15).
+## 2. Gestión de Cargos Administrativos (Nuevo)
+- **Estructura Organizacional**: Accede al módulo "Cargos" para administrar la jerarquía.
+- **Creación de Posiciones**: Define posiciones administrativas (ej. "Coordinador de Cuerdas", "Director Coral").
+- **Asignación a Docentes/Colaboradores**: Vincula un cargo a un usuario activo. El sistema automatiza notificaciones vía correo electrónico avisando sobre la asignación del rol.
+- **Documentación de Cargos**: Permite cargar URLs o lineamientos (Terms) específicos y definir estipendios si corresponde.
 
-## 3. Control de Inscripciones
-- **Solicitudes Pendientes**: Cuando un estudiante solicita un curso, aparecerá una notificación roja en el módulo académico.
-- **Aprobación/Rechazo**: Revisa el horario solicitado por el estudiante y confirma su cupo.
-- **Matrícula Directa**: El administrador puede inscribir a un estudiante manualmente sin que este lo solicite.
+## 3. Gestión Académica Avanzada (Cursos y Horarios)
+- **Cursos**: Define el currículo central. Crea y sube imágenes de material visual para cada curso.
+- **Aulas y Horarios**: Configura de manera sincronizada cada horario. Los administradores tienen control total sobre agendas (Creación, Ajustes y Borrado). 
+- **Relaciones (Docente - Clase)**: Asigna inmediatamente qué maestro cubrirá el horario. Toda asignación repercute en vivo en la interfaz del profesor.
+- **Control Inteligente de Cupos**: A diferencia de establecer límites fijos genéricos, ahora el sistema contabiliza a los "Inscritos" versus la cantidad tope configurada (`max_students`), permitiendo automatizar bloqueos de turnos llenos.
 
-## 4. Gestión de Eventos
-- **Creación de Eventos**: Ubicado en el módulo "Eventos". Permite promocionar seminarios, conciertos o talleres.
-- **Carga de Imágenes**: Se recomienda usar imágenes de formato 16:9.
-- **Tickets**: Los usuarios pueden solicitar entradas, las cuales se registran en la base de datos para control de aforo.
+## 4. Control de Inscripciones
+- **Solicitudes Pendientes**: Las peticiones de registro de los estudiantes llegan a "Inscripciones" con notificaciones y estados de aprobación.
+- **Validación Bidireccional**: Al autorizar la inscripción, el sistema previene cruces de horarios para un estudiante.
+- **Matrícula Ejecutiva**: Los administradores pueden inscribir estudiantes en el acto y asignar varios horarios desde la vista administrativa centralizada.
 
-## 5. Gestión de Programas (Main Web)
-- **Programas de la Home**: Administra el contenido dinámico que ven los visitantes en la sección "Programas".
-- **JSON dinámico**: Los cambios se guardan en `get_programs_json.php` para carga ultrarrápida en la landing.
+## 5. Auditoría y Trazabilidad (Nuevo)
+- **Bitácora Cero-Pérdida (Audit Log)**: Cada acción crítica (Acceso al panel, Cambios de Roles, Eliminación de Usuarios, Asignación de Roles especiales) es capturada automática e indefectiblemente.
+- **Resolución de Logs**: Si se acumula excesiva actividad de diagnóstico, cuentas con un botón de "**Limpiar Historial de Diagnósticos**", que preserva acciones directas de usuarios mientras descarta las pruebas temporales de servidor.
 
-## 6. Inventario de Instrumentos
-- **Control de Existencias**: Registro de instrumentos de la academia.
-- **Estado**: Seguir el rastro de instrumentos en mantenimiento o disponibles para alumnos.
+## 6. Gestión Web, Contenido y Disponibilidad
+- **Programas Dinámicos JSON**: Configura la Landing (Página de Inicio) inyectando títulos y resúmenes sin tocar el código fuente.
+- **Apertura y Cierre de Matrículas**: Manejo global ("Switch Dimensional"). 
+  - Al abrir inscripciones, los periodos/años se exigen a los prospectos.
+  - Al cerrarlas, el diseño de la portada se repliega elegantemente desactivando elementos foráneos.
+- **Sincronización en Directo**: Lo que configuras en Panel Admin se ve al instante en los Pies de Página (Footer) y menús de visitantes.
 
-## 8. Gestión de Contenido Web y Disponibilidad
-- **Matrículas**: Controla el estado global de inscripciones desde "Gestión de Contenido".
-- **Lógica de Visibilidad**: 
-    - Al cerrar matrículas, el campo "Año" se inhabilita y se vuelve opcional. El sistema ocultará automáticamente el año en la web para mayor limpieza.
-    - Al abrir matrículas, es **obligatorio** especificar el año (ej: 2026) para que los alumnos sepan a qué periodo aplican.
-- **Sincronización en Vivo**: Cualquier cambio guardado se refleja instantáneamente en el footer de todas las páginas del sitio sin necesidad de recargar.
+## 7. Inventario
+- Control sobre los activos físicos, instrumentos en reparación o listos para alumnos.
 
 ---
-*Documentación actualizada por Antigravity AI — febrero 2026*
+*Documentación actualizada por Antigravity AI — Abril 2026*

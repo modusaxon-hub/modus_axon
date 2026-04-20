@@ -12,8 +12,8 @@ Bienvenido a la guía de uso de la plataforma Jacquin. Aquí encontrarás cómo 
 ## 🎓 2. Estudiante
 - **Mi Panel**: Acceso centralizado a tu perfil.
 - **Avatar**: Personaliza tu imagen de perfil.
-- **Inscripción**: Solicita cupo en los cursos disponibles eligiendo tu horario preferido.
-- **Gestión Académica**: Una vez aprobada tu inscripción, podrás ver tus horarios confirmados, compañeros de clase y próximas asignaciones.
+- **Inscripción**: Solicita cupo en los cursos disponibles eligiendo tu horario preferido. El sistema te avisará en tiempo real si el salón se ha llenado (Cupos Agotados).
+- **Gestión Académica**: Una vez aprobada tu inscripción, podrás ver tus horarios confirmados, compañeros de clase y próximas asignaciones sin superposiciones de horario.
 - **Seguridad**: Cambia tu contraseña periódicamente.
 
 ## 🎹 3. Docente (Profesor)
@@ -22,9 +22,12 @@ Bienvenido a la guía de uso de la plataforma Jacquin. Aquí encontrarás cómo 
 - **Comunicación**: Acceso rápido para contactar a administración en caso de inconsistencias en el horario.
 - **Perfil Profesional**: Mantén tus datos actualizados para el directorio de docentes.
 
-## 🤝 4. Colaborador
+## 🤝 4. Colaborador (Secretaría)
 - **Apoyo Administrativo**: Rol intermedio con acceso a herramientas de visualización de usuarios y soporte técnico básico.
 - **Gestión de Eventos**: Ayuda en la moderación de solicitudes de entradas y organización de agenda.
 
+## ⚙️ 5. Administrador
+- **Control Total**: Gestión completa sobre listas de usuarios, auditoría de eventos de sistema, matriculación y control de cargos del equipo de trabajo.
+
 ---
-© 2026 Jacquin Academia Musical — Guía Rápida de Operación.
+© Abril 2026 Jacquin Academia Musical — Guía Rápida de Operación.

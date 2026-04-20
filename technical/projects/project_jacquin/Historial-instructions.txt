@@ -95,3 +95,36 @@ que el panel de colaboradores muestrre las secciones a las que pueda acceder de 
     - Implementación y mejora del sistema para registro de asistencia a clases.
     - Implementación de control de entrada y salida de personal de la academia.
     - Control de permisos y descansos de colaboradores y profesores. 
+
+-------// 110426 //-------
+    - Formulario de registro: quitar abligatoriedad de selección de curso cuando el usuario llega directo al registro y no desde la selección de un curso en específico.
+    - Modificar mensaje de email de bienvenida para que sea mas personalizado y menos genérico.
+    - Establecer estandard de diseño para los correos electrónicos transaccionales.
+    - Revisar email de alerta de nueva suscripción.
+    eliminemos todas las conecciones de los enlaces externos a infinityfree, desde ahora ya no usaremos es plataforma para pruebas de ahora en adeante solo local.
+    - Revisar la sección de historial de acciones se encuentre registrandod e manera satisfactoria las acciones realizadas en la página como está pensado el diseño.
+    - Mostrar modal de confirmación siempre que se realice alguna acción y proceder a cerrar los modales o volver al modal anterior donde sea el caso.
+    - Revisar los enlaces de correo que estan enviando a local equivocado, tenemos app en local 3000 y api en 8080, no se esta respetando la configuracion de variables de entorno.
+
+    -------// 150426 //-------
+    - continuamos con Jacquin.
+    - recuerda frontend en 3000 y api en 8080.
+    - Administrador prueba:
+    User: visionarycode.team@gmail.com
+    Pass: M@nuel345116
+    - corrige la redirección de los correos electrónicos transaccionales. Están enviando al enlace errado http://localhost:5173/dashboard, deben enviar a http://localhost:3000/dashboard.
+    - Sin modificar nada revisa que en la bitacora d acciones "Registro de Actividad" se guarden las acciones correctamente, acabo de realizar un cambio de rol de usuario y no se registró.
+    - Intervención a la sección de control de personal, alistamiento más funcional donde los administradores puedan llevar un registro de cada uno de los usuarios que sea conveniente llevar un control de registro de hora de entrada y salida y computo de horas trabajadas, con opción de resumen semanal, quincenal o mensual! 
+    - Intervención a la sección de "cargos", crea una lista de cargos con su respectivo nivel de acceso, con opción de editar y eliminar, además de un buscador para facilitar la búsqueda de cargos. Adicioonal crea la documentación para cada uno de ellos con sus respectivas responsabilidades y funciones, acciones para que el administrador pueda editar funciones y responsabilidades del cargo, crear y/o eliminar cargos y la acción de asignar cargos a los usuarios, con un protocolo de entrega de documentación via email a los funcionarios a los que se le asignen cargos.
+    - 
+
+    -------// 160426 //-------
+    - continuamos con Jacquin.
+    - recuerda frontend en 3000 y api en 8080.
+    - Administrador prueba:
+    User: visionarycode.team@gmail.com
+    Pass: M@nuel345116
+
+    - Revisión, adcuación y adaptación de la sesión de horarios, que los administradores puedan crear, editar y eliminar horarios y que la información esté completamente sincronizada y en todas la s secciones con las que necesite estar sincroniazada y concatenada con revisión y coreeción de errores, usa browser para las pruebas de funcionamiento.
+    - Corrige el elemento que muestra cuota, para que muestre número de inscrritos, creo que ese elemento de selector de cuota está de más!
+    - Revisión y adecuación y concatenacion del panel del profesor, estudiantes, colaboradores y administradores, con revisión y corrección de errores, usa browser para las pruebas de funcionamiento. revisa concatenaciones, sincronización de la información, conservando los niveles de acceso.

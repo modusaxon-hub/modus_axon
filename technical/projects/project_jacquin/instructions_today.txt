@@ -1,0 +1,9 @@
+
+-------// 200426 //-------
+    - continuamos con Jacquin.
+    - recuerda frontend en 3000 y api en 8080.
+    - Administrador prueba:
+    User: visionarycode.team@gmail.com
+    Pass: M@nuel345116
+
+    - 
