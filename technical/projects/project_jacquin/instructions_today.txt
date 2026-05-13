@@ -6,4 +6,4 @@
     User: visionarycode.team@gmail.com
     Pass: M@nuel345116
 
-    - 
+    - solo centrate en el error y/o instrucción señalada, no crees usuarios, no modifiques los estilos ya establecidos.
