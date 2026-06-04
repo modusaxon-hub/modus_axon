@@ -4,6 +4,14 @@
     - recuerda frontend en 3000 y api en 8080.
     - Administrador prueba:
     User: visionarycode.team@gmail.com
-    Pass: M@nuel345116
+    Common User Pass: M@nuel345116
 
     - solo centrate en el error y/o instrucción señalada, no crees usuarios, no modifiques los estilos ya establecidos.
+
+    -------// 260526 //-------
+    - seguimos con jacquin. 
+    - En el panel de administrador revisar edición, añadir, eliminar horarios, sincronizado con la información en los paneles de estudiante y profesores dónde corresponda.
+    - poder realizar la asignación de multiples profesores por cursos, esto significa que un curso puede tener más de un profesor asignado en el mismo horario.
+    - revisar que el los administradores puedan tener el control de la imágenes y contenido que se muestra en el HERO y que éstos cambios se apliquen realmente en la sección correspondiente y lo mismo en todas las secciones del frontend. ya que no se éstan aplicando los cambios que realizan los administradores. 
+    - revisar gestión de contenido web, debido que no hay opción de cargar imágenes.
+    
